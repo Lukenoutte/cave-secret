@@ -15,7 +15,10 @@ public class MediumButtonController : MonoBehaviour
     private bool buttonOn7 = false;
     private bool buttonOn8 = false;
     private bool buttonOn9 = false;
-    private bool pButtonOn1 = false;
+    private bool buttonOnC1 = false;
+    private bool buttonOnC2 = false;
+    private bool buttonOnC3 = false;
+    
     private bool controlVarMain = false;
     
     private List<string> generalList = new List<string>();
@@ -34,6 +37,9 @@ public class MediumButtonController : MonoBehaviour
     List<string> b7List = new List<string>();
     List<string> b8List = new List<string>();
     List<string> b9List = new List<string>();
+    List<string> c1List = new List<string>();
+    List<string> c2List = new List<string>();
+    List<string> c3List = new List<string>();
     List<string> clickedButtons = new List<string>();
     //Lista que contem as lista a cima
     List<List<string>> listOfLists = new List<List<string>>();
@@ -53,9 +59,12 @@ public class MediumButtonController : MonoBehaviour
         b7List.Add("B7");
         b8List.Add("B8");
         b9List.Add("B9");
+        c1List.Add("C1");
+        c2List.Add("C2");
+        c3List.Add("C3");
 
         // Add Listas a lista
-        listOfLists.AddRange(new List<string>[] {b1List, b2List, b3List, b4List, b5List, b6List, b7List, b8List, b9List });
+        listOfLists.AddRange(new List<string>[] {b1List, b2List, b3List, b4List, b5List, b6List, b7List, b8List, b9List, c1List, c2List, c3List });
 
         
 
@@ -102,45 +111,17 @@ public class MediumButtonController : MonoBehaviour
                     b.GetComponent<Animator>().SetBool("buttonClicked", false);
                 }
                 
-                // PB1 ------------------------------------------------------------------------
-                if (hit.collider.tag == "BPlus1" && pButtonOn1 == false)
-                {
-
-                    pButtonOn1 = true;
-
-                    b.GetComponent<Animator>().SetBool("buttonClicked", true);
-
-                }
-                else if (hit.collider.tag == "BPlus1" && pButtonOn1 == true)
-                {
-                    pButtonOn1 = false;
-
-                    b.GetComponent<Animator>().SetBool("buttonClicked", false);
-                }
+          
 
             }
 
             // Condição para ganhar
-            if (countLightsOn == 9 && hit.collider.tag == "Enter")
+            if (countLightsOn == 12 && hit.collider.tag == "Enter")
             {
-                bool auxBool;
-            if(mainList[9] == "1")
-                {
-                    auxBool = true;
-                }
-                else
-                {
-                    auxBool = false;
-                }
-                if (auxBool == pButtonOn1)
-                {
-                    Debug.Log("win!!!");
-                }
-                else
-                {
-                    allLightsOff();
-                }
+                Debug.Log("win!!!");
+
             }
+         
         }
 
 
@@ -183,18 +164,30 @@ public class MediumButtonController : MonoBehaviour
         {
             allLightsOff();
         }
+        if (countLightsOn == 10 && clickedButtons[9] != mainList[9])
+        {
+            allLightsOff();
+        }
+        if (countLightsOn == 11 && clickedButtons[10] != mainList[10])
+        {
+            allLightsOff();
+        }
+        if (countLightsOn == 12 && clickedButtons[11] != mainList[11])
+        {
+            allLightsOff();
+        }
 
 
-        
+
     }
 
      public void randomLists()
     {
-        int countList = 8;
+        int countList = 11;
         foreach (List<string> subList in listOfLists)
         {
             // Lista antes de se tornar randomica
-            generalList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9" });
+            generalList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "C1", "C2", "C3" });
             List<string> auxList = subList;
             for (int i = 0; i < countList+1; i++)
             {
@@ -207,15 +200,14 @@ public class MediumButtonController : MonoBehaviour
                  }
                 generalList.RemoveAt(itemIndex);
             }
-            int itemIndexP = Random.Range(0, 2);
-            auxList.Add(itemIndexP.ToString());
+ 
         }
 
       }
     public void allLightsOff()
     {
     List<string> auxList = new List<string>();
-    auxList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9" });
+    auxList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "C1", "C2", "C3" });
         GameObject bToOff;
         foreach (string a in auxList)
         {
@@ -232,6 +224,9 @@ public class MediumButtonController : MonoBehaviour
         buttonOn7 = false;
         buttonOn8 = false;
         buttonOn9 = false;
+        buttonOnC1 = false;
+        buttonOnC2 = false;
+        buttonOnC3 = false;
         clickedButtons.Clear();
     }
 
@@ -273,6 +268,18 @@ public class MediumButtonController : MonoBehaviour
         {
             controlVarMain = buttonOn9;
         }
+        if (b == "C1")
+        {
+            controlVarMain = buttonOnC1;
+        }
+        if (b == "C2")
+        {
+            controlVarMain = buttonOnC2;
+        }
+        if (b == "C3")
+        {
+            controlVarMain = buttonOnC3;
+        }
     }
     public void setMainList(string b)
     {
@@ -311,6 +318,18 @@ public class MediumButtonController : MonoBehaviour
         if (b == "B9")
         {
             mainList = b9List;
+        }
+        if (b == "C1")
+        {
+            mainList = c1List;
+        }
+        if (b == "C2")
+        {
+            mainList = c2List;
+        }
+        if (b == "C3")
+        {
+            mainList = c2List;
         }
     }
 
@@ -351,6 +370,18 @@ public class MediumButtonController : MonoBehaviour
         if (b == "B9")
         {
             buttonOn9 = boolVar;
+        }
+        if (b == "C1")
+        {
+            buttonOnC1 = boolVar;
+        }
+        if (b == "C2")
+        {
+            buttonOnC2 = boolVar;
+        }
+        if (b == "C3")
+        {
+            buttonOnC3 = boolVar;
         }
     }
 

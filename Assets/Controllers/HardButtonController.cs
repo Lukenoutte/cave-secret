@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour
+public class HardButtonController : MonoBehaviour
 {
-
+   
     /// Booleans que verificam qual luz está acesa 
-    private bool buttonOn1 = false;
+    private bool buttonOn1= false;
     private bool buttonOn2 = false;
     private bool buttonOn3 = false;
     private bool buttonOn4 = false;
@@ -15,13 +15,16 @@ public class ButtonController : MonoBehaviour
     private bool buttonOn7 = false;
     private bool buttonOn8 = false;
     private bool buttonOn9 = false;
+    private bool buttonOnC1 = false;
+    private bool buttonOnC2 = false;
+    private bool buttonOnC3 = false;
     private bool pButtonOn1 = false;
     private bool controlVarMain = false;
-
+    
     private List<string> generalList = new List<string>();
     public List<string> mainList; // Lista responsavel por controlar o jogo, escolhida dps que o usuário clicar no primeiro elemento.
     private GameObject b;
-    private string buttonName = " ";
+    private string buttonName= " ";
     //Contador de luzes on 
     private int countLightsOn = 0;
     // Listas que irão receber a ordem dos botões
@@ -34,6 +37,9 @@ public class ButtonController : MonoBehaviour
     List<string> b7List = new List<string>();
     List<string> b8List = new List<string>();
     List<string> b9List = new List<string>();
+    List<string> c1List = new List<string>();
+    List<string> c2List = new List<string>();
+    List<string> c3List = new List<string>();
     List<string> clickedButtons = new List<string>();
     //Lista que contem as lista a cima
     List<List<string>> listOfLists = new List<List<string>>();
@@ -41,7 +47,7 @@ public class ButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+    
 
         // Toda lista terá como seu primeiro item o botão a quem ela está ligada
         b1List.Add("B1");
@@ -53,11 +59,14 @@ public class ButtonController : MonoBehaviour
         b7List.Add("B7");
         b8List.Add("B8");
         b9List.Add("B9");
+        c1List.Add("C1");
+        c2List.Add("C2");
+        c3List.Add("C3");
 
         // Add Listas a lista
-        listOfLists.AddRange(new List<string>[] { b1List, b2List, b3List, b4List, b5List, b6List, b7List, b8List, b9List });
+        listOfLists.AddRange(new List<string>[] {b1List, b2List, b3List, b4List, b5List, b6List, b7List, b8List, b9List, c1List, c2List, c3List });
 
-
+        
 
         // Método de gerar as listas randomicas
         randomLists();
@@ -66,7 +75,7 @@ public class ButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
 
 
         if (Input.GetMouseButtonDown(0))
@@ -80,35 +89,65 @@ public class ButtonController : MonoBehaviour
                 b = GameObject.Find(buttonName);
                 mainVarControl(buttonName);
                 // Bs   ---------------------------------------------------------------------
-                if (buttonName.Length == 2 && controlVarMain == false)
+                if ( buttonName.Length == 2 && controlVarMain == false)
                 {
 
-
-                    setVarControl(buttonName, true);
+                   
+                    setVarControl(buttonName, true); 
                     countLightsOn++;
                     clickedButtons.Add(buttonName);
                     b.GetComponent<Animator>().SetBool("buttonClicked", true);
                     if (countLightsOn == 1)
                     {
-                        setMainList(buttonName);
+                        setMainList(buttonName); 
                     }
                 }
-                else if (buttonName.Length == 2 && controlVarMain == true)
+                else if (buttonName.Length == 2 &&  controlVarMain == true)
                 {
-
+                    
                     setVarControl(buttonName, false);
                     countLightsOn--;
                     clickedButtons.Remove(buttonName);
                     b.GetComponent<Animator>().SetBool("buttonClicked", false);
                 }
-
-
-                // Condição para ganhar
-                if (countLightsOn == 9 && hit.collider.tag == "Enter")
+                
+                // PB1 ------------------------------------------------------------------------
+                if (hit.collider.tag == "BPlus1" && pButtonOn1 == false)
                 {
 
-                    Debug.Log("win!!!");
+                    pButtonOn1 = true;
 
+                    b.GetComponent<Animator>().SetBool("buttonClicked", true);
+
+                }
+                else if (hit.collider.tag == "BPlus1" && pButtonOn1 == true)
+                {
+                    pButtonOn1 = false;
+
+                    b.GetComponent<Animator>().SetBool("buttonClicked", false);
+                }
+
+            }
+
+            // Condição para ganhar
+            if (countLightsOn == 12 && hit.collider.tag == "Enter")
+            {
+                bool auxBool;
+            if(mainList[13] == "1")
+                {
+                    auxBool = true;
+                }
+                else
+                {
+                    auxBool = false;
+                }
+                if (auxBool == pButtonOn1)
+                {
+                    Debug.Log("win!!!");
+                }
+                else
+                {
+                    allLightsOff();
                 }
             }
         }
@@ -153,38 +192,51 @@ public class ButtonController : MonoBehaviour
         {
             allLightsOff();
         }
+        if (countLightsOn == 10 && clickedButtons[9] != mainList[9])
+        {
+            allLightsOff();
+        }
+        if (countLightsOn == 11 && clickedButtons[10] != mainList[10])
+        {
+            allLightsOff();
+        }
+        if (countLightsOn == 12 && clickedButtons[11] != mainList[11])
+        {
+            allLightsOff();
+        }
 
 
 
     }
 
-    public void randomLists()
+     public void randomLists()
     {
-        int countList = 8;
+        int countList = 11;
         foreach (List<string> subList in listOfLists)
         {
             // Lista antes de se tornar randomica
-            generalList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9" });
+            generalList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "C1", "C2", "C3" });
             List<string> auxList = subList;
-            for (int i = 0; i < countList + 1; i++)
+            for (int i = 0; i < countList+1; i++)
             {
                 int itemIndex = Random.Range(0, generalList.Count);
                 // Se o item a ser adicionado já existir (ser o primeiro da lista adicionado anteriormente) ele pula o elemento.
                 if (!auxList.Contains(generalList[itemIndex]))
                 {
                     auxList.Add(generalList[itemIndex]);
-
-                }
+                    
+                 }
                 generalList.RemoveAt(itemIndex);
             }
-     
+            int itemIndexP = Random.Range(0, 2);
+            auxList.Add(itemIndexP.ToString());
         }
 
-    }
+      }
     public void allLightsOff()
     {
-        List<string> auxList = new List<string>();
-        auxList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9" });
+    List<string> auxList = new List<string>();
+    auxList.AddRange(new string[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "C1", "C2", "C3" });
         GameObject bToOff;
         foreach (string a in auxList)
         {
@@ -201,12 +253,15 @@ public class ButtonController : MonoBehaviour
         buttonOn7 = false;
         buttonOn8 = false;
         buttonOn9 = false;
+        buttonOnC1 = false;
+        buttonOnC2 = false;
+        buttonOnC3 = false;
         clickedButtons.Clear();
     }
 
     public void mainVarControl(string b)
     {
-        if (b == "B1")
+        if(b == "B1")
         {
             controlVarMain = buttonOn1;
         }
@@ -241,6 +296,18 @@ public class ButtonController : MonoBehaviour
         if (b == "B9")
         {
             controlVarMain = buttonOn9;
+        }
+        if (b == "C1")
+        {
+            controlVarMain = buttonOnC1;
+        }
+        if (b == "C2")
+        {
+            controlVarMain = buttonOnC2;
+        }
+        if (b == "C3")
+        {
+            controlVarMain = buttonOnC3;
         }
     }
     public void setMainList(string b)
@@ -281,6 +348,18 @@ public class ButtonController : MonoBehaviour
         {
             mainList = b9List;
         }
+        if (b == "C1")
+        {
+            mainList = c1List;
+        }
+        if (b == "C2")
+        {
+            mainList = c2List;
+        }
+        if (b == "C3")
+        {
+            mainList = c2List;
+        }
     }
 
     public void setVarControl(string b, bool boolVar)
@@ -320,6 +399,18 @@ public class ButtonController : MonoBehaviour
         if (b == "B9")
         {
             buttonOn9 = boolVar;
+        }
+        if (b == "C1")
+        {
+            buttonOnC1 = boolVar;
+        }
+        if (b == "C2")
+        {
+            buttonOnC2 = boolVar;
+        }
+        if (b == "C3")
+        {
+            buttonOnC3 = boolVar;
         }
     }
 

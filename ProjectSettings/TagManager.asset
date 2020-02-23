@@ -15,6 +15,9 @@ TagManager:
   - B7
   - BPlus1
   - Enter
+  - C1
+  - C2
+  - C3
   layers:
   - Default
   - TransparentFX
