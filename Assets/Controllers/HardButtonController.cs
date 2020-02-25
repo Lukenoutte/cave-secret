@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HardButtonController : MonoBehaviour
 {
-   
+    private Text TimerText;
+    float timer = 0.0f;
+    int seconds = 0;
+    private bool winGame = false;
     /// Booleans que verificam qual luz está acesa 
     private bool buttonOn1= false;
     private bool buttonOn2 = false;
@@ -47,8 +51,8 @@ public class HardButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    
 
+        TimerText = GameObject.Find("Timer").GetComponent<Text>();
         // Toda lista terá como seu primeiro item o botão a quem ela está ligada
         b1List.Add("B1");
         b2List.Add("B2");
@@ -75,8 +79,14 @@ public class HardButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
+        // Timer
+        if (winGame == false)
+        {
+            timer += Time.deltaTime;
+            seconds = (int)timer;
+            TimerText.text = seconds.ToString();
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -144,6 +154,7 @@ public class HardButtonController : MonoBehaviour
                 if (auxBool == pButtonOn1)
                 {
                     Debug.Log("win!!!");
+                    winGame = true;
                 }
                 else
                 {
@@ -358,7 +369,7 @@ public class HardButtonController : MonoBehaviour
         }
         if (b == "C3")
         {
-            mainList = c2List;
+            mainList = c3List;
         }
     }
 

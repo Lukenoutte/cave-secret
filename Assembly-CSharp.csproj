@@ -66,18 +66,6 @@
     <Compile Include="Assets\Controllers\EasyButtonController.cs" />
     <Compile Include="Assets\Controllers\HardButtonController.cs" />
     <Compile Include="Assets\Controllers\MediumButtonController.cs" />
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Zete/BombDefuse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/Zete/BombDefuse/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Zete/BombDefuse/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Editor">
-      <HintPath>C:/Users/Zete/BombDefuse/Library/ScriptAssemblies/Editor.dll</HintPath>
-    </Reference>
     <Reference Include="XiaomiSupport">
       <HintPath>C:/Users/Zete/BombDefuse/Library/ScriptAssemblies/XiaomiSupport.dll</HintPath>
     </Reference>

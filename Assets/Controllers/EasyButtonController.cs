@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EasyButtonController : MonoBehaviour
 {
 
     /// Booleans que verificam qual luz está acesa 
+    private Text TimerText;
+    float timer = 0.0f;
+    int seconds = 0;
+    private bool winGame=false;
     private bool buttonOn1 = false;
     private bool buttonOn2 = false;
     private bool buttonOn3 = false;
@@ -41,7 +46,7 @@ public class EasyButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        TimerText = GameObject.Find("Timer").GetComponent<Text>();
 
         // Toda lista terá como seu primeiro item o botão a quem ela está ligada
         b1List.Add("B1");
@@ -67,8 +72,13 @@ public class EasyButtonController : MonoBehaviour
     void Update()
     {
 
-
-
+        // Timer
+        if (winGame == false)
+        {
+            timer += Time.deltaTime;
+            seconds = (int)timer;
+            TimerText.text = seconds.ToString();
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -108,6 +118,7 @@ public class EasyButtonController : MonoBehaviour
                 {
 
                     Debug.Log("win!!!");
+                    winGame = true; 
 
                 }
             }
