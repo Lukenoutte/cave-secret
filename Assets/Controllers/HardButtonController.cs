@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class HardButtonController : MonoBehaviour
 {
-    private Text TimerText;
-    float timer = 0.0f;
-    int seconds = 0;
+    private Text timerText;
+    private float timer = 0.0f;
+    private int seconds = 0;
     private bool winGame = false;
+    private bool isPaused = false;
     /// Booleans que verificam qual luz está acesa 
     private bool buttonOn1= false;
     private bool buttonOn2 = false;
@@ -52,7 +53,7 @@ public class HardButtonController : MonoBehaviour
     void Start()
     {
 
-        TimerText = GameObject.Find("Timer").GetComponent<Text>();
+        timerText = GameObject.Find("Timer").GetComponent<Text>();
         // Toda lista terá como seu primeiro item o botão a quem ela está ligada
         b1List.Add("B1");
         b2List.Add("B2");
@@ -81,11 +82,11 @@ public class HardButtonController : MonoBehaviour
     {
 
         // Timer
-        if (winGame == false)
+        if (winGame == false & isPaused == false)
         {
             timer += Time.deltaTime;
             seconds = (int)timer;
-            TimerText.text = seconds.ToString();
+            timerText.text = seconds.ToString();
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -99,7 +100,7 @@ public class HardButtonController : MonoBehaviour
                 b = GameObject.Find(buttonName);
                 mainVarControl(buttonName);
                 // Bs   ---------------------------------------------------------------------
-                if ( buttonName.Length == 2 && controlVarMain == false)
+                if ( buttonName.Length == 2 && controlVarMain == false && isPaused == false)
                 {
 
                    
@@ -112,7 +113,7 @@ public class HardButtonController : MonoBehaviour
                         setMainList(buttonName); 
                     }
                 }
-                else if (buttonName.Length == 2 &&  controlVarMain == true)
+                else if (buttonName.Length == 2 &&  controlVarMain == true && isPaused == false)
                 {
                     
                     setVarControl(buttonName, false);
@@ -120,7 +121,21 @@ public class HardButtonController : MonoBehaviour
                     clickedButtons.Remove(buttonName);
                     b.GetComponent<Animator>().SetBool("buttonClicked", false);
                 }
-                
+
+
+                if (hit.collider.tag == "Pause" && isPaused == false)
+                {
+
+                    isPaused = true;
+
+                }
+                else if (hit.collider.tag == "Pause" && isPaused == true)
+                {
+                    isPaused = false;
+
+
+                }
+
                 // PB1 ------------------------------------------------------------------------
                 if (hit.collider.tag == "BPlus1" && pButtonOn1 == false)
                 {
@@ -136,6 +151,7 @@ public class HardButtonController : MonoBehaviour
 
                     b.GetComponent<Animator>().SetBool("buttonClicked", false);
                 }
+
 
             }
 

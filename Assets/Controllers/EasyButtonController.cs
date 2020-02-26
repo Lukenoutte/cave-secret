@@ -7,9 +7,10 @@ public class EasyButtonController : MonoBehaviour
 {
 
     /// Booleans que verificam qual luz está acesa 
-    private Text TimerText;
-    float timer = 0.0f;
-    int seconds = 0;
+    private Text timerText;
+    private float timer = 0.0f;
+    private int seconds = 0;
+    private bool isPaused = false;
     private bool winGame=false;
     private bool buttonOn1 = false;
     private bool buttonOn2 = false;
@@ -20,7 +21,7 @@ public class EasyButtonController : MonoBehaviour
     private bool buttonOn7 = false;
     private bool buttonOn8 = false;
     private bool buttonOn9 = false;
-    private bool pButtonOn1 = false;
+    
     private bool controlVarMain = false;
 
     private List<string> generalList = new List<string>();
@@ -46,7 +47,7 @@ public class EasyButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TimerText = GameObject.Find("Timer").GetComponent<Text>();
+        timerText = GameObject.Find("Timer").GetComponent<Text>();
 
         // Toda lista terá como seu primeiro item o botão a quem ela está ligada
         b1List.Add("B1");
@@ -73,45 +74,63 @@ public class EasyButtonController : MonoBehaviour
     {
 
         // Timer
-        if (winGame == false)
+        if (winGame == false & isPaused == false)
         {
             timer += Time.deltaTime;
             seconds = (int)timer;
-            TimerText.text = seconds.ToString();
+            timerText.text = seconds.ToString();
         }
+
+
         if (Input.GetMouseButtonDown(0))
         {
+            
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
-            if (hit != null && hit.collider != null)
-            {
-                // Pega elemento que foi clicado
-                buttonName = hit.collider.gameObject.tag.ToString();
-                b = GameObject.Find(buttonName);
-                mainVarControl(buttonName);
-                // Bs   ---------------------------------------------------------------------
-                if (buttonName.Length == 2 && controlVarMain == false)
+         
+                if (hit != null && hit.collider != null)
                 {
-
-
-                    setVarControl(buttonName, true);
-                    countLightsOn++;
-                    clickedButtons.Add(buttonName);
-                    b.GetComponent<Animator>().SetBool("buttonClicked", true);
-                    if (countLightsOn == 1)
+                    // Pega elemento que foi clicado
+                    buttonName = hit.collider.gameObject.tag.ToString();
+                    b = GameObject.Find(buttonName);
+                    mainVarControl(buttonName);
+                    // Bs   ---------------------------------------------------------------------
+                    if (buttonName.Length == 2 && controlVarMain == false && isPaused == false)
                     {
-                        setMainList(buttonName);
+
+
+                        setVarControl(buttonName, true);
+                        countLightsOn++;
+                        clickedButtons.Add(buttonName);
+                        b.GetComponent<Animator>().SetBool("buttonClicked", true);
+                        if (countLightsOn == 1)
+                        {
+                            setMainList(buttonName);
+                        }
                     }
-                }
-                else if (buttonName.Length == 2 && controlVarMain == true)
+                    else if (buttonName.Length == 2 && controlVarMain == true && isPaused == false)
+                    {
+
+                        setVarControl(buttonName, false);
+                        countLightsOn--;
+                        clickedButtons.Remove(buttonName);
+                        b.GetComponent<Animator>().SetBool("buttonClicked", false);
+                    }
+                
+
+
+                if (hit.collider.tag == "Pause" && isPaused == false)
                 {
 
-                    setVarControl(buttonName, false);
-                    countLightsOn--;
-                    clickedButtons.Remove(buttonName);
-                    b.GetComponent<Animator>().SetBool("buttonClicked", false);
-                }
+                    isPaused = true;
 
+                 }
+                else if (hit.collider.tag == "Pause" && isPaused == true)
+                {
+                    isPaused = false;
+
+                   
+                }
 
                 // Condição para ganhar
                 if (countLightsOn == 9 && hit.collider.tag == "Enter")
