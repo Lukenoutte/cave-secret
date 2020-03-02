@@ -65,6 +65,18 @@
   <ItemGroup>
     <Compile Include="Assets\Controllers\GeneralButtonController.cs" />
     <Compile Include="Assets\Controllers\UIController.cs" />
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/Zete/stoneSecret/stoneSecret/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/Zete/stoneSecret/stoneSecret/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/Zete/stoneSecret/stoneSecret/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Editor">
+      <HintPath>C:/Users/Zete/stoneSecret/stoneSecret/Library/ScriptAssemblies/Editor.dll</HintPath>
+    </Reference>
     <Reference Include="XiaomiSupport">
       <HintPath>C:/Users/Zete/stoneSecret/stoneSecret/Library/ScriptAssemblies/XiaomiSupport.dll</HintPath>
     </Reference>

@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public void easyButton()
     {
-        
+        SceneManager.LoadScene("GameEasy");
     }
-
-    // Update is called once per frame
-    void Update()
+    public void mediumButton()
     {
-        
+        SceneManager.LoadScene("GameMedium");
+    }
+    public void hardButton()
+    {
+        SceneManager.LoadScene("GameHard");
     }
 }
