@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Controllers\BgController.cs" />
     <Compile Include="Assets\Controllers\GeneralButtonController.cs" />
     <Compile Include="Assets\Controllers\UIController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">

@@ -32,6 +32,7 @@ public class GeneralButtonController : MonoBehaviour
     private List<string> generalList = new List<string>();
     public List<string> mainList; // Lista responsavel por controlar o jogo, escolhida dps que o usuário clicar no primeiro elemento.
     private GameObject b;
+    private GameObject bg2;
     public string buttonName;
     //Contador de luzes on 
     public int countLightsOn = 0;
@@ -59,13 +60,15 @@ public class GeneralButtonController : MonoBehaviour
     private bool isHard = false;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
 
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
-
+        bg2 = GameObject.Find("Bg2");
         timerText = GameObject.Find("Timer").GetComponent<Text>();
         // Toda lista terá como seu primeiro item o botão a quem ela está ligada
         b1List.Add("B1");
@@ -100,6 +103,9 @@ public class GeneralButtonController : MonoBehaviour
 
         // Método de gerar as listas randomicas
         randomLists();
+
+    
+        
 
     }
 
@@ -293,7 +299,10 @@ public class GeneralButtonController : MonoBehaviour
 
 
 
+
+
     }// Update end
+
     public void randomLists()
     {
         int countList = 0;
@@ -372,7 +381,7 @@ public class GeneralButtonController : MonoBehaviour
         buttonOnC1 = false;
         buttonOnC2 = false;
         buttonOnC3 = false;
-
+        bg2.GetComponent<BgController>().ShakeMe();
         clickedButtons.Clear();
     }
 
@@ -532,4 +541,7 @@ public class GeneralButtonController : MonoBehaviour
             buttonOnC3 = boolVar;
         }
     }
+
+
+
 }
