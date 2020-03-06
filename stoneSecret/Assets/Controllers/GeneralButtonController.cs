@@ -9,10 +9,10 @@ public class GeneralButtonController : MonoBehaviour
 
 
     private Text timerText;
-    private float timer = 0.0f;
+    private float timer;
     private int seconds = 0;
     private bool winGame = false;
-    private bool isPaused = false;
+    public bool isPaused = false;
     /// Booleans que verificam qual luz está acesa 
     private bool buttonOn1 = false;
     private bool buttonOn2 = false;
@@ -26,13 +26,17 @@ public class GeneralButtonController : MonoBehaviour
     private bool buttonOnC1 = false;
     private bool buttonOnC2 = false;
     private bool buttonOnC3 = false;
-    private bool pButtonOn1 = false;
+    private GameObject pauseButton;
+    private GameObject allButtons;
     private bool controlVarMain = false;
+    private GameObject enterLight;
 
     private List<string> generalList = new List<string>();
     public List<string> mainList; // Lista responsavel por controlar o jogo, escolhida dps que o usuário clicar no primeiro elemento.
     private GameObject b;
     private GameObject bg2;
+    [SerializeField]
+    private GameObject menuPause;
     public string buttonName;
     //Contador de luzes on 
     public int countLightsOn = 0;
@@ -52,7 +56,7 @@ public class GeneralButtonController : MonoBehaviour
     public List<string> clickedButtons = new List<string>();
     //Lista que contem as lista a cima
     List<List<string>> listOfLists = new List<List<string>>();
-
+    private int qtdElementToWin;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;
@@ -65,7 +69,11 @@ public class GeneralButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        enterLight = GameObject.Find("Enter");
+        pauseButton = GameObject.Find("Pause");
+        allButtons = GameObject.Find("Button");
+        
+        isPaused = false;
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
         bg2 = GameObject.Find("Bg2");
@@ -89,23 +97,34 @@ public class GeneralButtonController : MonoBehaviour
         {
             listOfLists.AddRange(new List<string>[] { b1List, b2List, b3List, b4List, b5List, b6List, b7List, b8List, b9List });
             isEasy = true;
+            qtdElementToWin = 9;
         }
         else if (sceneName == "GameMedium")
         {
             listOfLists.AddRange(new List<string>[] { b1List, b2List, b3List, b4List, b5List, b6List, b7List, b8List, b9List, c1List, c2List, c3List });
             isMedium = true;
+            qtdElementToWin = 12;
         }
         else if (sceneName == "GameHard")
         {
             listOfLists.AddRange(new List<string>[] { b1List, b2List, b3List, b4List, b5List, b6List, b7List, b8List, b9List, c1List, c2List, c3List });
             isHard = true;
+            qtdElementToWin = 12;
         }
 
         // Método de gerar as listas randomicas
         randomLists();
 
-    
-        
+        if (!isHard)
+        {
+            timer = 0.0f;
+        }
+        else
+        {
+            timer = 261;
+        }
+
+
 
     }
 
@@ -113,9 +132,18 @@ public class GeneralButtonController : MonoBehaviour
     void Update()
     {
         // Timer
-        if (winGame == false & isPaused == false)
+        if (!isHard)
         {
-            timer += Time.deltaTime;
+            if (winGame == false & isPaused == false)
+            {
+                timer += Time.deltaTime;
+                seconds = (int)timer;
+                timerText.text = seconds.ToString();
+            }
+        }
+        else if (!winGame && timer > 0 && !isPaused)
+        {
+            timer -= Time.deltaTime;
             seconds = (int)timer;
             timerText.text = seconds.ToString();
         }
@@ -155,40 +183,50 @@ public class GeneralButtonController : MonoBehaviour
                     b.GetComponent<Animator>().SetBool("buttonClicked", false);
                 }
 
+                // Luz do botão Enter
+                if (countLightsOn == qtdElementToWin)
+                {
 
+                    enterLight.GetComponent<Animator>().SetBool("win", true);
 
+                }
+                else
+                {
+                    enterLight.GetComponent<Animator>().SetBool("win", false);
+                }
+
+                if (hit.collider.tag == "Enter" && countLightsOn < qtdElementToWin)
+                {
+
+                    StartCoroutine(lightOnEnterNow());
+
+                }
+
+                //Pause
                 if (hit.collider.tag == "Pause" && isPaused == false)
                 {
 
                     isPaused = true;
+                    pauseButton.GetComponent<Animator>().SetBool("isPaused", true);
 
+                    Vector3 aux = allButtons.GetComponent<Transform>().position;
+                    allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+                    menuPause.SetActive(true);
                 }
                 else if (hit.collider.tag == "Pause" && isPaused == true)
                 {
+
                     isPaused = false;
+                    pauseButton.GetComponent<Animator>().SetBool("isPaused", false);
 
-
+                    Vector3 aux = allButtons.GetComponent<Transform>().position;
+                    allButtons.GetComponent<Transform>().position = new Vector3(0, aux.y, aux.z);
+                    menuPause.SetActive(false);
                 }
 
 
-                if(isHard == true)
-                {
-                    // PB1 ------------------------------------------------------------------------
-                    if (hit.collider.tag == "BPlus1" && pButtonOn1 == false && isPaused == false)
-                    {
 
-                        pButtonOn1 = true;
 
-                        b.GetComponent<Animator>().SetBool("buttonClicked", true);
-
-                    }
-                    else if (hit.collider.tag == "BPlus1" && pButtonOn1 == true && isPaused == false)
-                    {
-                        pButtonOn1 = false;
-
-                        b.GetComponent<Animator>().SetBool("buttonClicked", false);
-                    }
-                }
 
                 // Condição para ganhar
                 if (isEasy == true)
@@ -214,16 +252,8 @@ public class GeneralButtonController : MonoBehaviour
                 {
                     if (countLightsOn == 12 && hit.collider.tag == "Enter")
                     {
-                        bool auxBool;
-                        if (mainList[12] == "1")
-                        {
-                            auxBool = true;
-                        }
-                        else
-                        {
-                            auxBool = false;
-                        }
-                        if (auxBool == pButtonOn1)
+
+                        if (timer > 0)
                         {
                             Debug.Log("win!!!");
                             winGame = true;
@@ -338,12 +368,6 @@ public class GeneralButtonController : MonoBehaviour
                 }
                 generalList.RemoveAt(itemIndex);
             }
-            if (isHard == true)
-            {
-                int itemIndexP = Random.Range(0, 2);
-                auxList.Add(itemIndexP.ToString());
-            }
-
         }
 
     }
@@ -543,5 +567,20 @@ public class GeneralButtonController : MonoBehaviour
     }
 
 
+    private IEnumerator lightOnEnterNow()
+    {
+
+        enterLight.GetComponent<Animator>().SetBool("clicked", true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        enterLight.GetComponent<Animator>().SetBool("clicked", false);
+
+    }
+
+    public void setIsPaused(bool value)
+    {
+        isPaused = value;
+    }
 
 }

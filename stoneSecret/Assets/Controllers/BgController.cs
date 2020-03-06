@@ -18,7 +18,7 @@ public class BgController : MonoBehaviour
     {
         if (shaking)
         {
-            float step = 2 * Time.deltaTime;
+            float step = 3 * Time.deltaTime;
             Vector3 newPos = Random.insideUnitSphere * (step * shakeVar);
             
             newPos.z = GetComponent<Transform>().position.z;

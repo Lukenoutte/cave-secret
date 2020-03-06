@@ -19,6 +19,9 @@ TagManager:
   - C2
   - C3
   - Pause
+  - Menu
+  - Reset
+  - MenuPause
   layers:
   - Default
   - TransparentFX

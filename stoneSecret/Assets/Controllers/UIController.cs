@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+
+
+    void Start()
+    {
+
+
+    }
     // Start is called before the first frame update
     public void easyButton()
     {
@@ -18,4 +25,5 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene("GameHard");
     }
+
 }
