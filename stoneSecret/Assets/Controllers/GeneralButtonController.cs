@@ -12,6 +12,7 @@ public class GeneralButtonController : MonoBehaviour
     private float timer;
     private int seconds = 0;
     private bool winGame = false;
+    private bool looseGame = false;
     public bool isPaused = false;
     /// Booleans que verificam qual luz está acesa 
     private bool buttonOn1 = false;
@@ -28,6 +29,7 @@ public class GeneralButtonController : MonoBehaviour
     private bool buttonOnC3 = false;
     private GameObject pauseButton;
     private GameObject allButtons;
+    private GameObject fireFlies;
     private bool controlVarMain = false;
     private GameObject enterLight;
 
@@ -36,7 +38,14 @@ public class GeneralButtonController : MonoBehaviour
     private GameObject b;
     private GameObject bg2;
     [SerializeField]
+    private GameObject looseMenu;
+    [SerializeField]
+    private GameObject winMenu;
+    [SerializeField]
     private GameObject menuPause;
+    [SerializeField]
+    private GameObject timerAndPause;
+
     public string buttonName;
     //Contador de luzes on 
     public int countLightsOn = 0;
@@ -72,7 +81,8 @@ public class GeneralButtonController : MonoBehaviour
         enterLight = GameObject.Find("Enter");
         pauseButton = GameObject.Find("Pause");
         allButtons = GameObject.Find("Button");
-        
+        fireFlies = GameObject.Find("FireFlies");
+
         isPaused = false;
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
@@ -134,14 +144,14 @@ public class GeneralButtonController : MonoBehaviour
         // Timer
         if (!isHard)
         {
-            if (winGame == false & isPaused == false)
+            if (!winGame & !isPaused & !looseGame)
             {
                 timer += Time.deltaTime;
                 seconds = (int)timer;
                 timerText.text = seconds.ToString();
             }
         }
-        else if (!winGame && timer > 0 && !isPaused)
+        else if (!winGame && !isPaused && !looseGame)
         {
             timer -= Time.deltaTime;
             seconds = (int)timer;
@@ -203,7 +213,7 @@ public class GeneralButtonController : MonoBehaviour
                 }
 
                 //Pause
-                if (hit.collider.tag == "Pause" && isPaused == false)
+                if (hit.collider.tag == "Pause" && isPaused == false && !winGame)
                 {
 
                     isPaused = true;
@@ -213,7 +223,7 @@ public class GeneralButtonController : MonoBehaviour
                     allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
                     menuPause.SetActive(true);
                 }
-                else if (hit.collider.tag == "Pause" && isPaused == true)
+                else if (hit.collider.tag == "Pause" && isPaused == true && !winGame)
                 {
 
                     isPaused = false;
@@ -272,6 +282,51 @@ public class GeneralButtonController : MonoBehaviour
 
         } // End click
 
+
+        if (isEasy | isMedium)
+        {
+            if(seconds >= 9999)
+            {
+                looseGame = true;
+            }
+        }
+        if (isHard)
+        {
+            if(seconds <= 0)
+            {
+                looseGame = true;
+            }
+        }
+
+        // Win menu
+        //
+        if (winGame)
+        {
+            Vector3 aux = allButtons.GetComponent<Transform>().position;
+            allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+            winMenu.SetActive(true);
+            timerAndPause.SetActive(false);
+            Text textTimerWin;
+            textTimerWin = GameObject.Find("TimerFinish").GetComponent<Text>();
+            textTimerWin.text = timerText.text;
+            ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
+            aux2.rateOverTime = 7;
+        }
+
+        // Loose menu
+        //
+        if (looseGame)
+        {
+            Vector3 aux = allButtons.GetComponent<Transform>().position;
+            allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+            looseMenu.SetActive(true);
+            timerAndPause.SetActive(false);
+            Text textTimerWin;
+            textTimerWin = GameObject.Find("TimerFinishLoose").GetComponent<Text>();
+            textTimerWin.text = timerText.text;
+            ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
+            aux2.rateOverTime = 0;
+        }
 
         // Compara se o botão clicado corresponde com o da lista.
         if (countLightsOn == 2 && clickedButtons[1] != mainList[1])
