@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: -81.3}
+  m_AnchoredPosition: {x: 29, y: -81.3}
   m_SizeDelta: {x: 417.5, y: 195.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &41365831
@@ -1881,7 +1881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14, y: 116}
+  m_AnchoredPosition: {x: 31, y: 116}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921309033
@@ -3338,15 +3338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91262627cb8cc9c478ce43ff67320c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
   mainList: []
   looseMenu: {fileID: 556985987}
   winMenu: {fileID: 1249747954}
   menuPause: {fileID: 1026404866}
   timerAndPause: {fileID: 1173127714}
-  buttonName: 
-  countLightsOn: 0
-  clickedButtons: []
 --- !u!4 &1615525331
 Transform:
   m_ObjectHideFlags: 0

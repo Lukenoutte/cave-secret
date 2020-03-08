@@ -6081,15 +6081,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91262627cb8cc9c478ce43ff67320c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
   mainList: []
   looseMenu: {fileID: 1167717070}
   winMenu: {fileID: 572122078}
   menuPause: {fileID: 599487046}
   timerAndPause: {fileID: 365571308}
-  buttonName: 
-  countLightsOn: 0
-  clickedButtons: []
 --- !u!1 &1488056801
 GameObject:
   m_ObjectHideFlags: 0

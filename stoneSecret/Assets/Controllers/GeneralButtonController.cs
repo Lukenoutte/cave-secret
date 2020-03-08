@@ -13,7 +13,7 @@ public class GeneralButtonController : MonoBehaviour
     private int seconds = 0;
     private bool winGame = false;
     private bool looseGame = false;
-    public bool isPaused = false;
+    private bool isPaused = false;
     /// Booleans que verificam qual luz está acesa 
     private bool buttonOn1 = false;
     private bool buttonOn2 = false;
@@ -34,7 +34,8 @@ public class GeneralButtonController : MonoBehaviour
     private GameObject enterLight;
 
     private List<string> generalList = new List<string>();
-    public List<string> mainList; // Lista responsavel por controlar o jogo, escolhida dps que o usuário clicar no primeiro elemento.
+    [SerializeField]
+    private List<string> mainList; // Lista responsavel por controlar o jogo, escolhida dps que o usuário clicar no primeiro elemento.
     private GameObject b;
     private GameObject bg2;
     [SerializeField]
@@ -46,25 +47,25 @@ public class GeneralButtonController : MonoBehaviour
     [SerializeField]
     private GameObject timerAndPause;
 
-    public string buttonName;
+    private string buttonName;
     //Contador de luzes on 
-    public int countLightsOn = 0;
+    private int countLightsOn = 0;
     // Listas que irão receber a ordem dos botões
-    List<string> b1List = new List<string>();
-    List<string> b2List = new List<string>();
-    List<string> b3List = new List<string>();
-    List<string> b4List = new List<string>();
-    List<string> b5List = new List<string>();
-    List<string> b6List = new List<string>();
-    List<string> b7List = new List<string>();
-    List<string> b8List = new List<string>();
-    List<string> b9List = new List<string>();
-    List<string> c1List = new List<string>();
-    List<string> c2List = new List<string>();
-    List<string> c3List = new List<string>();
-    public List<string> clickedButtons = new List<string>();
+    private List<string> b1List = new List<string>();
+    private List<string> b2List = new List<string>();
+    private List<string> b3List = new List<string>();
+    private List<string> b4List = new List<string>();
+    private List<string> b5List = new List<string>();
+    private List<string> b6List = new List<string>();
+    private List<string> b7List = new List<string>();
+    private List<string> b8List = new List<string>();
+    private List<string> b9List = new List<string>();
+    private List<string> c1List = new List<string>();
+    private List<string> c2List = new List<string>();
+    private List<string> c3List = new List<string>();
+    private List<string> clickedButtons = new List<string>();
     //Lista que contem as lista a cima
-    List<List<string>> listOfLists = new List<List<string>>();
+    private List<List<string>> listOfLists = new List<List<string>>();
     private int qtdElementToWin;
     private Scene m_Scene;
     private string sceneName;
