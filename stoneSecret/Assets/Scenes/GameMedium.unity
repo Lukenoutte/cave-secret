@@ -3343,6 +3343,8 @@ MonoBehaviour:
   winMenu: {fileID: 1249747954}
   menuPause: {fileID: 1026404866}
   timerAndPause: {fileID: 1173127714}
+  timerFinishLoose: {fileID: 41365829}
+  TimerFinishWin: {fileID: 1635599213}
 --- !u!4 &1615525331
 Transform:
   m_ObjectHideFlags: 0
@@ -3498,7 +3500,7 @@ GameObject:
   - component: {fileID: 1635599216}
   - component: {fileID: 1635599215}
   m_Layer: 5
-  m_Name: TimerFinish
+  m_Name: TimerFinishWin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

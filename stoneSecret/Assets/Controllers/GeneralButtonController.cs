@@ -46,7 +46,10 @@ public class GeneralButtonController : MonoBehaviour
     private GameObject menuPause;
     [SerializeField]
     private GameObject timerAndPause;
-
+    [SerializeField]
+    private GameObject timerFinishLoose;
+    [SerializeField]
+    private GameObject TimerFinishWin;
     private string buttonName;
     //Contador de luzes on 
     private int countLightsOn = 0;
@@ -132,7 +135,7 @@ public class GeneralButtonController : MonoBehaviour
         }
         else
         {
-            timer = 261;
+            timer = 161;
         }
 
 
@@ -308,7 +311,7 @@ public class GeneralButtonController : MonoBehaviour
             winMenu.SetActive(true);
             timerAndPause.SetActive(false);
             Text textTimerWin;
-            textTimerWin = GameObject.Find("TimerFinish").GetComponent<Text>();
+            textTimerWin = TimerFinishWin.GetComponent<Text>();
             textTimerWin.text = timerText.text;
             ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
             aux2.rateOverTime = 7;
@@ -323,7 +326,7 @@ public class GeneralButtonController : MonoBehaviour
             looseMenu.SetActive(true);
             timerAndPause.SetActive(false);
             Text textTimerWin;
-            textTimerWin = GameObject.Find("TimerFinishLoose").GetComponent<Text>();
+            textTimerWin = timerFinishLoose.GetComponent<Text>();
             textTimerWin.text = timerText.text;
             ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
             aux2.rateOverTime = 0;

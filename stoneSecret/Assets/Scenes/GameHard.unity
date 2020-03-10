@@ -532,15 +532,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91262627cb8cc9c478ce43ff67320c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
   mainList: []
   looseMenu: {fileID: 92313602}
   winMenu: {fileID: 1961044190}
   menuPause: {fileID: 1152012983}
   timerAndPause: {fileID: 114089515}
-  buttonName: 
-  countLightsOn: 0
-  clickedButtons: []
+  timerFinishLoose: {fileID: 2120219431}
+  TimerFinishWin: {fileID: 1284079027}
 --- !u!4 &327579994
 Transform:
   m_ObjectHideFlags: 0
@@ -1164,7 +1162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14, y: 116}
+  m_AnchoredPosition: {x: -24, y: 116}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &695262375
@@ -2170,7 +2168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 183, y: -541}
+  m_AnchoredPosition: {x: 153, y: -541}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1153564849
@@ -2426,7 +2424,7 @@ GameObject:
   - component: {fileID: 1284079030}
   - component: {fileID: 1284079029}
   m_Layer: 5
-  m_Name: TimerFinish
+  m_Name: TimerFinishWin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8722,7 +8720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 14, y: 0}
   m_SizeDelta: {x: 1116, y: 986}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2040621369
@@ -8866,7 +8864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: -81.3}
+  m_AnchoredPosition: {x: -22, y: -81.3}
   m_SizeDelta: {x: 417.5, y: 195.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2120219433
