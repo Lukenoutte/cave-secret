@@ -13,7 +13,6 @@ TagManager:
   - B8
   - B9
   - B7
-  - BPlus1
   - Enter
   - C1
   - C2
@@ -22,6 +21,11 @@ TagManager:
   - Menu
   - Reset
   - MenuPause
+  - Next
+  - Bixinho
+  - BEasy
+  - BMedium
+  - BHard
   layers:
   - Default
   - TransparentFX

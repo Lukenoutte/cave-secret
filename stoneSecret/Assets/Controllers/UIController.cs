@@ -50,9 +50,27 @@ public class UIController : MonoBehaviour
 
             if (hit != null && hit.collider != null)
             {
+                if (hit.collider.tag == "Next")
+                {
+                    SceneManager.LoadScene("MenuMain");
+                }
+
                 if (hit.collider.tag == "Menu")
                 {
                     SceneManager.LoadScene("MenuMain");
+                }
+
+                if (hit.collider.tag == "BEasy")
+                {
+                    easyButton();
+                }
+                if (hit.collider.tag == "BMedium")
+                {
+                    mediumButton();
+                }
+                if (hit.collider.tag == "BHard")
+                {
+                    hardButton();
                 }
                 if (isEasy)
                 {

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bixinho1Papo
+  m_Name: null
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 9211e733c488b0d429389c4e764c1a96, type: 3}
-    - time: 0.8333333
-      value: {fileID: 21300000, guid: 378394605a9f98b42b5598e677f17922, type: 3}
-    - time: 1.6666666
-      value: {fileID: 21300000, guid: 0fae251bdc1f6c0489850db142b0ac8a, type: 3}
-    - time: 2.6166666
-      value: {fileID: 21300000, guid: 23cd0712c000f1a40ad7a562b11a1d83, type: 3}
+      value: {fileID: 21300000, guid: aeaec39e0dafeae428efc943c9aa42c4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,16 +40,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 9211e733c488b0d429389c4e764c1a96, type: 3}
-    - {fileID: 21300000, guid: 378394605a9f98b42b5598e677f17922, type: 3}
-    - {fileID: 21300000, guid: 0fae251bdc1f6c0489850db142b0ac8a, type: 3}
-    - {fileID: 21300000, guid: 23cd0712c000f1a40ad7a562b11a1d83, type: 3}
+    - {fileID: 21300000, guid: aeaec39e0dafeae428efc943c9aa42c4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2.6333332
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
