@@ -1,37 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AnimationController : MonoBehaviour
 {
-
-    private GameObject bixinho = null;
-    private GameObject mainMenu;
-    private GameObject bixinho1Menu;
-    private GameObject bixinho2Menu;
+    private GameObject bixinho, bixinho1Menu, bixinho2Menu, mainMenu;
+    [SerializeField]
+    private GameObject  bixinho3Dif, bixinho4Menu, difficulty;
     private string animName;
-    private bool animOn;
+    private bool animOnMenu;
+    private bool animOnDif;
     public int idAnim;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        animOn = false;
+
+        animOnMenu = false;
+        animOnDif = false;
         bixinho1Menu = GameObject.Find("/Canvas/MainMenu/Play/Bixinho1Menu");
         bixinho2Menu = GameObject.Find("/Canvas/MainMenu/Bixinho2Menu");
         mainMenu = GameObject.Find("/Canvas/MainMenu");
-        idAnim = Random.Range(1, 3);
 
-        if (idAnim == 1)
-        {
-            bixinho1Menu.SetActive(true);
-            animOn = true;
-        }
 
-        if (idAnim == 2)
-        {
-            bixinho2Menu.SetActive(true);
-            animOn = true;
-        }
 
     }
 
@@ -54,39 +47,59 @@ public class AnimationController : MonoBehaviour
                 }
             }
         }
-
-        if (mainMenu.active == false)
+        // Main menu animations
+        if (mainMenu.activeSelf == false)
         {
-            animOn = false;
+            animOnMenu = false;
             bixinho1Menu.SetActive(false);
             bixinho2Menu.SetActive(false);
+            bixinho4Menu.SetActive(false);
         }
-
-        if (animOn == false && mainMenu.active == true)
+        else if (animOnMenu == false)
         {
             int oldId = idAnim;
-            idAnim = Random.Range(1, 3);
+            idAnim = Random.Range(1, 4);
             while (oldId == idAnim)
             {
-                idAnim = Random.Range(1, 3);
+                idAnim = Random.Range(1, 4);
             }
 
 
-            if (idAnim == 1 && animOn == false && !bixinho2Menu.active)
+            if (idAnim == 1 && animOnMenu == false && !bixinho2Menu.activeSelf && !bixinho4Menu.activeSelf)
             {
-                animOn = true;
+                animOnMenu = true;
                 bixinho1Menu.SetActive(true);
-                
+
 
 
             }
-            else if (idAnim == 2 && animOn == false && !bixinho1Menu.active)
+            if (idAnim == 2 && animOnMenu == false && !bixinho1Menu.activeSelf && !bixinho4Menu.activeSelf)
             {
-                animOn = true;
+                animOnMenu = true;
                 bixinho2Menu.SetActive(true);
-               
+
             }
+            if (idAnim == 3 && animOnMenu == false && !bixinho1Menu.activeSelf && !bixinho2Menu.activeSelf)
+            {
+                animOnMenu = true;
+                bixinho4Menu.SetActive(true);
+
+            }
+        } // End
+
+        // Dif animations
+        if (difficulty.activeSelf == false)
+        {
+            animOnDif = false;
+            bixinho3Dif.SetActive(false);
+
         }
+        else if (animOnDif == false)
+        {
+            bixinho3Dif.SetActive(true);
+            animOnDif = true;
+        } // End
+
     }
 
     private IEnumerator eraseAnim(GameObject anim)
@@ -97,10 +110,16 @@ public class AnimationController : MonoBehaviour
 
         yield return new WaitForSeconds(3);
         aux.SetActive(false);
-        animOn = false;
-               
-    }
+        if (mainMenu.activeSelf)
+        {
+            animOnMenu = false;
+        }
+        if (difficulty.activeSelf)
+        {
+            animOnDif = false;
+        }
 
+    }
 
 
 }

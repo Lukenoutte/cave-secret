@@ -26,6 +26,9 @@ TagManager:
   - BEasy
   - BMedium
   - BHard
+  - Play
+  - Configuration
+  - Difficulty
   layers:
   - Default
   - TransparentFX

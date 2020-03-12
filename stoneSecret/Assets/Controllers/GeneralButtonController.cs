@@ -39,17 +39,7 @@ public class GeneralButtonController : MonoBehaviour
     private GameObject b;
     private GameObject bg2;
     [SerializeField]
-    private GameObject looseMenu;
-    [SerializeField]
-    private GameObject winMenu;
-    [SerializeField]
-    private GameObject menuPause;
-    [SerializeField]
-    private GameObject timerAndPause;
-    [SerializeField]
-    private GameObject timerFinishLoose;
-    [SerializeField]
-    private GameObject TimerFinishWin;
+    private GameObject looseMenu, winMenu, menuPause, timerAndPause, timerFinishLoose, TimerFinishWin;
     private string buttonName;
     //Contador de luzes on 
     private int countLightsOn = 0;
@@ -75,13 +65,14 @@ public class GeneralButtonController : MonoBehaviour
     private bool isEasy = false;
     private bool isMedium = false;
     private bool isHard = false;
-
+    private bool clickble = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(clickbleOn());
         enterLight = GameObject.Find("Enter");
         pauseButton = GameObject.Find("Pause");
         allButtons = GameObject.Find("Button");
@@ -162,7 +153,7 @@ public class GeneralButtonController : MonoBehaviour
             timerText.text = seconds.ToString();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && clickble)
         {
 
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -637,9 +628,11 @@ public class GeneralButtonController : MonoBehaviour
 
     }
 
-    public void setIsPaused(bool value)
-    {
-        isPaused = value;
-    }
 
+    private IEnumerator clickbleOn()
+    {
+        clickble = false;
+        yield return new WaitForSeconds(0.5f);
+        clickble = true;
+    }
 }

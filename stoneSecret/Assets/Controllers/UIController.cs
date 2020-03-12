@@ -5,18 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject menuMain, configuration, difficulty;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;
     private bool isMedium = false;
     private bool isHard = false;
-    private GameObject menuButton;
-    private GeneralButtonController allButtons;
 
+
+    private bool clickble = false;
     void Start()
     {
-        menuButton = GameObject.Find("Menu");
+        StartCoroutine(clickbleOn());
         
+
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
 
@@ -24,78 +27,92 @@ public class UIController : MonoBehaviour
         if (sceneName == "GameEasy")
         {
             isEasy = true;
-    
+
         }
         else if (sceneName == "GameMedium")
         {
-          
+
             isMedium = true;
-          
+
         }
         else if (sceneName == "GameHard")
         {
-           
+
             isHard = true;
-           
+
         }
 
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (clickble == true)
         {
-
-            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
-
-            if (hit != null && hit.collider != null)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.tag == "Next")
-                {
-                    SceneManager.LoadScene("MenuMain");
-                }
 
-                if (hit.collider.tag == "Menu")
-                {
-                    SceneManager.LoadScene("MenuMain");
-                }
+                Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
 
-                if (hit.collider.tag == "BEasy")
+                if (hit != null && hit.collider != null)
                 {
-                    easyButton();
-                }
-                if (hit.collider.tag == "BMedium")
-                {
-                    mediumButton();
-                }
-                if (hit.collider.tag == "BHard")
-                {
-                    hardButton();
-                }
-                if (isEasy)
-                {
-                    if (hit.collider.tag == "Reset")
+                    if (hit.collider.tag == "Next")
+                    {
+                        SceneManager.LoadScene("MenuMain");
+                    }
+                    if (hit.collider.tag == "Play")
+                    {
+                        menuMain.SetActive(false);
+                        difficulty.SetActive(true);
+
+                    }
+                    if (hit.collider.tag == "Configuration")
+                    {
+                        menuMain.SetActive(false);
+                        configuration.SetActive(true);
+
+                    }
+                    if (hit.collider.tag == "Menu")
+                    {
+                        SceneManager.LoadScene("MenuMain");
+                    }
+
+                    if (hit.collider.tag == "BEasy")
                     {
                         easyButton();
                     }
-                }
-
-                if (isMedium)
-                {
-                    if (hit.collider.tag == "Reset")
+                    if (hit.collider.tag == "BMedium")
                     {
                         mediumButton();
                     }
-                }
-
-                if (isHard)
-                {
-                    if (hit.collider.tag == "Reset")
+                    if (hit.collider.tag == "BHard")
                     {
                         hardButton();
                     }
-                }
+                    if (isEasy)
+                    {
+                        if (hit.collider.tag == "Reset")
+                        {
+                            easyButton();
+                        }
+                    }
 
+                    if (isMedium)
+                    {
+                        if (hit.collider.tag == "Reset")
+                        {
+                            mediumButton();
+                        }
+                    }
+
+                    if (isHard)
+                    {
+                        if (hit.collider.tag == "Reset")
+                        {
+                            hardButton();
+                        }
+                    }
+
+                }
             }
         }
     }
@@ -114,5 +131,11 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene("GameHard");
     }
 
+    private IEnumerator clickbleOn()
+    {
+        clickble = false;
+        yield return new WaitForSeconds(0.5f);
+        clickble = true;
+    }
 
 }
