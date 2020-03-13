@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject menuMain, configuration, difficulty;
+    
+    public GameObject menuMain, configuration, difficulty;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;

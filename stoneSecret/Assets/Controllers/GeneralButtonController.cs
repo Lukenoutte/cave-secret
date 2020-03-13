@@ -38,8 +38,8 @@ public class GeneralButtonController : MonoBehaviour
     private List<string> mainList; // Lista responsavel por controlar o jogo, escolhida dps que o usuário clicar no primeiro elemento.
     private GameObject b;
     private GameObject bg2;
-    [SerializeField]
-    private GameObject looseMenu, winMenu, menuPause, timerAndPause, timerFinishLoose, TimerFinishWin;
+    
+    public GameObject looseMenu, winMenu, menuPause, timerAndPause, timerFinishLoose, TimerFinishWin;
     private string buttonName;
     //Contador de luzes on 
     private int countLightsOn = 0;
