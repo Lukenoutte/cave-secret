@@ -7,7 +7,7 @@ public class AnimationController : MonoBehaviour
 {
     private GameObject bixinho, bixinho1Menu, bixinho2Menu, mainMenu;
 
-    public GameObject bixinho3Dif, bixinho4Menu, difficulty, bixinho5Dif, configuration, bixinho6Config, bixinho7Config;
+    public GameObject bixinho3Dif, bixinho4Menu, difficulty, bixinho5Dif, configuration, bixinho6Config, bixinho7Config, bixinho8Menu;
     private string animName;
     private bool animOnMenu;
     private bool animOnDif;
@@ -57,18 +57,24 @@ public class AnimationController : MonoBehaviour
             bixinho1Menu.SetActive(false);
             bixinho2Menu.SetActive(false);
             bixinho4Menu.SetActive(false);
+            bixinho8Menu.SetActive(false);
         }
         else if (animOnMenu == false)
         {
+            bool AnimActive = false;
             int oldIdMenu = idAnimMenu;
-            idAnimMenu = Random.Range(1, 4);
+            idAnimMenu = Random.Range(1, 5);
             while (oldIdMenu == idAnimMenu)
             {
-                idAnimMenu = Random.Range(1, 4);
+                idAnimMenu = Random.Range(1, 5);
             }
 
+            if (bixinho2Menu.activeSelf | bixinho4Menu.activeSelf | bixinho8Menu.activeSelf | bixinho1Menu.activeSelf)
+            {
+                AnimActive = true;
+            }
 
-            if (idAnimMenu == 1 && animOnMenu == false && !bixinho2Menu.activeSelf && !bixinho4Menu.activeSelf)
+            if (idAnimMenu == 1 && animOnMenu == false && !AnimActive)
             {
                 animOnMenu = true;
                 bixinho1Menu.SetActive(true);
@@ -76,16 +82,22 @@ public class AnimationController : MonoBehaviour
 
 
             }
-            if (idAnimMenu == 2 && animOnMenu == false && !bixinho1Menu.activeSelf && !bixinho4Menu.activeSelf)
+            if (idAnimMenu == 2 && animOnMenu == false && !AnimActive)
             {
                 animOnMenu = true;
                 bixinho2Menu.SetActive(true);
 
             }
-            if (idAnimMenu == 3 && animOnMenu == false && !bixinho1Menu.activeSelf && !bixinho2Menu.activeSelf)
+            if (idAnimMenu == 3 && animOnMenu == false && !AnimActive)
             {
                 animOnMenu = true;
                 bixinho4Menu.SetActive(true);
+
+            }
+            if (idAnimMenu == 4 && animOnMenu == false && !AnimActive)
+            {
+                animOnMenu = true;
+                bixinho8Menu.SetActive(true);
 
             }
         } // End
@@ -101,14 +113,19 @@ public class AnimationController : MonoBehaviour
         else if (animOnDif == false)
         {
             int oldIdDif = idAnimDif;
+            bool AnimActive = false;
             idAnimDif = Random.Range(1, 3);
             while (oldIdDif == idAnimDif)
             {
                 idAnimDif = Random.Range(1, 3);
             }
 
+            if (bixinho5Dif.activeSelf | bixinho3Dif.activeSelf)
+            {
+                AnimActive = true;
+            }
 
-            if (idAnimDif == 1 && animOnDif == false && !bixinho5Dif.activeSelf)
+            if (idAnimDif == 1 && animOnDif == false && !AnimActive)
             {
                 animOnDif = true;
                 bixinho3Dif.SetActive(true);
@@ -116,7 +133,7 @@ public class AnimationController : MonoBehaviour
 
 
             }
-            if (idAnimDif == 2 && animOnDif == false && !bixinho3Dif.activeSelf)
+            if (idAnimDif == 2 && animOnDif == false && !AnimActive)
             {
                 animOnDif = true;
                 bixinho5Dif.SetActive(true);
@@ -140,14 +157,19 @@ public class AnimationController : MonoBehaviour
         {
 
             int oldIdConfig = idAnimConfig;
+            bool AnimActive = false;
             idAnimConfig = Random.Range(1, 3);
             while (oldIdConfig == idAnimConfig)
             {
                 idAnimConfig = Random.Range(1, 3);
             }
 
+            if (bixinho7Config.activeSelf | bixinho6Config.activeSelf)
+            {
+                AnimActive = true;
+            }
 
-            if (idAnimConfig == 1 && animOnConfig == false && !bixinho7Config.activeSelf)
+            if (idAnimConfig == 1 && animOnConfig == false && !AnimActive)
             {
                 animOnConfig = true;
                 bixinho6Config.SetActive(true);
@@ -155,7 +177,7 @@ public class AnimationController : MonoBehaviour
 
 
             }
-            if (idAnimConfig == 2 && animOnConfig == false && !bixinho6Config.activeSelf)
+            if (idAnimConfig == 2 && animOnConfig == false && !AnimActive)
             {
                 animOnConfig = true;
                 bixinho7Config.SetActive(true);
@@ -164,7 +186,7 @@ public class AnimationController : MonoBehaviour
 
             }
 
-        } // End
+        } // End 
     }
 
     private IEnumerator eraseAnim(GameObject anim)
