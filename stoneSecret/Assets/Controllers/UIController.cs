@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     
-    public GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard;
+    public GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
+        medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;
@@ -131,17 +133,24 @@ public class UIController : MonoBehaviour
         {
             if (difficulty.activeSelf == true)
             {
-                if (SaveManager.instance.state.easyWin == true)
+                SaveState auxSave = SaveManager.instance.state;
+                if (auxSave.easyWin == true)
                 {
                     buttonEasy.GetComponent<Animator>().SetBool("win", true);
+                    recordEasy.GetComponent<Text>().text = auxSave.easyRecord.ToString();
+                    medalEasy.SetActive(true);
                 }
-                if (SaveManager.instance.state.mediumWin == true)
+                if (auxSave.mediumWin == true)
                 {
                     buttonMedium.GetComponent<Animator>().SetBool("win", true);
+                    recordMedium.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
+                    medalMedium.SetActive(true);
                 }
-                if (SaveManager.instance.state.hardWin == true)
+                if (auxSave.hardWin == true)
                 {
                     buttonHard.GetComponent<Animator>().SetBool("win", true);
+                    recordHard.GetComponent<Text>().text = auxSave.hardRecord.ToString();
+                    medalHard.SetActive(true);
                 }
             }
         }

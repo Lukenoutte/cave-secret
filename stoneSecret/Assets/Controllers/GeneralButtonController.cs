@@ -79,8 +79,11 @@ public class GeneralButtonController : MonoBehaviour
         allButtons = GameObject.Find("Button");
         fireFlies = GameObject.Find("FireFlies");
         isPaused = false;
+
+        // Scene
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
+
         bg2 = GameObject.Find("Bg2");
         timerText = GameObject.Find("Timer").GetComponent<Text>();
         // Toda lista terá como seu primeiro item o botão a quem ela está ligada
@@ -116,7 +119,7 @@ public class GeneralButtonController : MonoBehaviour
             isHard = true;
             qtdElementToWin = 12;
         }
-
+        // Valor do record na tela
         SaveState auxSave = SaveManager.instance.state;
         if (isEasy)
         {
@@ -153,7 +156,7 @@ public class GeneralButtonController : MonoBehaviour
         }
         else
         {
-            timer = timerHard;
+            timer = timerHard + 1;
         }
 
 

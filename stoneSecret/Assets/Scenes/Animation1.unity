@@ -456,7 +456,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 66bc1953b3f06164e91bb092615bc17e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d8dd7b128488fbb44b7120be9341d2fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -599,6 +599,12 @@ MonoBehaviour:
   buttonEasy: {fileID: 0}
   buttonMedium: {fileID: 0}
   buttonHard: {fileID: 0}
+  medalEasy: {fileID: 0}
+  medalMedium: {fileID: 0}
+  medalHard: {fileID: 0}
+  recordEasy: {fileID: 0}
+  recordMedium: {fileID: 0}
+  recordHard: {fileID: 0}
 --- !u!1 &2105881401
 GameObject:
   m_ObjectHideFlags: 0
