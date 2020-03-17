@@ -38,8 +38,9 @@ public class GeneralButtonController : MonoBehaviour
     private List<string> mainList; // Lista responsavel por controlar o jogo, escolhida dps que o usuário clicar no primeiro elemento.
     private GameObject b;
     private GameObject bg2;
-    
-    public GameObject looseMenu, winMenu, menuPause, timerAndPause, timerFinishLoose, TimerFinishWin;
+
+    public GameObject looseMenu, winMenu, menuPause, timerAndPause, timerFinishLoose, timerFinishWin, record,
+        medal, record2, medal2;
     private string buttonName;
     //Contador de luzes on 
     private int countLightsOn = 0;
@@ -66,18 +67,17 @@ public class GeneralButtonController : MonoBehaviour
     private bool isMedium = false;
     private bool isHard = false;
     private bool clickble = false;
-
+    private int timerHard;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(clickbleOn());
+        StartCoroutine(ClickbleOn());
         enterLight = GameObject.Find("Enter");
         pauseButton = GameObject.Find("Pause");
         allButtons = GameObject.Find("Button");
         fireFlies = GameObject.Find("FireFlies");
-
         isPaused = false;
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
@@ -117,16 +117,43 @@ public class GeneralButtonController : MonoBehaviour
             qtdElementToWin = 12;
         }
 
-        // Método de gerar as listas randomicas
-        randomLists();
+        SaveState auxSave = SaveManager.instance.state;
+        if (isEasy)
+        {
+            if (auxSave.easyWin)
+            {
+                medal.SetActive(true);
+                record.GetComponent<Text>().text = auxSave.easyRecord.ToString();
 
+
+            }
+        }
+        if (isMedium)
+        {
+            if (auxSave.mediumWin)
+            {
+                medal.SetActive(true);
+                record.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
+            }
+        }
+        if (isHard)
+        {
+            if (auxSave.hardWin)
+            {
+                medal.SetActive(true);
+                record.GetComponent<Text>().text = auxSave.hardRecord.ToString();
+            }
+        }
+        // Método de gerar as listas randomicas
+        RandomLists();
+        timerHard = SaveManager.instance.state.hardRecord;
         if (!isHard)
         {
             timer = 0.0f;
         }
         else
         {
-            timer = 161;
+            timer = timerHard;
         }
 
 
@@ -164,25 +191,25 @@ public class GeneralButtonController : MonoBehaviour
                 // Pega elemento que foi clicado
                 buttonName = hit.collider.gameObject.tag.ToString();
                 b = GameObject.Find(buttonName);
-                mainVarControl(buttonName);
+                MainVarControl(buttonName);
                 // Bs   ---------------------------------------------------------------------
                 if (buttonName.Length == 2 && controlVarMain == false && isPaused == false)
                 {
 
 
-                    setVarControl(buttonName, true);
+                    SetVarControl(buttonName, true);
                     countLightsOn++;
                     clickedButtons.Add(buttonName);
                     b.GetComponent<Animator>().SetBool("buttonClicked", true);
                     if (countLightsOn == 1)
                     {
-                        setMainList(buttonName);
+                        SetMainList(buttonName);
                     }
                 }
                 else if (buttonName.Length == 2 && controlVarMain == true && isPaused == false)
                 {
 
-                    setVarControl(buttonName, false);
+                    SetVarControl(buttonName, false);
                     countLightsOn--;
                     clickedButtons.Remove(buttonName);
                     b.GetComponent<Animator>().SetBool("buttonClicked", false);
@@ -203,7 +230,7 @@ public class GeneralButtonController : MonoBehaviour
                 if (hit.collider.tag == "Enter" && countLightsOn < qtdElementToWin)
                 {
 
-                    StartCoroutine(lightOnEnterNow());
+                    StartCoroutine(LightOnEnterNow());
 
                 }
 
@@ -243,6 +270,9 @@ public class GeneralButtonController : MonoBehaviour
                         Debug.Log("win!!!");
                         winGame = true;
 
+
+
+
                     }
                 }
                 else if (isMedium == true)
@@ -251,6 +281,8 @@ public class GeneralButtonController : MonoBehaviour
                     {
                         Debug.Log("win!!!");
                         winGame = true;
+
+
                     }
                 }
                 else if (isHard == true)
@@ -262,10 +294,11 @@ public class GeneralButtonController : MonoBehaviour
                         {
                             Debug.Log("win!!!");
                             winGame = true;
+
                         }
                         else
                         {
-                            allLightsOff();
+                            AllLightsOff();
                         }
                     }
                 } // Condição ganhar
@@ -280,14 +313,14 @@ public class GeneralButtonController : MonoBehaviour
 
         if (isEasy | isMedium)
         {
-            if(seconds >= 9999)
+            if (seconds >= 9999)
             {
                 looseGame = true;
             }
         }
         if (isHard)
         {
-            if(seconds <= 0)
+            if (seconds <= 0)
             {
                 looseGame = true;
             }
@@ -295,17 +328,98 @@ public class GeneralButtonController : MonoBehaviour
 
         // Win menu
         //
-        if (winGame)
+        if (!isHard)
         {
-            Vector3 aux = allButtons.GetComponent<Transform>().position;
-            allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
-            winMenu.SetActive(true);
-            timerAndPause.SetActive(false);
-            Text textTimerWin;
-            textTimerWin = TimerFinishWin.GetComponent<Text>();
-            textTimerWin.text = timerText.text;
-            ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
-            aux2.rateOverTime = 7;
+            if (winGame)
+            {
+                Vector3 aux = allButtons.GetComponent<Transform>().position;
+                allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+                winMenu.SetActive(true);
+                timerAndPause.SetActive(false);
+                Text textTimerWin;
+                textTimerWin = timerFinishWin.GetComponent<Text>();
+                textTimerWin.text = timerText.text;
+                ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
+                aux2.rateOverTime = 7;
+                SaveState auxSave = SaveManager.instance.state;
+                //EasyRecord
+                if (isEasy)
+                {
+                    if (auxSave.easyWin)
+                    {
+                        if (seconds < auxSave.easyRecord)
+                        {
+                            auxSave.easyRecord = seconds;
+                            SaveManager.instance.Save();
+                        }
+                        record2.GetComponent<Text>().text = auxSave.easyRecord.ToString();
+                        medal2.SetActive(true);
+
+                    }
+                    else
+                    {
+                        auxSave.easyRecord = seconds;
+                        auxSave.easyWin = true;
+                        auxSave.played = true;
+                        SaveManager.instance.Save();
+
+                    }
+                }
+
+
+                // MedumRecord
+                if (isMedium)
+                {
+                    if (auxSave.mediumWin)
+                    {
+                        if (seconds < auxSave.mediumRecord)
+                        {
+                            auxSave.mediumRecord = seconds;
+                            SaveManager.instance.Save();
+                        }
+                        record2.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
+                        medal2.SetActive(true);
+                    }
+                    else
+                    {
+                        auxSave.mediumRecord = seconds;
+                        auxSave.mediumWin = true;
+                        SaveManager.instance.Save();
+                    }
+                }
+
+                
+
+            }
+
+        }
+        else
+        {
+            if (winGame)
+            {
+                Vector3 aux = allButtons.GetComponent<Transform>().position;
+                allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+                winMenu.SetActive(true);
+                timerAndPause.SetActive(false);
+                Text textTimerWin;
+                textTimerWin = timerFinishWin.GetComponent<Text>();
+                int resto = timerHard - seconds;
+                textTimerWin.text = resto.ToString();
+                ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
+                aux2.rateOverTime = 7;
+                SaveState auxSave = SaveManager.instance.state;
+                auxSave.hardWin = true;
+                if (resto < auxSave.hardRecord)
+                {
+                    auxSave.hardRecord = resto;
+                    SaveManager.instance.Save();
+                }
+                if (auxSave.hardWin)
+                {
+                    record2.GetComponent<Text>().text = auxSave.hardRecord.ToString();
+                    medal2.SetActive(true);
+                }
+            }
         }
 
         // Loose menu
@@ -326,53 +440,53 @@ public class GeneralButtonController : MonoBehaviour
         // Compara se o botão clicado corresponde com o da lista.
         if (countLightsOn == 2 && clickedButtons[1] != mainList[1])
         {
-            allLightsOff();
+            AllLightsOff();
 
         }
 
         if (countLightsOn == 3 && clickedButtons[2] != mainList[2])
         {
-            allLightsOff();
+            AllLightsOff();
 
         }
 
         if (countLightsOn == 4 && clickedButtons[3] != mainList[3])
         {
-            allLightsOff();
+            AllLightsOff();
         }
 
         if (countLightsOn == 5 && clickedButtons[4] != mainList[4])
         {
-            allLightsOff();
+            AllLightsOff();
         }
 
         if (countLightsOn == 6 && clickedButtons[5] != mainList[5])
         {
-            allLightsOff();
+            AllLightsOff();
         }
 
         if (countLightsOn == 7 && clickedButtons[6] != mainList[6])
         {
-            allLightsOff();
+            AllLightsOff();
         }
 
         if (countLightsOn == 8 && clickedButtons[7] != mainList[7])
         {
-            allLightsOff();
+            AllLightsOff();
         }
         if (countLightsOn == 9 && clickedButtons[8] != mainList[8])
         {
-            allLightsOff();
+            AllLightsOff();
         }
         if (isMedium == true | isHard == true)
         {
             if (countLightsOn == 10 && clickedButtons[9] != mainList[9])
             {
-                allLightsOff();
+                AllLightsOff();
             }
             if (countLightsOn == 11 && clickedButtons[10] != mainList[10])
             {
-                allLightsOff();
+                AllLightsOff();
             }
 
         }
@@ -383,7 +497,7 @@ public class GeneralButtonController : MonoBehaviour
 
     }// Update end
 
-    public void randomLists()
+    public void RandomLists()
     {
         int countList = 0;
         if (isEasy == true)
@@ -422,7 +536,7 @@ public class GeneralButtonController : MonoBehaviour
 
     }
 
-    public void allLightsOff()
+    public void AllLightsOff()
     {
         List<string> auxList = new List<string>();
 
@@ -460,7 +574,7 @@ public class GeneralButtonController : MonoBehaviour
     }
 
 
-    public void mainVarControl(string b)
+    public void MainVarControl(string b)
     {
         if (b == "B1")
         {
@@ -511,7 +625,7 @@ public class GeneralButtonController : MonoBehaviour
             controlVarMain = buttonOnC3;
         }
     }
-    public void setMainList(string b)
+    public void SetMainList(string b)
     {
         if (b == "B1")
         {
@@ -564,7 +678,7 @@ public class GeneralButtonController : MonoBehaviour
     }
 
 
-    public void setVarControl(string b, bool boolVar)
+    public void SetVarControl(string b, bool boolVar)
     {
         if (b == "B1")
         {
@@ -617,7 +731,7 @@ public class GeneralButtonController : MonoBehaviour
     }
 
 
-    private IEnumerator lightOnEnterNow()
+    private IEnumerator LightOnEnterNow()
     {
 
         enterLight.GetComponent<Animator>().SetBool("clicked", true);
@@ -629,7 +743,7 @@ public class GeneralButtonController : MonoBehaviour
     }
 
 
-    private IEnumerator clickbleOn()
+    private IEnumerator ClickbleOn()
     {
         clickble = false;
         yield return new WaitForSeconds(0.5f);

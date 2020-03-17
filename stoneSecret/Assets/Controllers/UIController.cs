@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {
     
-    public GameObject menuMain, configuration, difficulty;
+    public GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;
@@ -17,11 +17,23 @@ public class UIController : MonoBehaviour
     private bool clickble = false;
     void Start()
     {
-        StartCoroutine(clickbleOn());
-        
 
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
+        if (sceneName == "Animation1")
+        {
+            if (SaveManager.instance.state.played == true)
+            {
+                SceneManager.LoadScene("MenuMain");
+            }
+
+        }
+
+        StartCoroutine(ClickbleOn());
+        
+
+
+
 
 
         if (sceneName == "GameEasy")
@@ -78,21 +90,21 @@ public class UIController : MonoBehaviour
 
                     if (hit.collider.tag == "BEasy")
                     {
-                        easyButton();
+                        EasyButton();
                     }
                     if (hit.collider.tag == "BMedium")
                     {
-                        mediumButton();
+                        MediumButton();
                     }
                     if (hit.collider.tag == "BHard")
                     {
-                        hardButton();
+                        HardButton();
                     }
                     if (isEasy)
                     {
                         if (hit.collider.tag == "Reset")
                         {
-                            easyButton();
+                            EasyButton();
                         }
                     }
 
@@ -100,7 +112,7 @@ public class UIController : MonoBehaviour
                     {
                         if (hit.collider.tag == "Reset")
                         {
-                            mediumButton();
+                            MediumButton();
                         }
                     }
 
@@ -108,30 +120,49 @@ public class UIController : MonoBehaviour
                     {
                         if (hit.collider.tag == "Reset")
                         {
-                            hardButton();
+                            HardButton();
                         }
                     }
 
                 }
             }
         }
+        if (sceneName == "MenuMain")
+        {
+            if (difficulty.activeSelf == true)
+            {
+                if (SaveManager.instance.state.easyWin == true)
+                {
+                    buttonEasy.GetComponent<Animator>().SetBool("win", true);
+                }
+                if (SaveManager.instance.state.mediumWin == true)
+                {
+                    buttonMedium.GetComponent<Animator>().SetBool("win", true);
+                }
+                if (SaveManager.instance.state.hardWin == true)
+                {
+                    buttonHard.GetComponent<Animator>().SetBool("win", true);
+                }
+            }
+        }
+
     }
 
 
-    public void easyButton()
+    public void EasyButton()
     {
         SceneManager.LoadScene("GameEasy");
     }
-    public void mediumButton()
+    public void MediumButton()
     {
         SceneManager.LoadScene("GameMedium");
     }
-    public void hardButton()
+    public void HardButton()
     {
         SceneManager.LoadScene("GameHard");
     }
 
-    private IEnumerator clickbleOn()
+    private IEnumerator ClickbleOn()
     {
         clickble = false;
         yield return new WaitForSeconds(0.5f);

@@ -16,12 +16,13 @@ public class AnimationController : MonoBehaviour
     private int idAnimMenu;
     private int idAnimDif;
     private int idAnimConfig;
-    private int contClick= 0;
+    private int contClick = 0;
+    private bool tutorialAnim;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        tutorialAnim = true;
         animOnMenu = false;
         animOnDif = false;
         animOnConfig = false;
@@ -48,7 +49,7 @@ public class AnimationController : MonoBehaviour
                 bixinho = GameObject.Find(animName);
                 if (hit.collider.tag == "Bixinho")
                 {
-                    StartCoroutine(eraseAnim(bixinho));
+                    StartCoroutine(EraseAnim(bixinho));
                     contClick++;
                 }
             }
@@ -124,46 +125,54 @@ public class AnimationController : MonoBehaviour
         }
         else if (animOnDif == false)
         {
-            int oldIdDif = idAnimDif;
-            bool AnimActive = false;
-            idAnimDif = Random.Range(1, 5);
-            while (oldIdDif == idAnimDif)
-            {
-                idAnimDif = Random.Range(1, 5);
-            }
-
-            if (bixinho5Dif.activeSelf | bixinho3Dif.activeSelf | bixinho10Dif.activeSelf | bixinho11Dif.activeSelf)
-            {
-                AnimActive = true;
-            }
-
-            if (idAnimDif == 1 && animOnDif == false && !AnimActive)
+            if (SaveManager.instance.state.played == false && animOnDif == false && tutorialAnim == true)
             {
                 animOnDif = true;
+                tutorialAnim = false;
                 bixinho3Dif.SetActive(true);
-
-
-
             }
-            if (idAnimDif == 2 && animOnDif == false && !AnimActive)
+            else
             {
-                animOnDif = true;
-                bixinho5Dif.SetActive(true);
 
-            }
+                int oldIdDif = idAnimDif;
+                bool AnimActive = false;
+                idAnimDif = Random.Range(1, 5);
+                while (oldIdDif == idAnimDif)
+                {
+                    idAnimDif = Random.Range(1, 5);
+                }
 
-            if (idAnimDif == 3 && animOnDif == false && !AnimActive)
-            {
-                animOnDif = true;
-                bixinho10Dif.SetActive(true);
+                if (bixinho5Dif.activeSelf | bixinho3Dif.activeSelf | bixinho10Dif.activeSelf | bixinho11Dif.activeSelf)
+                {
+                    AnimActive = true;
+                }
 
-            }
+                if (idAnimDif == 1 && animOnDif == false && !AnimActive)
+                {
+                    animOnDif = true;
+                    bixinho3Dif.SetActive(true);
 
-            if (idAnimDif == 4 && animOnDif == false && !AnimActive)
-            {
-                animOnDif = true;
-                bixinho11Dif.SetActive(true);
+                }
+                if (idAnimDif == 2 && animOnDif == false && !AnimActive)
+                {
+                    animOnDif = true;
+                    bixinho5Dif.SetActive(true);
 
+                }
+
+                if (idAnimDif == 3 && animOnDif == false && !AnimActive)
+                {
+                    animOnDif = true;
+                    bixinho10Dif.SetActive(true);
+
+                }
+
+                if (idAnimDif == 4 && animOnDif == false && !AnimActive)
+                {
+                    animOnDif = true;
+                    bixinho11Dif.SetActive(true);
+
+                }
             }
         } // End
 
@@ -216,12 +225,12 @@ public class AnimationController : MonoBehaviour
             {
                 animOnConfig = true;
                 bixinho12Config.SetActive(true);
-                
+
             }
         } // End 
     }
 
-    private IEnumerator eraseAnim(GameObject anim)
+    private IEnumerator EraseAnim(GameObject anim)
     {
         GameObject aux = anim;
         aux.GetComponent<Animator>().SetBool("clicked", true);
