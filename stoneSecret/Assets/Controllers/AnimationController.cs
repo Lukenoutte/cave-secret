@@ -115,7 +115,7 @@ public class AnimationController : MonoBehaviour
         } // End
 
         // Dif animations
-        if (difficulty.activeSelf == false)
+        if (difficulty.GetComponent<Transform>().position.x < 0)
         {
             animOnDif = false;
             bixinho3Dif.SetActive(false);
@@ -123,7 +123,7 @@ public class AnimationController : MonoBehaviour
             bixinho10Dif.SetActive(false);
             bixinho11Dif.SetActive(false);
         }
-        else if (animOnDif == false)
+        else if (difficulty.GetComponent<Transform>().position.x == 0)
         {
             if (SaveManager.instance.state.played == false && animOnDif == false && tutorialAnim == true)
             {

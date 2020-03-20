@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    
+
     public GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
-        medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard;
+        medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard, thxBg1, thxBg2, thxBixinho, thxNext, coracao;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;
     private bool isMedium = false;
     private bool isHard = false;
+    private bool thxScreen = false;
 
 
     private bool clickble = false;
@@ -32,7 +33,7 @@ public class UIController : MonoBehaviour
         }
 
         StartCoroutine(ClickbleOn());
-        
+
 
 
 
@@ -55,6 +56,63 @@ public class UIController : MonoBehaviour
             isHard = true;
 
         }
+        if (sceneName == "MenuMain")
+        {
+
+            SaveState auxSave = SaveManager.instance.state;
+            if (auxSave.easyWin == true)
+            {
+                buttonEasy.GetComponent<Animator>().SetBool("win", true);
+                recordEasy.GetComponent<Text>().text = auxSave.easyRecord.ToString();
+                medalEasy.SetActive(true);
+                if (auxSave.breakRecordEasy)
+                {
+                    buttonEasy.GetComponent<Animator>().SetBool("record", true);
+                }
+            }
+            if (auxSave.mediumWin == true)
+            {
+                buttonMedium.GetComponent<Animator>().SetBool("win", true);
+                recordMedium.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
+                medalMedium.SetActive(true);
+                if (auxSave.breakRecordMedium)
+                {
+                    buttonMedium.GetComponent<Animator>().SetBool("record", true);
+                }
+            }
+            if (auxSave.hardWin == true)
+            {
+                buttonHard.GetComponent<Animator>().SetBool("win", true);
+                recordHard.GetComponent<Text>().text = auxSave.hardRecord.ToString();
+                medalHard.SetActive(true);
+                if (auxSave.breakRecordHard)
+                {
+                    buttonHard.GetComponent<Animator>().SetBool("record", true);
+                }
+            }
+
+            if(auxSave.easyWin && auxSave.mediumWin && auxSave.hardWin && !auxSave.thxMensage)
+            {
+                thxScreen = true;
+                int itemIndex = Random.Range(1, 3);
+                if(itemIndex == 1)
+                {
+                    thxBg1.SetActive(true);
+                }
+                if(itemIndex == 2)
+                {
+                    thxBg2.SetActive(true);
+                }
+                thxBixinho.SetActive(true);
+                auxSave.thxMensage = true;
+                thxNext.SetActive(true);
+                SaveManager.instance.Save();
+            }
+            if (auxSave.thxMensage)
+            {
+                coracao.SetActive(true);
+            }
+        }
 
     }
     private void Update()
@@ -73,13 +131,29 @@ public class UIController : MonoBehaviour
                     {
                         SceneManager.LoadScene("MenuMain");
                     }
-                    if (hit.collider.tag == "Play")
+                    if (hit.collider.tag == "ThxNext")
+                    {
+                        thxScreen = false;
+                        thxBg2.SetActive(false);
+                        thxBg1.SetActive(false);
+                        thxBixinho.SetActive(false);
+                        thxNext.SetActive(false);
+                    }
+                    if (hit.collider.tag == "Play" && !thxScreen)
                     {
                         menuMain.SetActive(false);
-                        difficulty.SetActive(true);
+                        Vector3 aux = difficulty.GetComponent<Transform>().position;
+                        difficulty.GetComponent<Transform>().position = new Vector3(0, aux.y, aux.z);
 
                     }
-                    if (hit.collider.tag == "Configuration")
+                    if (hit.collider.tag == "Back")
+                    {
+                        menuMain.SetActive(true);
+                        Vector3 aux = difficulty.GetComponent<Transform>().position;
+                        difficulty.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+
+                    }
+                    if (hit.collider.tag == "Configuration" && !thxScreen)
                     {
                         menuMain.SetActive(false);
                         configuration.SetActive(true);
@@ -129,31 +203,7 @@ public class UIController : MonoBehaviour
                 }
             }
         }
-        if (sceneName == "MenuMain")
-        {
-            if (difficulty.activeSelf == true)
-            {
-                SaveState auxSave = SaveManager.instance.state;
-                if (auxSave.easyWin == true)
-                {
-                    buttonEasy.GetComponent<Animator>().SetBool("win", true);
-                    recordEasy.GetComponent<Text>().text = auxSave.easyRecord.ToString();
-                    medalEasy.SetActive(true);
-                }
-                if (auxSave.mediumWin == true)
-                {
-                    buttonMedium.GetComponent<Animator>().SetBool("win", true);
-                    recordMedium.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
-                    medalMedium.SetActive(true);
-                }
-                if (auxSave.hardWin == true)
-                {
-                    buttonHard.GetComponent<Animator>().SetBool("win", true);
-                    recordHard.GetComponent<Text>().text = auxSave.hardRecord.ToString();
-                    medalHard.SetActive(true);
-                }
-            }
-        }
+
 
     }
 

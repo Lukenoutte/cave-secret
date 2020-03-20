@@ -12,7 +12,7 @@ public class SaveManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         instance = this;
         Load();
-        Debug.Log(Helper.Serialize<SaveState>(state));
+        
     }
 
     public void Save()

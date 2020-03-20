@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Animation1.unity
+- path: Assets/Scenes/GameEasy.unity
   isLoaded: 1
   isActive: 1

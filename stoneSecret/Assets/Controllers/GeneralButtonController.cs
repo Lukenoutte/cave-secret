@@ -353,6 +353,7 @@ public class GeneralButtonController : MonoBehaviour
                         if (seconds < auxSave.easyRecord)
                         {
                             auxSave.easyRecord = seconds;
+                            auxSave.breakRecordEasy = true;
                             SaveManager.instance.Save();
                         }
                         record2.GetComponent<Text>().text = auxSave.easyRecord.ToString();
@@ -378,6 +379,7 @@ public class GeneralButtonController : MonoBehaviour
                         if (seconds < auxSave.mediumRecord)
                         {
                             auxSave.mediumRecord = seconds;
+                            auxSave.breakRecordMedium = true;
                             SaveManager.instance.Save();
                         }
                         record2.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
@@ -411,16 +413,30 @@ public class GeneralButtonController : MonoBehaviour
                 ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
                 aux2.rateOverTime = 7;
                 SaveState auxSave = SaveManager.instance.state;
-                auxSave.hardWin = true;
-                if (resto < auxSave.hardRecord)
-                {
-                    auxSave.hardRecord = resto;
-                    SaveManager.instance.Save();
-                }
+
+             
+
+
                 if (auxSave.hardWin)
                 {
                     record2.GetComponent<Text>().text = auxSave.hardRecord.ToString();
                     medal2.SetActive(true);
+
+                    if (resto < auxSave.hardRecord)
+                    {
+                        auxSave.hardRecord = resto;
+                        auxSave.breakRecordHard = true;
+                        SaveManager.instance.Save();
+                    }
+                   
+                }else
+                {
+                    auxSave.hardWin = true;
+                    if (resto < auxSave.hardRecord)
+                    {
+                        auxSave.hardRecord = resto;
+                        SaveManager.instance.Save();
+                    }
                 }
             }
         }
