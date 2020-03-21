@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GeneralButtonController : MonoBehaviour
 {
 
-
+    public static GeneralButtonController instance { set; get; }
     private Text timerText;
     private float timer;
     private int seconds = 0;
@@ -68,11 +68,13 @@ public class GeneralButtonController : MonoBehaviour
     private bool isHard = false;
     private bool clickble = false;
     private int timerHard;
+    public int contWrong = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         StartCoroutine(ClickbleOn());
         enterLight = GameObject.Find("Enter");
         pauseButton = GameObject.Find("Pause");
@@ -576,6 +578,7 @@ public class GeneralButtonController : MonoBehaviour
             bToOff.GetComponent<Animator>().SetBool("buttonClicked", false);
         }
         countLightsOn = 0;
+        contWrong++;
         buttonOn1 = false;
         buttonOn2 = false;
         buttonOn3 = false;
