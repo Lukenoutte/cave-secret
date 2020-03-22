@@ -1945,15 +1945,16 @@ MonoBehaviour:
   bixinho11Dif: {fileID: 88394113}
   bixinhoBregaFunk: {fileID: 930343131}
   bixinho12Config: {fileID: 625814145}
-  bixinho4Easy: {fileID: 0}
-  bixinho2Easy: {fileID: 0}
-  bixinho5Easy: {fileID: 0}
-  bixinho6Easy: {fileID: 0}
-  bixinho8Easy: {fileID: 0}
-  bixinho1Easy: {fileID: 0}
-  bixinho7Easy: {fileID: 0}
-  bixinho3Easy: {fileID: 0}
-  bixinho9Easy: {fileID: 0}
+  bixinho4InGame: {fileID: 0}
+  bixinho2InGame: {fileID: 0}
+  bixinho5InGame: {fileID: 0}
+  bixinho6InGame: {fileID: 0}
+  bixinho8InGame: {fileID: 0}
+  bixinho1InGame: {fileID: 0}
+  bixinho7InGame: {fileID: 0}
+  bixinho3InGame: {fileID: 0}
+  bixinho9InGame: {fileID: 0}
+  animOnInGame: 0
 --- !u!114 &778624312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2667,20 +2668,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &1163411621
-Transform:
+--- !u!224 &1163411621
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163411620}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 407, y: -14, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 89.957085, y: 89.957085, z: 89.957085}
   m_Children: []
   m_Father: {fileID: 1267018167}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 407, y: -14}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1163411622
 SpriteRenderer:
   m_ObjectHideFlags: 0

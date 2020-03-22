@@ -13,7 +13,7 @@ public class GeneralButtonController : MonoBehaviour
     private int seconds = 0;
     private bool winGame = false;
     private bool looseGame = false;
-    private bool isPaused = false;
+    public bool isPaused = false;
     /// Booleans que verificam qual luz está acesa 
     private bool buttonOn1 = false;
     private bool buttonOn2 = false;
