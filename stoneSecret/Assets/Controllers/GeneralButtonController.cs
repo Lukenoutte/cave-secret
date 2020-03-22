@@ -43,7 +43,7 @@ public class GeneralButtonController : MonoBehaviour
         medal, record2, medal2;
     private string buttonName;
     //Contador de luzes on 
-    private int countLightsOn = 0;
+    public int countLightsOn = 0;
     // Listas que irão receber a ordem dos botões
     private List<string> b1List = new List<string>();
     private List<string> b2List = new List<string>();
@@ -69,6 +69,7 @@ public class GeneralButtonController : MonoBehaviour
     private bool clickble = false;
     private int timerHard;
     public int contWrong = 0;
+    public int contEnterNoWin = 0;
 
 
     // Start is called before the first frame update
@@ -236,7 +237,7 @@ public class GeneralButtonController : MonoBehaviour
                 {
 
                     StartCoroutine(LightOnEnterNow());
-
+                    contEnterNoWin++;
                 }
 
                 //Pause
@@ -443,6 +444,10 @@ public class GeneralButtonController : MonoBehaviour
             }
         }
 
+        if(countLightsOn >= 4)
+        {
+            contWrong = 0;
+        }
         // Loose menu
         //
         if (looseGame)

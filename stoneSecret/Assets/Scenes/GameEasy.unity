@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 60638877}
   - component: {fileID: 60638879}
   - component: {fileID: 60638878}
+  - component: {fileID: 60638880}
   m_Layer: 0
   m_Name: Bixinho5Easy
   m_TagString: Bixinho
@@ -216,6 +217,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &60638880
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60638876}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.49869043, y: 0.8808603}
+  m_Size: {x: 1.6102487, y: 2.8993511}
+  m_Direction: 0
 --- !u!1 &84897751
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,49 +420,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.272089, y: -0.21024989}
   m_Size: {x: 1.7066497, y: 2.9186766}
   m_Direction: 0
---- !u!1 &129250457
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 129250459}
-  - component: {fileID: 129250458}
-  m_Layer: 0
-  m_Name: SaveManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &129250458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129250457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f77883025c0ea2488c537365b8a0157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &129250459
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129250457}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &243844132
 GameObject:
   m_ObjectHideFlags: 0
@@ -6936,9 +6910,10 @@ GameObject:
   - component: {fileID: 1259912886}
   - component: {fileID: 1259912888}
   - component: {fileID: 1259912887}
+  - component: {fileID: 1259912889}
   m_Layer: 0
   m_Name: Bixinho6Easy
-  m_TagString: Untagged
+  m_TagString: Bixinho
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7024,6 +6999,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &1259912889
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259912885}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0000014059241, y: -0.19118911}
+  m_Size: {x: 1.7880236, y: 2.8331919}
+  m_Direction: 0
 --- !u!1 &1286296195
 GameObject:
   m_ObjectHideFlags: 0
@@ -7325,7 +7316,9 @@ MonoBehaviour:
   medal: {fileID: 868519169}
   record2: {fileID: 1669747762}
   medal2: {fileID: 619051751}
+  countLightsOn: 0
   contWrong: 0
+  contEnterNoWin: 0
 --- !u!1 &1488056801
 GameObject:
   m_ObjectHideFlags: 0
@@ -7857,6 +7850,14 @@ MonoBehaviour:
   bixinhoBregaFunk: {fileID: 0}
   bixinho12Config: {fileID: 0}
   bixinho4Easy: {fileID: 1286296195}
+  bixinho2Easy: {fileID: 661150378}
+  bixinho5Easy: {fileID: 60638876}
+  bixinho6Easy: {fileID: 1259912885}
+  bixinho8Easy: {fileID: 116954132}
+  bixinho1Easy: {fileID: 1721559751}
+  bixinho7Easy: {fileID: 678459491}
+  bixinho3Easy: {fileID: 800725952}
+  bixinho9Easy: {fileID: 854902218}
 --- !u!1 &1608279256
 GameObject:
   m_ObjectHideFlags: 0

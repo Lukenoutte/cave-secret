@@ -10,7 +10,8 @@ public class AnimationController : MonoBehaviour
     public GameObject bixinho3Dif, bixinho4Menu, difficulty, bixinho5Dif, configuration, bixinho6Config, bixinho7Config,
         bixinho8Menu, bixinho9Config, bixinho10Dif, bixinho11Dif, bixinhoBregaFunk, bixinho12Config;
 
-    public GameObject bixinho4Easy;
+    public GameObject bixinho4Easy, bixinho2Easy, bixinho5Easy, bixinho6Easy, bixinho8Easy, bixinho1Easy, bixinho7Easy, bixinho3Easy,
+        bixinho9Easy;
     private string animName;
     private bool animOnMenu;
     private bool animOnDif;
@@ -22,9 +23,14 @@ public class AnimationController : MonoBehaviour
     private bool tutorialAnim;
     private Scene m_Scene;
     private string sceneName;
-    private bool animOnEasy;
+    public bool animOnEasy;
     private bool execulted;
-
+    private int wrongFixoTuto = 6;
+    private int rightFixo = 3;
+    private int contEnterFixo = 1;
+    private int idAnimEasyWrongTuto;
+    private int idAnimEasyRight;
+    private int idAnimEasyEnter;
     // Start is called before the first frame update
     void Start()
     {
@@ -247,15 +253,114 @@ public class AnimationController : MonoBehaviour
         // Scene Easy
         if (sceneName == "GameEasy")
         {
-
-            if (GeneralButtonController.instance.contWrong == 2 && !animOnEasy && !execulted)
+            GeneralButtonController aux = GeneralButtonController.instance;
+            if (aux.contWrong == 2 && !animOnEasy && !execulted && !SaveManager.instance.state.played)
             {
                 bixinho4Easy.SetActive(true);
                 animOnEasy = true;
                 execulted = true;
                 StartCoroutine(AutoDestroyAnim(bixinho4Easy));
             }
-        }
+
+            if (aux.contWrong == wrongFixoTuto && aux.countLightsOn < 2 && !animOnEasy)
+            {
+
+                int oldIdEasy = idAnimEasyWrongTuto;
+                idAnimEasyWrongTuto = Random.Range(1, 6);
+                while (oldIdEasy == idAnimEasyWrongTuto)
+                {
+                    idAnimEasyWrongTuto = Random.Range(1, 6);
+                }
+
+                if (idAnimEasyWrongTuto == 1 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho2Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho2Easy));
+                }
+
+                if (idAnimEasyWrongTuto == 2 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho5Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho5Easy));
+                }
+                if (idAnimEasyWrongTuto == 3 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho6Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho6Easy));
+                }
+                if (idAnimEasyWrongTuto == 4 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho8Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho8Easy));
+                }
+                if (idAnimEasyWrongTuto == 5 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho9Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho9Easy));
+                }
+                wrongFixoTuto += 6;
+            }
+
+            if (aux.countLightsOn == rightFixo && !animOnEasy)
+            {
+                int oldIdEasy = idAnimEasyRight;
+                idAnimEasyRight = Random.Range(1, 3);
+                while (oldIdEasy == idAnimEasyRight)
+                {
+                    idAnimEasyRight = Random.Range(1, 3);
+                }
+
+
+                if (idAnimEasyRight == 1 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho1Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho1Easy));
+                    rightFixo += 3;
+                }
+
+                if (idAnimEasyRight == 2 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho7Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho7Easy));
+                    rightFixo += 3;
+                }
+            }
+            if (aux.contEnterNoWin == contEnterFixo && !animOnEasy)
+            {
+
+                int oldIdEasy = idAnimEasyEnter;
+                idAnimEasyEnter = Random.Range(1, 3);
+                while (oldIdEasy == idAnimEasyEnter)
+                {
+                    idAnimEasyEnter = Random.Range(1, 3);
+                }
+                if (idAnimEasyEnter == 1 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho3Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho3Easy));
+                    contEnterFixo += 3;
+                }
+
+                if (idAnimEasyEnter == 2 && !animOnEasy)
+                {
+                    animOnEasy = true;
+                    bixinho4Easy.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho4Easy));
+                    contEnterFixo += 3;
+                }
+
+               
+            }
+
+            }
 
     } // End update
 
@@ -265,7 +370,7 @@ public class AnimationController : MonoBehaviour
         aux.GetComponent<Animator>().SetBool("clicked", true);
 
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         aux.SetActive(false);
         if (sceneName == "MenuMain")
         {
@@ -291,6 +396,7 @@ public class AnimationController : MonoBehaviour
 
     private IEnumerator AutoDestroyAnim(GameObject anim)
     {
+        if (animOnEasy) { 
         GameObject aux = anim;
         yield return new WaitForSeconds(6);
         aux.GetComponent<Animator>().SetBool("clicked", true);
@@ -300,7 +406,7 @@ public class AnimationController : MonoBehaviour
         {
             animOnEasy = false;
         }
-        
+        }
     }
 
 
