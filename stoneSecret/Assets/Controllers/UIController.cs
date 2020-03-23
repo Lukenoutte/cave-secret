@@ -153,6 +153,7 @@ public class UIController : MonoBehaviour
                         menuMain.SetActive(true);
                         Vector3 aux = difficulty.GetComponent<Transform>().position;
                         difficulty.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+                        configuration.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
 
                     }
                     if (SaveManager.instance != null)
@@ -175,7 +176,8 @@ public class UIController : MonoBehaviour
                     if (hit.collider.tag == "Configuration" && !thxScreen)
                     {
                         menuMain.SetActive(false);
-                        configuration.SetActive(true);
+                        Vector3 aux = difficulty.GetComponent<Transform>().position;
+                        configuration.GetComponent<Transform>().position = new Vector3(0, aux.y, aux.z);
 
                     }
                     if (hit.collider.tag == "Menu")
@@ -225,7 +227,7 @@ public class UIController : MonoBehaviour
 
         if (sceneName == "MenuMain")
         {
-            if (configuration.activeSelf) { 
+
             if (SaveManager.instance.state.bixinhoActivation)
             {
                 bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
@@ -234,28 +236,27 @@ public class UIController : MonoBehaviour
             {
                 bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
             }
-            }
+
         }
 
         if (isEasy | isMedium)
         {
-            if (menuPause.activeSelf)
+
+            if (SaveManager.instance.state.bixinhoActivation)
             {
-                if (SaveManager.instance.state.bixinhoActivation)
-                {
-                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
-                }
-                else
-                {
-                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
-                }
+                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
+            }
+            else
+            {
+                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
+
             }
         }
-        { 
+        {
         }
 
 
-        }
+    }
 
 
     public void EasyButton()

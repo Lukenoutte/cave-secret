@@ -205,7 +205,7 @@ public class AnimationController : MonoBehaviour
 
 
                 // Config animations
-                if (configuration.activeSelf == false)
+                if (configuration.GetComponent<Transform>().position.x < 0)
                 {
                     animOnConfig = false;
                     bixinho6Config.SetActive(false);
@@ -258,6 +258,26 @@ public class AnimationController : MonoBehaviour
             }
         } // Menu
 
+        /// GameHard
+        if(sceneName == "GameHard")
+        {
+            GeneralButtonController aux = GeneralButtonController.instance;
+            if (aux.isPaused)
+            {
+                if (animOnInGame)
+                {
+                    desableAnimationInGame();
+                }
+
+                bixinho1Pause.SetActive(true);
+            }
+            else
+            {
+
+                bixinho1Pause.SetActive(false);
+
+            }
+        }
         // In Game
         if (sceneName == "GameEasy" | sceneName == "GameMedium")
         {

@@ -263,9 +263,10 @@ public class GeneralButtonController : MonoBehaviour
                     isPaused = true;
                     pauseButton.GetComponent<Animator>().SetBool("isPaused", true);
 
-                    Vector3 aux = allButtons.GetComponent<Transform>().position;
-                    allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
-                    menuPause.SetActive(true);
+                    Vector3 aux1 = allButtons.GetComponent<Transform>().position;
+                    Vector3 aux2 = menuPause.GetComponent<Transform>().position;
+                    allButtons.GetComponent<Transform>().position = new Vector3(-999, aux1.y, aux1.z);
+                    menuPause.GetComponent<Transform>().position = new Vector3(0, aux2.y, aux2.z);
                 }
                 else if (hit.collider.tag == "Pause" && isPaused == true && !winGame)
                 {
@@ -273,9 +274,10 @@ public class GeneralButtonController : MonoBehaviour
                     isPaused = false;
                     pauseButton.GetComponent<Animator>().SetBool("isPaused", false);
 
-                    Vector3 aux = allButtons.GetComponent<Transform>().position;
-                    allButtons.GetComponent<Transform>().position = new Vector3(0, aux.y, aux.z);
-                    menuPause.SetActive(false);
+                    Vector3 aux1 = allButtons.GetComponent<Transform>().position;
+                    Vector3 aux2 = menuPause.GetComponent<Transform>().position;
+                    allButtons.GetComponent<Transform>().position = new Vector3(0, aux1.y, aux1.z);
+                    menuPause.GetComponent<Transform>().position = new Vector3(-999, aux2.y, aux2.z);
                 }
 
 
