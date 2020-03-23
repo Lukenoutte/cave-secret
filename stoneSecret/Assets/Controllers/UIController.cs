@@ -8,7 +8,8 @@ public class UIController : MonoBehaviour
 {
 
     public GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
-        medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard, thxBg1, thxBg2, thxBixinho, thxNext, coracao;
+        medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard, thxBg1, thxBg2, thxBixinho, thxNext, coracao,
+        bixinhoActivation, menuPause;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;
@@ -37,8 +38,6 @@ public class UIController : MonoBehaviour
 
 
 
-
-
         if (sceneName == "GameEasy")
         {
             isEasy = true;
@@ -58,59 +57,62 @@ public class UIController : MonoBehaviour
         }
         if (sceneName == "MenuMain")
         {
+            if (SaveManager.instance != null)
+            {
+                SaveState auxSave = SaveManager.instance.state;
+                if (auxSave.easyWin == true)
+                {
+                    buttonEasy.GetComponent<Animator>().SetBool("win", true);
+                    recordEasy.GetComponent<Text>().text = auxSave.easyRecord.ToString();
+                    medalEasy.SetActive(true);
+                    if (auxSave.breakRecordEasy)
+                    {
+                        buttonEasy.GetComponent<Animator>().SetBool("record", true);
+                    }
+                }
+                if (auxSave.mediumWin == true)
+                {
+                    buttonMedium.GetComponent<Animator>().SetBool("win", true);
+                    recordMedium.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
+                    medalMedium.SetActive(true);
+                    if (auxSave.breakRecordMedium)
+                    {
+                        buttonMedium.GetComponent<Animator>().SetBool("record", true);
+                    }
+                }
+                if (auxSave.hardWin == true)
+                {
+                    buttonHard.GetComponent<Animator>().SetBool("win", true);
+                    recordHard.GetComponent<Text>().text = auxSave.hardRecord.ToString();
+                    medalHard.SetActive(true);
+                    if (auxSave.breakRecordHard)
+                    {
+                        buttonHard.GetComponent<Animator>().SetBool("record", true);
+                    }
+                }
 
-            SaveState auxSave = SaveManager.instance.state;
-            if (auxSave.easyWin == true)
-            {
-                buttonEasy.GetComponent<Animator>().SetBool("win", true);
-                recordEasy.GetComponent<Text>().text = auxSave.easyRecord.ToString();
-                medalEasy.SetActive(true);
-                if (auxSave.breakRecordEasy)
+                if (auxSave.easyWin && auxSave.mediumWin && auxSave.hardWin && !auxSave.thxMensage)
                 {
-                    buttonEasy.GetComponent<Animator>().SetBool("record", true);
+                    thxScreen = true;
+                    int itemIndex = Random.Range(1, 3);
+                    if (itemIndex == 1)
+                    {
+                        thxBg1.SetActive(true);
+                    }
+                    if (itemIndex == 2)
+                    {
+                        thxBg2.SetActive(true);
+                    }
+                    thxBixinho.SetActive(true);
+                    auxSave.thxMensage = true;
+                    thxNext.SetActive(true);
+                    SaveManager.instance.Save();
                 }
-            }
-            if (auxSave.mediumWin == true)
-            {
-                buttonMedium.GetComponent<Animator>().SetBool("win", true);
-                recordMedium.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
-                medalMedium.SetActive(true);
-                if (auxSave.breakRecordMedium)
+                if (auxSave.thxMensage)
                 {
-                    buttonMedium.GetComponent<Animator>().SetBool("record", true);
-                }
-            }
-            if (auxSave.hardWin == true)
-            {
-                buttonHard.GetComponent<Animator>().SetBool("win", true);
-                recordHard.GetComponent<Text>().text = auxSave.hardRecord.ToString();
-                medalHard.SetActive(true);
-                if (auxSave.breakRecordHard)
-                {
-                    buttonHard.GetComponent<Animator>().SetBool("record", true);
-                }
-            }
+                    coracao.SetActive(true);
 
-            if(auxSave.easyWin && auxSave.mediumWin && auxSave.hardWin && !auxSave.thxMensage)
-            {
-                thxScreen = true;
-                int itemIndex = Random.Range(1, 3);
-                if(itemIndex == 1)
-                {
-                    thxBg1.SetActive(true);
                 }
-                if(itemIndex == 2)
-                {
-                    thxBg2.SetActive(true);
-                }
-                thxBixinho.SetActive(true);
-                auxSave.thxMensage = true;
-                thxNext.SetActive(true);
-                SaveManager.instance.Save();
-            }
-            if (auxSave.thxMensage)
-            {
-                coracao.SetActive(true);
             }
         }
 
@@ -152,6 +154,23 @@ public class UIController : MonoBehaviour
                         Vector3 aux = difficulty.GetComponent<Transform>().position;
                         difficulty.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
 
+                    }
+                    if (SaveManager.instance != null)
+                    {
+                        if (hit.collider.tag == "BixinhoActivation" && SaveManager.instance.state.bixinhoActivation)
+                        {
+                            bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
+                            SaveManager.instance.state.bixinhoActivation = false;
+                            SaveManager.instance.Save();
+
+                        }
+                        else if (hit.collider.tag == "BixinhoActivation" && !SaveManager.instance.state.bixinhoActivation)
+                        {
+                            bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
+                            SaveManager.instance.state.bixinhoActivation = true;
+                            SaveManager.instance.Save();
+
+                        }
                     }
                     if (hit.collider.tag == "Configuration" && !thxScreen)
                     {
@@ -204,8 +223,39 @@ public class UIController : MonoBehaviour
             }
         }
 
+        if (sceneName == "MenuMain")
+        {
+            if (configuration.activeSelf) { 
+            if (SaveManager.instance.state.bixinhoActivation)
+            {
+                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
+            }
+            else
+            {
+                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
+            }
+            }
+        }
 
-    }
+        if (isEasy | isMedium)
+        {
+            if (menuPause.activeSelf)
+            {
+                if (SaveManager.instance.state.bixinhoActivation)
+                {
+                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
+                }
+                else
+                {
+                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
+                }
+            }
+        }
+        { 
+        }
+
+
+        }
 
 
     public void EasyButton()

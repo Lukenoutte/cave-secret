@@ -11,7 +11,8 @@ public class AnimationController : MonoBehaviour
         bixinho8Menu, bixinho9Config, bixinho10Dif, bixinho11Dif, bixinhoBregaFunk, bixinho12Config;
 
     public GameObject bixinho4InGame, bixinho2InGame, bixinho5InGame, bixinho6InGame, bixinho8InGame,
-        bixinho1InGame, bixinho7InGame, bixinho3InGame, bixinho9InGame;
+        bixinho1InGame, bixinho7InGame, bixinho3InGame, bixinho9InGame, bixinho10InGame, bixinho11InGame, bixinho12InGame,
+        bixinho13InGame, bixinho14InGame, bixinho1Pause;
     private string animName;
     private bool animOnMenu;
     private bool animOnDif;
@@ -74,183 +75,190 @@ public class AnimationController : MonoBehaviour
         // Scene Menu
         if (sceneName == "MenuMain")
         {
-            // Main menu animations
-            if (mainMenu.activeSelf == false)
+            if (mainMenu != null)
             {
-                animOnMenu = false;
-                bixinho1Menu.SetActive(false);
-                bixinho2Menu.SetActive(false);
-                bixinho4Menu.SetActive(false);
-                bixinho8Menu.SetActive(false);
-                bixinhoBregaFunk.SetActive(false);
-            }
-            else if (animOnMenu == false)
-            {
-                bool AnimActive = false;
-                int oldIdMenu = idAnimMenu;
-                idAnimMenu = Random.Range(1, 6);
-                while (oldIdMenu == idAnimMenu)
+                // Main menu animations
+                if (mainMenu.activeSelf == false)
                 {
-                    idAnimMenu = Random.Range(1, 6);
+                    animOnMenu = false;
+                    bixinho1Menu.SetActive(false);
+                    bixinho2Menu.SetActive(false);
+                    bixinho4Menu.SetActive(false);
+                    bixinho8Menu.SetActive(false);
+                    bixinhoBregaFunk.SetActive(false);
                 }
-
-                if (bixinho2Menu.activeSelf | bixinho4Menu.activeSelf | bixinho8Menu.activeSelf | bixinho1Menu.activeSelf | bixinhoBregaFunk.activeSelf)
+                else if (animOnMenu == false)
                 {
-                    AnimActive = true;
-                }
-
-                if (idAnimMenu == 1 && animOnMenu == false && !AnimActive)
-                {
-                    animOnMenu = true;
-                    bixinho1Menu.SetActive(true);
-
-
-
-                }
-                if (idAnimMenu == 2 && animOnMenu == false && !AnimActive)
-                {
-                    animOnMenu = true;
-                    bixinho2Menu.SetActive(true);
-
-                }
-                if (idAnimMenu == 3 && animOnMenu == false && !AnimActive)
-                {
-                    animOnMenu = true;
-                    bixinho4Menu.SetActive(true);
-
-                }
-                if (idAnimMenu == 4 && animOnMenu == false && !AnimActive)
-                {
-                    animOnMenu = true;
-                    bixinho8Menu.SetActive(true);
-
-                }
-
-                if (idAnimMenu == 5 && animOnMenu == false && !AnimActive && contClick > 15)
-                {
-                    animOnMenu = true;
-                    bixinhoBregaFunk.SetActive(true);
-
-                }
-            } // End
-
-            // Dif animations
-            if (difficulty.GetComponent<Transform>().position.x < 0)
-            {
-                animOnDif = false;
-                bixinho3Dif.SetActive(false);
-                bixinho5Dif.SetActive(false);
-                bixinho10Dif.SetActive(false);
-                bixinho11Dif.SetActive(false);
-            }
-            else if (difficulty.GetComponent<Transform>().position.x == 0)
-            {
-                if (SaveManager.instance.state.played == false && animOnDif == false && tutorialAnim == true)
-                {
-                    animOnDif = true;
-                    tutorialAnim = false;
-                    bixinho3Dif.SetActive(true);
-                }
-                else
-                {
-
-                    int oldIdDif = idAnimDif;
                     bool AnimActive = false;
-                    idAnimDif = Random.Range(1, 5);
-                    while (oldIdDif == idAnimDif)
+                    int oldIdMenu = idAnimMenu;
+                    idAnimMenu = Random.Range(1, 6);
+                    while (oldIdMenu == idAnimMenu)
                     {
-                        idAnimDif = Random.Range(1, 5);
+                        idAnimMenu = Random.Range(1, 6);
                     }
 
-                    if (bixinho5Dif.activeSelf | bixinho3Dif.activeSelf | bixinho10Dif.activeSelf | bixinho11Dif.activeSelf)
+                    if (bixinho2Menu.activeSelf | bixinho4Menu.activeSelf | bixinho8Menu.activeSelf | bixinho1Menu.activeSelf | bixinhoBregaFunk.activeSelf)
                     {
                         AnimActive = true;
                     }
 
-                    if (idAnimDif == 1 && animOnDif == false && !AnimActive)
+                    if (idAnimMenu == 1 && animOnMenu == false && !AnimActive)
                     {
-                        animOnDif = true;
-                        bixinho3Dif.SetActive(true);
+                        animOnMenu = true;
+                        bixinho1Menu.SetActive(true);
+
+
 
                     }
-                    if (idAnimDif == 2 && animOnDif == false && !AnimActive)
+                    if (idAnimMenu == 2 && animOnMenu == false && !AnimActive)
                     {
-                        animOnDif = true;
-                        bixinho5Dif.SetActive(true);
+                        animOnMenu = true;
+                        bixinho2Menu.SetActive(true);
+
+                    }
+                    if (idAnimMenu == 3 && animOnMenu == false && !AnimActive)
+                    {
+                        animOnMenu = true;
+                        bixinho4Menu.SetActive(true);
+
+                    }
+                    if (idAnimMenu == 4 && animOnMenu == false && !AnimActive)
+                    {
+                        animOnMenu = true;
+                        bixinho8Menu.SetActive(true);
 
                     }
 
-                    if (idAnimDif == 3 && animOnDif == false && !AnimActive)
+                    if (idAnimMenu == 5 && animOnMenu == false && !AnimActive && contClick > 15)
                     {
-                        animOnDif = true;
-                        bixinho10Dif.SetActive(true);
+                        animOnMenu = true;
+                        bixinhoBregaFunk.SetActive(true);
 
                     }
+                } // End
 
-                    if (idAnimDif == 4 && animOnDif == false && !AnimActive)
-                    {
-                        animOnDif = true;
-                        bixinho11Dif.SetActive(true);
-
-                    }
-                }
-            } // End
-
-
-            // Config animations
-            if (configuration.activeSelf == false)
-            {
-                animOnConfig = false;
-                bixinho6Config.SetActive(false);
-                bixinho7Config.SetActive(false);
-                bixinho9Config.SetActive(false);
-                bixinho12Config.SetActive(false);
-
-            }
-            else if (animOnConfig == false)
-            {
-
-                int oldIdConfig = idAnimConfig;
-                bool AnimActive = false;
-                idAnimConfig = Random.Range(1, 5);
-                while (oldIdConfig == idAnimConfig)
+                // Dif animations
+                if (difficulty.GetComponent<Transform>().position.x < 0)
                 {
+                    animOnDif = false;
+                    bixinho3Dif.SetActive(false);
+                    bixinho5Dif.SetActive(false);
+                    bixinho10Dif.SetActive(false);
+                    bixinho11Dif.SetActive(false);
+                }
+                else if (difficulty.GetComponent<Transform>().position.x == 0)
+                {
+                    if (SaveManager.instance != null)
+                    {
+                        if (SaveManager.instance.state.played == false && animOnDif == false && tutorialAnim == true)
+                        {
+                            animOnDif = true;
+                            tutorialAnim = false;
+                            bixinho3Dif.SetActive(true);
+                        }
+                        else
+                        {
+
+                            int oldIdDif = idAnimDif;
+                            bool AnimActive = false;
+                            idAnimDif = Random.Range(1, 5);
+                            while (oldIdDif == idAnimDif)
+                            {
+                                idAnimDif = Random.Range(1, 5);
+                            }
+
+                            if (bixinho5Dif.activeSelf | bixinho3Dif.activeSelf | bixinho10Dif.activeSelf | bixinho11Dif.activeSelf)
+                            {
+                                AnimActive = true;
+                            }
+
+                            if (idAnimDif == 1 && animOnDif == false && !AnimActive)
+                            {
+                                animOnDif = true;
+                                bixinho3Dif.SetActive(true);
+
+                            }
+                            if (idAnimDif == 2 && animOnDif == false && !AnimActive)
+                            {
+                                animOnDif = true;
+                                bixinho5Dif.SetActive(true);
+
+                            }
+
+                            if (idAnimDif == 3 && animOnDif == false && !AnimActive)
+                            {
+                                animOnDif = true;
+                                bixinho10Dif.SetActive(true);
+
+                            }
+
+                            if (idAnimDif == 4 && animOnDif == false && !AnimActive)
+                            {
+                                animOnDif = true;
+                                bixinho11Dif.SetActive(true);
+
+                            }
+                        }
+                    }
+
+                } // End
+
+
+                // Config animations
+                if (configuration.activeSelf == false)
+                {
+                    animOnConfig = false;
+                    bixinho6Config.SetActive(false);
+                    bixinho7Config.SetActive(false);
+                    bixinho9Config.SetActive(false);
+                    bixinho12Config.SetActive(false);
+
+                }
+                else if (animOnConfig == false)
+                {
+
+                    int oldIdConfig = idAnimConfig;
+                    bool AnimActive = false;
                     idAnimConfig = Random.Range(1, 5);
-                }
+                    while (oldIdConfig == idAnimConfig)
+                    {
+                        idAnimConfig = Random.Range(1, 5);
+                    }
 
-                if (bixinho7Config.activeSelf | bixinho6Config.activeSelf | bixinho9Config.activeSelf | bixinho12Config.activeSelf)
-                {
-                    AnimActive = true;
-                }
+                    if (bixinho7Config.activeSelf | bixinho6Config.activeSelf | bixinho9Config.activeSelf | bixinho12Config.activeSelf)
+                    {
+                        AnimActive = true;
+                    }
 
-                if (idAnimConfig == 1 && animOnConfig == false && !AnimActive)
-                {
-                    animOnConfig = true;
-                    bixinho6Config.SetActive(true);
+                    if (idAnimConfig == 1 && animOnConfig == false && !AnimActive)
+                    {
+                        animOnConfig = true;
+                        bixinho6Config.SetActive(true);
 
 
 
-                }
-                if (idAnimConfig == 2 && animOnConfig == false && !AnimActive)
-                {
-                    animOnConfig = true;
-                    bixinho7Config.SetActive(true);
-                }
-                if (idAnimConfig == 3 && animOnConfig == false && !AnimActive)
-                {
-                    animOnConfig = true;
-                    bixinho9Config.SetActive(true);
-                }
-                if (idAnimConfig == 4 && animOnConfig == false && !AnimActive)
-                {
-                    animOnConfig = true;
-                    bixinho12Config.SetActive(true);
+                    }
+                    if (idAnimConfig == 2 && animOnConfig == false && !AnimActive)
+                    {
+                        animOnConfig = true;
+                        bixinho7Config.SetActive(true);
+                    }
+                    if (idAnimConfig == 3 && animOnConfig == false && !AnimActive)
+                    {
+                        animOnConfig = true;
+                        bixinho9Config.SetActive(true);
+                    }
+                    if (idAnimConfig == 4 && animOnConfig == false && !AnimActive)
+                    {
+                        animOnConfig = true;
+                        bixinho12Config.SetActive(true);
 
-                }
-            } // End 
-        }
+                    }
+                } // End 
+            }
+        } // Menu
 
-        // Scene Easy
+        // In Game
         if (sceneName == "GameEasy" | sceneName == "GameMedium")
         {
             GeneralButtonController aux = GeneralButtonController.instance;
@@ -263,28 +271,38 @@ public class AnimationController : MonoBehaviour
             }
             if (aux.isPaused)
             {
-                if (animOnInGame) { 
-                animOnInGame = false;
-                bixinho1InGame.SetActive(false);
-                bixinho2InGame.SetActive(false);
-                bixinho3InGame.SetActive(false);
-                bixinho4InGame.SetActive(false);
-                bixinho5InGame.SetActive(false);
-                bixinho6InGame.SetActive(false);
-                bixinho7InGame.SetActive(false);
-                bixinho8InGame.SetActive(false);
-                bixinho9InGame.SetActive(false);
+                if (animOnInGame)
+                {
+                    desableAnimationInGame();
                 }
+
+                bixinho1Pause.SetActive(true);
+            }
+            else
+            {
+
+                bixinho1Pause.SetActive(false);
+
+            }
+            if (SaveManager.instance != null)
+            {
+                if (!SaveManager.instance.state.bixinhoActivation)
+                {
+                    desableAnimationInGame();
+                    animOnInGame = true;
+                }
+
+
             }
 
             if (aux.contWrong == wrongFixoTuto && aux.countLightsOn < 2 && !animOnInGame)
             {
 
                 int oldIdEasy = idAnimInGameTuto;
-                idAnimInGameTuto = Random.Range(1, 6);
+                idAnimInGameTuto = Random.Range(1, 9);
                 while (oldIdEasy == idAnimInGameTuto)
                 {
-                    idAnimInGameTuto = Random.Range(1, 6);
+                    idAnimInGameTuto = Random.Range(1, 9);
                 }
 
                 if (idAnimInGameTuto == 1 && !animOnInGame)
@@ -318,16 +336,35 @@ public class AnimationController : MonoBehaviour
                     bixinho9InGame.SetActive(true);
                     StartCoroutine(AutoDestroyAnim(bixinho9InGame));
                 }
+                if (idAnimInGameTuto == 6 && !animOnInGame)
+                {
+                    animOnInGame = true;
+                    bixinho10InGame.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho10InGame));
+                }
+                if (idAnimInGameTuto == 7 && !animOnInGame)
+                {
+                    animOnInGame = true;
+                    bixinho11InGame.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho11InGame));
+                }
+                if (idAnimInGameTuto == 8 && !animOnInGame)
+                {
+                    animOnInGame = true;
+                    bixinho13InGame.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho13InGame));
+                }
+
                 wrongFixoTuto += 6;
             }
 
             if (aux.countLightsOn == rightFixo && !animOnInGame)
             {
                 int oldIdEasy = idAnimInGameRight;
-                idAnimInGameRight = Random.Range(1, 3);
+                idAnimInGameRight = Random.Range(1, 5);
                 while (oldIdEasy == idAnimInGameRight)
                 {
-                    idAnimInGameRight = Random.Range(1, 3);
+                    idAnimInGameRight = Random.Range(1, 5);
                 }
 
 
@@ -344,6 +381,20 @@ public class AnimationController : MonoBehaviour
                     animOnInGame = true;
                     bixinho7InGame.SetActive(true);
                     StartCoroutine(AutoDestroyAnim(bixinho7InGame));
+                    rightFixo += 3;
+                }
+                if (idAnimInGameRight == 3 && !animOnInGame)
+                {
+                    animOnInGame = true;
+                    bixinho12InGame.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho12InGame));
+                    rightFixo += 3;
+                }
+                if (idAnimInGameRight == 4 && !animOnInGame)
+                {
+                    animOnInGame = true;
+                    bixinho14InGame.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(bixinho14InGame));
                     rightFixo += 3;
                 }
             }
@@ -372,10 +423,10 @@ public class AnimationController : MonoBehaviour
                     contEnterFixo += 3;
                 }
 
-               
-            }
 
             }
+
+        }
 
     } // End update
 
@@ -411,18 +462,39 @@ public class AnimationController : MonoBehaviour
 
     private IEnumerator AutoDestroyAnim(GameObject anim)
     {
-        if (animOnInGame) { 
-        GameObject aux = anim;
-        yield return new WaitForSeconds(6);
-        aux.GetComponent<Animator>().SetBool("clicked", true);
-        yield return new WaitForSeconds(1);
-        aux.SetActive(false);
-        if (sceneName == "GameEasy" | sceneName == "GameMedium")
+        if (animOnInGame)
         {
-            animOnInGame = false;
-        }
+            GameObject aux = anim;
+            yield return new WaitForSeconds(5);
+            aux.GetComponent<Animator>().SetBool("clicked", true);
+            yield return new WaitForSeconds(1);
+            aux.SetActive(false);
+            if (sceneName == "GameEasy" | sceneName == "GameMedium")
+            {
+                animOnInGame = false;
+            }
         }
     }
 
+    private void desableAnimationInGame()
+    {
+
+        animOnInGame = false;
+        bixinho1InGame.SetActive(false);
+        bixinho2InGame.SetActive(false);
+        bixinho3InGame.SetActive(false);
+        bixinho4InGame.SetActive(false);
+        bixinho5InGame.SetActive(false);
+        bixinho6InGame.SetActive(false);
+        bixinho7InGame.SetActive(false);
+        bixinho8InGame.SetActive(false);
+        bixinho9InGame.SetActive(false);
+        bixinho10InGame.SetActive(false);
+        bixinho11InGame.SetActive(false);
+        bixinho12InGame.SetActive(false);
+        bixinho13InGame.SetActive(false);
+        bixinho14InGame.SetActive(false);
+        bixinho1Pause.SetActive(false);
+    }
 
 }

@@ -123,45 +123,61 @@ public class GeneralButtonController : MonoBehaviour
             qtdElementToWin = 12;
         }
         // Valor do record na tela
-        SaveState auxSave = SaveManager.instance.state;
-        if (isEasy)
+        if (SaveManager.instance != null)
         {
-            if (auxSave.easyWin)
+            SaveState auxSave = SaveManager.instance.state;
+            if (isEasy)
             {
-                medal.SetActive(true);
-                record.GetComponent<Text>().text = auxSave.easyRecord.ToString();
+                if (auxSave.easyWin)
+                {
+                    medal.SetActive(true);
+                    record.GetComponent<Text>().text = auxSave.easyRecord.ToString();
 
 
+                }
             }
-        }
-        if (isMedium)
-        {
-            if (auxSave.mediumWin)
+            if (isMedium)
             {
-                medal.SetActive(true);
-                record.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
+                if (auxSave.mediumWin)
+                {
+                    medal.SetActive(true);
+                    record.GetComponent<Text>().text = auxSave.mediumRecord.ToString();
+                }
             }
-        }
-        if (isHard)
-        {
-            if (auxSave.hardWin)
+            if (isHard)
             {
-                medal.SetActive(true);
-                record.GetComponent<Text>().text = auxSave.hardRecord.ToString();
+                if (auxSave.hardWin)
+                {
+                    medal.SetActive(true);
+                    record.GetComponent<Text>().text = auxSave.hardRecord.ToString();
+                }
             }
         }
         // Método de gerar as listas randomicas
         RandomLists();
-        timerHard = SaveManager.instance.state.hardRecord;
-        if (!isHard)
+        if (SaveManager.instance != null)
         {
-            timer = 0.0f;
+            timerHard = SaveManager.instance.state.hardRecord;
+            if (!isHard)
+            {
+                timer = 0.0f;
+            }
+            else
+            {
+                timer = timerHard + 1;
+            }
         }
         else
         {
-            timer = timerHard + 1;
+            if (!isHard)
+            {
+                timer = 0.0f;
+            }
+            else
+            {
+                timer = 160 + 1;
+            }
         }
-
 
 
     }
@@ -396,7 +412,7 @@ public class GeneralButtonController : MonoBehaviour
                     }
                 }
 
-                
+
 
             }
 
@@ -417,7 +433,7 @@ public class GeneralButtonController : MonoBehaviour
                 aux2.rateOverTime = 7;
                 SaveState auxSave = SaveManager.instance.state;
 
-             
+
 
 
                 if (auxSave.hardWin)
@@ -431,8 +447,9 @@ public class GeneralButtonController : MonoBehaviour
                         auxSave.breakRecordHard = true;
                         SaveManager.instance.Save();
                     }
-                   
-                }else
+
+                }
+                else
                 {
                     auxSave.hardWin = true;
                     if (resto < auxSave.hardRecord)
@@ -444,7 +461,7 @@ public class GeneralButtonController : MonoBehaviour
             }
         }
 
-        if(countLightsOn >= 4)
+        if (countLightsOn >= 4)
         {
             contWrong = 0;
         }

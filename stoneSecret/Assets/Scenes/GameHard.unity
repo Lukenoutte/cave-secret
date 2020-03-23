@@ -532,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91262627cb8cc9c478ce43ff67320c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
   mainList: []
   looseMenu: {fileID: 92313602}
   winMenu: {fileID: 1961044190}
@@ -543,6 +544,9 @@ MonoBehaviour:
   medal: {fileID: 1940471649}
   record2: {fileID: 1020330815}
   medal2: {fileID: 851124823}
+  countLightsOn: 0
+  contWrong: 0
+  contEnterNoWin: 0
 --- !u!4 &327579994
 Transform:
   m_ObjectHideFlags: 0
@@ -3590,6 +3594,19 @@ MonoBehaviour:
   buttonEasy: {fileID: 0}
   buttonMedium: {fileID: 0}
   buttonHard: {fileID: 0}
+  medalEasy: {fileID: 0}
+  medalMedium: {fileID: 0}
+  medalHard: {fileID: 0}
+  recordEasy: {fileID: 0}
+  recordMedium: {fileID: 0}
+  recordHard: {fileID: 0}
+  thxBg1: {fileID: 0}
+  thxBg2: {fileID: 0}
+  thxBixinho: {fileID: 0}
+  thxNext: {fileID: 0}
+  coracao: {fileID: 0}
+  bixinhoActivation: {fileID: 0}
+  menuPause: {fileID: 1152012983}
 --- !u!223 &1683638605
 Canvas:
   m_ObjectHideFlags: 0

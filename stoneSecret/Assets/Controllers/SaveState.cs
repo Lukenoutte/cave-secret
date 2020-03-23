@@ -13,4 +13,5 @@
     public bool breakRecordMedium = false;
     public bool breakRecordHard = false;
     public bool thxMensage = false;
+    public bool bixinhoActivation = true;
 }
