@@ -227,29 +227,33 @@ public class UIController : MonoBehaviour
 
         if (sceneName == "MenuMain")
         {
-
-            if (SaveManager.instance.state.bixinhoActivation)
+            if (SaveManager.instance != null)
             {
-                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
-            }
-            else
-            {
-                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
+                if (SaveManager.instance.state.bixinhoActivation)
+                {
+                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
+                }
+                else
+                {
+                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
+                }
             }
 
         }
 
         if (isEasy | isMedium)
         {
-
-            if (SaveManager.instance.state.bixinhoActivation)
+            if (SaveManager.instance != null)
             {
-                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
-            }
-            else
-            {
-                bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
+                if (SaveManager.instance.state.bixinhoActivation)
+                {
+                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
+                }
+                else
+                {
+                    bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
 
+                }
             }
         }
         {
