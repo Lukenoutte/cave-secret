@@ -43,7 +43,7 @@ public class GeneralButtonController : MonoBehaviour
         medal, record2, medal2;
     private string buttonName;
     //Contador de luzes on 
-    public int countLightsOn = 0;
+    private int contLightsOn = 0;
     // Listas que irão receber a ordem dos botões
     private List<string> b1List = new List<string>();
     private List<string> b2List = new List<string>();
@@ -70,7 +70,7 @@ public class GeneralButtonController : MonoBehaviour
     private int timerHard;
     public int contWrong = 0;
     public int contEnterNoWin = 0;
-
+    public int contLightsOnAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -220,10 +220,11 @@ public class GeneralButtonController : MonoBehaviour
 
 
                     SetVarControl(buttonName, true);
-                    countLightsOn++;
+                    contLightsOn++;
+                    contLightsOnAnimation = contLightsOn;
                     clickedButtons.Add(buttonName);
                     b.GetComponent<Animator>().SetBool("buttonClicked", true);
-                    if (countLightsOn == 1)
+                    if (contLightsOn == 1)
                     {
                         SetMainList(buttonName);
                     }
@@ -232,13 +233,14 @@ public class GeneralButtonController : MonoBehaviour
                 {
 
                     SetVarControl(buttonName, false);
-                    countLightsOn--;
+                    contLightsOn--;
+                    contLightsOnAnimation = contLightsOn;
                     clickedButtons.Remove(buttonName);
                     b.GetComponent<Animator>().SetBool("buttonClicked", false);
                 }
 
                 // Luz do botão Enter
-                if (countLightsOn == qtdElementToWin)
+                if (contLightsOn == qtdElementToWin)
                 {
 
                     enterLight.GetComponent<Animator>().SetBool("win", true);
@@ -249,7 +251,7 @@ public class GeneralButtonController : MonoBehaviour
                     enterLight.GetComponent<Animator>().SetBool("win", false);
                 }
 
-                if (hit.collider.tag == "Enter" && countLightsOn < qtdElementToWin)
+                if (hit.collider.tag == "Enter" && contLightsOn < qtdElementToWin)
                 {
 
                     StartCoroutine(LightOnEnterNow());
@@ -282,13 +284,13 @@ public class GeneralButtonController : MonoBehaviour
 
 
 
-
+               
 
                 // Condição para ganhar
                 if (isEasy == true)
                 {
 
-                    if (countLightsOn == 9 && hit.collider.tag == "Enter")
+                    if (contLightsOn == 9 && hit.collider.tag == "Enter")
                     {
 
                         Debug.Log("win!!!");
@@ -301,7 +303,7 @@ public class GeneralButtonController : MonoBehaviour
                 }
                 else if (isMedium == true)
                 {
-                    if (countLightsOn == 12 && hit.collider.tag == "Enter")
+                    if (contLightsOn == 12 && hit.collider.tag == "Enter")
                     {
                         Debug.Log("win!!!");
                         winGame = true;
@@ -311,7 +313,7 @@ public class GeneralButtonController : MonoBehaviour
                 }
                 else if (isHard == true)
                 {
-                    if (countLightsOn == 12 && hit.collider.tag == "Enter")
+                    if (contLightsOn == 12 && hit.collider.tag == "Enter")
                     {
 
                         if (timer > 0)
@@ -333,7 +335,16 @@ public class GeneralButtonController : MonoBehaviour
 
 
         } // End click
-
+        if (SaveManager.instance != null)
+        {
+            if (!SaveManager.instance.state.bixinhoActivation)
+            {
+                contEnterNoWin = 0;
+                contWrong = 0;
+                contLightsOnAnimation = 0;
+            }
+        }
+      
 
         if (isEasy | isMedium)
         {
@@ -463,7 +474,7 @@ public class GeneralButtonController : MonoBehaviour
             }
         }
 
-        if (countLightsOn >= 4)
+        if (contLightsOn >= 4)
         {
             contWrong = 0;
         }
@@ -483,53 +494,53 @@ public class GeneralButtonController : MonoBehaviour
         }
 
         // Compara se o botão clicado corresponde com o da lista.
-        if (countLightsOn == 2 && clickedButtons[1] != mainList[1])
+        if (contLightsOn == 2 && clickedButtons[1] != mainList[1])
         {
             AllLightsOff();
 
         }
 
-        if (countLightsOn == 3 && clickedButtons[2] != mainList[2])
+        if (contLightsOn == 3 && clickedButtons[2] != mainList[2])
         {
             AllLightsOff();
 
         }
 
-        if (countLightsOn == 4 && clickedButtons[3] != mainList[3])
+        if (contLightsOn == 4 && clickedButtons[3] != mainList[3])
         {
             AllLightsOff();
         }
 
-        if (countLightsOn == 5 && clickedButtons[4] != mainList[4])
+        if (contLightsOn == 5 && clickedButtons[4] != mainList[4])
         {
             AllLightsOff();
         }
 
-        if (countLightsOn == 6 && clickedButtons[5] != mainList[5])
+        if (contLightsOn == 6 && clickedButtons[5] != mainList[5])
         {
             AllLightsOff();
         }
 
-        if (countLightsOn == 7 && clickedButtons[6] != mainList[6])
+        if (contLightsOn == 7 && clickedButtons[6] != mainList[6])
         {
             AllLightsOff();
         }
 
-        if (countLightsOn == 8 && clickedButtons[7] != mainList[7])
+        if (contLightsOn == 8 && clickedButtons[7] != mainList[7])
         {
             AllLightsOff();
         }
-        if (countLightsOn == 9 && clickedButtons[8] != mainList[8])
+        if (contLightsOn == 9 && clickedButtons[8] != mainList[8])
         {
             AllLightsOff();
         }
         if (isMedium == true | isHard == true)
         {
-            if (countLightsOn == 10 && clickedButtons[9] != mainList[9])
+            if (contLightsOn == 10 && clickedButtons[9] != mainList[9])
             {
                 AllLightsOff();
             }
-            if (countLightsOn == 11 && clickedButtons[10] != mainList[10])
+            if (contLightsOn == 11 && clickedButtons[10] != mainList[10])
             {
                 AllLightsOff();
             }
@@ -601,7 +612,8 @@ public class GeneralButtonController : MonoBehaviour
             bToOff = GameObject.Find(a);
             bToOff.GetComponent<Animator>().SetBool("buttonClicked", false);
         }
-        countLightsOn = 0;
+        contLightsOn = 0;
+        contLightsOnAnimation = 0;
         contWrong++;
         buttonOn1 = false;
         buttonOn2 = false;

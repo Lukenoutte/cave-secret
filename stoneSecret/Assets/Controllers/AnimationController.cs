@@ -32,6 +32,7 @@ public class AnimationController : MonoBehaviour
     private int idAnimInGameTuto;
     private int idAnimInGameRight;
     private int idAnimInGameEnter;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +55,8 @@ public class AnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         if (Input.GetMouseButtonDown(0))
         {
 
@@ -130,7 +133,7 @@ public class AnimationController : MonoBehaviour
 
                     }
 
-                    if (idAnimMenu == 5 && animOnMenu == false && !AnimActive && contClick > 15)
+                    if (idAnimMenu == 5 && animOnMenu == false && !AnimActive && contClick > 25)
                     {
                         animOnMenu = true;
                         bixinhoBregaFunk.SetActive(true);
@@ -290,10 +293,9 @@ public class AnimationController : MonoBehaviour
             GeneralButtonController aux = GeneralButtonController.instance;
             if (aux.isPaused)
             {
-                if (animOnInGame)
-                {
+             
                     desableAnimationInGame();
-                }
+               
 
                 bixinho1Pause.SetActive(true);
             }
@@ -308,21 +310,32 @@ public class AnimationController : MonoBehaviour
         if (sceneName == "GameEasy" | sceneName == "GameMedium")
         {
             GeneralButtonController aux = GeneralButtonController.instance;
-            if (aux.contWrong == 2 && !animOnInGame && !execulted && !SaveManager.instance.state.played)
+            if (SaveManager.instance != null)
             {
-                bixinho4InGame.SetActive(true);
-                animOnInGame = true;
-                execulted = true;
-                StartCoroutine(AutoDestroyAnim(bixinho4InGame));
+                if (aux.contWrong == 2 && !animOnInGame && !execulted && !SaveManager.instance.state.played)
+                {
+                    bixinho4InGame.SetActive(true);
+                    animOnInGame = true;
+                    execulted = true;
+                    StartCoroutine(AutoDestroyAnim(bixinho4InGame));
+                }
             }
             if (aux.isPaused)
             {
-                if (animOnInGame)
-                {
-                    desableAnimationInGame();
-                }
 
-                bixinho1Pause.SetActive(true);
+                    desableAnimationInGame();
+
+                if (SaveManager.instance != null)
+                {
+                    if (SaveManager.instance.state.bixinhoActivation)
+                    {
+                        bixinho1Pause.SetActive(true);
+                    }
+                }
+                else
+                {
+                    Debug.Log("No save menager");
+                }
             }
             else
             {
@@ -341,7 +354,7 @@ public class AnimationController : MonoBehaviour
 
             }
 
-            if (aux.contWrong == wrongFixoTuto && aux.countLightsOn < 2 && !animOnInGame)
+            if (aux.contWrong == wrongFixoTuto && aux.contLightsOnAnimation < 2 && !animOnInGame)
             {
 
                 int oldIdEasy = idAnimInGameTuto;
@@ -404,7 +417,7 @@ public class AnimationController : MonoBehaviour
                 wrongFixoTuto += 6;
             }
 
-            if (aux.countLightsOn == rightFixo && !animOnInGame)
+            if (aux.contLightsOnAnimation == rightFixo && !animOnInGame)
             {
                 int oldIdEasy = idAnimInGameRight;
                 idAnimInGameRight = Random.Range(1, 5);
@@ -540,7 +553,7 @@ public class AnimationController : MonoBehaviour
     {
 
         GameObject aux = anim;
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         aux.GetComponent<Animator>().SetBool("clicked", true);
         yield return new WaitForSeconds(1);
         aux.SetActive(false);
@@ -584,7 +597,7 @@ public class AnimationController : MonoBehaviour
         bixinho12InGame.SetActive(false);
         bixinho13InGame.SetActive(false);
         bixinho14InGame.SetActive(false);
-        bixinho1Pause.SetActive(false);
+        
     }
 
 }
