@@ -26,13 +26,13 @@ public class AnimationController : MonoBehaviour
     private string sceneName;
     public bool animOnInGame;
     private bool execulted;
-    private int wrongFixoTuto = 6;
-    private int rightFixo = 3;
+    private int wrongFixoTuto;
+    private int rightFixo;
     private int contEnterFixo = 1;
     private int idAnimInGameTuto;
     private int idAnimInGameRight;
     private int idAnimInGameEnter;
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,15 +48,31 @@ public class AnimationController : MonoBehaviour
         bixinho2Menu = GameObject.Find("/Canvas/MainMenu/Bixinho2Menu");
         mainMenu = GameObject.Find("/Canvas/MainMenu");
 
-
-
+        if (SaveManager.instance != null)
+        {
+            if (SaveManager.instance.state.playedTuto)
+            {
+                rightFixo = 3;
+                wrongFixoTuto = 6;
+            }
+            else
+            {
+                rightFixo = 9;
+                wrongFixoTuto = 1;
+            }
+        }
+        else
+        {
+            rightFixo = 3;
+            wrongFixoTuto = 6;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
+
         if (Input.GetMouseButtonDown(0))
         {
 
@@ -206,7 +222,7 @@ public class AnimationController : MonoBehaviour
                                 bixinho11Dif.SetActive(true);
 
                             }
-   
+
                         }
                     }
 
@@ -280,20 +296,24 @@ public class AnimationController : MonoBehaviour
         if (sceneName == "GameHard")
         {
             GeneralButtonController aux = GeneralButtonController.instance;
-            if (aux.isPaused)
+            if (aux != null)
             {
-             
+                if (aux.isPaused)
+                {
+
                     desableAnimationInGame();
-               
 
-                bixinho1Pause.SetActive(true);
+
+                    bixinho1Pause.SetActive(true);
+                }
+                else
+                {
+
+                    bixinho1Pause.SetActive(false);
+
+                }
             }
-            else
-            {
-
-                bixinho1Pause.SetActive(false);
-
-            }
+  
         }
         // In Game
         if (sceneName == "GameEasy" | sceneName == "GameMedium")
@@ -309,25 +329,28 @@ public class AnimationController : MonoBehaviour
                     StartCoroutine(AutoDestroyAnim(bixinho4InGame));
                 }
             }
-            if (aux.isPaused)
+            if (aux != null)
             {
+                if (aux.isPaused)
+                {
 
                     desableAnimationInGame();
 
-                if (SaveManager.instance != null)
-                {
-                    if (SaveManager.instance.state.bixinhoActivation)
+                    if (SaveManager.instance != null)
                     {
-                        bixinho1Pause.SetActive(true);
+                        if (SaveManager.instance.state.bixinhoActivation)
+                        {
+                            bixinho1Pause.SetActive(true);
+                        }
                     }
+
                 }
-    
-            }
-            else
-            {
+                else
+                {
 
-                bixinho1Pause.SetActive(false);
+                    bixinho1Pause.SetActive(false);
 
+                }
             }
             if (SaveManager.instance != null)
             {
@@ -339,138 +362,139 @@ public class AnimationController : MonoBehaviour
 
 
             }
-
-            if (aux.contWrong == wrongFixoTuto && aux.contLightsOnAnimation < 2 && !animOnInGame)
+            if (aux != null)
             {
-
-                int oldIdEasy = idAnimInGameTuto;
-                idAnimInGameTuto = Random.Range(1, 9);
-                while (oldIdEasy == idAnimInGameTuto)
+                if (aux.contWrong == wrongFixoTuto && aux.contLightsOnAnimation < 2 && !animOnInGame)
                 {
+
+                    int oldIdEasy = idAnimInGameTuto;
                     idAnimInGameTuto = Random.Range(1, 9);
+                    while (oldIdEasy == idAnimInGameTuto)
+                    {
+                        idAnimInGameTuto = Random.Range(1, 9);
+                    }
+
+                    if (idAnimInGameTuto == 1 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho2InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho2InGame));
+                    }
+
+                    if (idAnimInGameTuto == 2 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho5InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho5InGame));
+                    }
+                    if (idAnimInGameTuto == 3 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho6InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho6InGame));
+                    }
+                    if (idAnimInGameTuto == 4 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho8InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho8InGame));
+                    }
+                    if (idAnimInGameTuto == 5 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho9InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho9InGame));
+                    }
+                    if (idAnimInGameTuto == 6 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho10InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho10InGame));
+                    }
+                    if (idAnimInGameTuto == 7 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho11InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho11InGame));
+                    }
+                    if (idAnimInGameTuto == 8 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho13InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho13InGame));
+                    }
+
+                    wrongFixoTuto += 6;
                 }
 
-                if (idAnimInGameTuto == 1 && !animOnInGame)
+                if (aux.contLightsOnAnimation == rightFixo && !animOnInGame)
                 {
-                    animOnInGame = true;
-                    bixinho2InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho2InGame));
-                }
-
-                if (idAnimInGameTuto == 2 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho5InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho5InGame));
-                }
-                if (idAnimInGameTuto == 3 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho6InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho6InGame));
-                }
-                if (idAnimInGameTuto == 4 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho8InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho8InGame));
-                }
-                if (idAnimInGameTuto == 5 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho9InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho9InGame));
-                }
-                if (idAnimInGameTuto == 6 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho10InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho10InGame));
-                }
-                if (idAnimInGameTuto == 7 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho11InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho11InGame));
-                }
-                if (idAnimInGameTuto == 8 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho13InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho13InGame));
-                }
-
-                wrongFixoTuto += 6;
-            }
-
-            if (aux.contLightsOnAnimation == rightFixo && !animOnInGame)
-            {
-                int oldIdEasy = idAnimInGameRight;
-                idAnimInGameRight = Random.Range(1, 5);
-                while (oldIdEasy == idAnimInGameRight)
-                {
+                    int oldIdEasy = idAnimInGameRight;
                     idAnimInGameRight = Random.Range(1, 5);
-                }
+                    while (oldIdEasy == idAnimInGameRight)
+                    {
+                        idAnimInGameRight = Random.Range(1, 5);
+                    }
 
 
-                if (idAnimInGameRight == 1 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho1InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho1InGame));
-                    rightFixo += 3;
-                }
+                    if (idAnimInGameRight == 1 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho1InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho1InGame));
+                        rightFixo += 3;
+                    }
 
-                if (idAnimInGameRight == 2 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho7InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho7InGame));
-                    rightFixo += 3;
+                    if (idAnimInGameRight == 2 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho7InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho7InGame));
+                        rightFixo += 3;
+                    }
+                    if (idAnimInGameRight == 3 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho12InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho12InGame));
+                        rightFixo += 3;
+                    }
+                    if (idAnimInGameRight == 4 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho14InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho14InGame));
+                        rightFixo += 3;
+                    }
                 }
-                if (idAnimInGameRight == 3 && !animOnInGame)
+                if (aux.contEnterNoWin == contEnterFixo && !animOnInGame)
                 {
-                    animOnInGame = true;
-                    bixinho12InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho12InGame));
-                    rightFixo += 3;
-                }
-                if (idAnimInGameRight == 4 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho14InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho14InGame));
-                    rightFixo += 3;
-                }
-            }
-            if (aux.contEnterNoWin == contEnterFixo && !animOnInGame)
-            {
 
-                int oldIdEasy = idAnimInGameEnter;
-                idAnimInGameEnter = Random.Range(1, 3);
-                while (oldIdEasy == idAnimInGameEnter)
-                {
+                    int oldIdEasy = idAnimInGameEnter;
                     idAnimInGameEnter = Random.Range(1, 3);
-                }
-                if (idAnimInGameEnter == 1 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho3InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho3InGame));
-                    contEnterFixo += 3;
-                }
+                    while (oldIdEasy == idAnimInGameEnter)
+                    {
+                        idAnimInGameEnter = Random.Range(1, 3);
+                    }
+                    if (idAnimInGameEnter == 1 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho3InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho3InGame));
+                        contEnterFixo += 3;
+                    }
 
-                if (idAnimInGameEnter == 2 && !animOnInGame)
-                {
-                    animOnInGame = true;
-                    bixinho4InGame.SetActive(true);
-                    StartCoroutine(AutoDestroyAnim(bixinho4InGame));
-                    contEnterFixo += 3;
+                    if (idAnimInGameEnter == 2 && !animOnInGame)
+                    {
+                        animOnInGame = true;
+                        bixinho4InGame.SetActive(true);
+                        StartCoroutine(AutoDestroyAnim(bixinho4InGame));
+                        contEnterFixo += 3;
+                    }
+
+
                 }
-
-
             }
-
         }
 
     } // End update
@@ -567,23 +591,24 @@ public class AnimationController : MonoBehaviour
 
     private void desableAnimationInGame()
     {
-
-        animOnInGame = false;
-        bixinho1InGame.SetActive(false);
-        bixinho2InGame.SetActive(false);
-        bixinho3InGame.SetActive(false);
-        bixinho4InGame.SetActive(false);
-        bixinho5InGame.SetActive(false);
-        bixinho6InGame.SetActive(false);
-        bixinho7InGame.SetActive(false);
-        bixinho8InGame.SetActive(false);
-        bixinho9InGame.SetActive(false);
-        bixinho10InGame.SetActive(false);
-        bixinho11InGame.SetActive(false);
-        bixinho12InGame.SetActive(false);
-        bixinho13InGame.SetActive(false);
-        bixinho14InGame.SetActive(false);
-        
+        if (sceneName != "GameHard")
+        {
+            animOnInGame = false;
+            bixinho1InGame.SetActive(false);
+            bixinho2InGame.SetActive(false);
+            bixinho3InGame.SetActive(false);
+            bixinho4InGame.SetActive(false);
+            bixinho5InGame.SetActive(false);
+            bixinho6InGame.SetActive(false);
+            bixinho7InGame.SetActive(false);
+            bixinho8InGame.SetActive(false);
+            bixinho9InGame.SetActive(false);
+            bixinho10InGame.SetActive(false);
+            bixinho11InGame.SetActive(false);
+            bixinho12InGame.SetActive(false);
+            bixinho13InGame.SetActive(false);
+            bixinho14InGame.SetActive(false);
+        }
     }
 
 }

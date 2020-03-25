@@ -9,13 +9,14 @@ public class UIController : MonoBehaviour
 
     public GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
         medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard, thxBg1, thxBg2, thxBixinho, thxNext, coracao,
-        bixinhoActivation, menuPause;
+        bixinhoActivation, menuPause, lockedMedium, lockedHard;
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;
     private bool isMedium = false;
     private bool isHard = false;
     private bool thxScreen = false;
+    private bool isNotLocked = true;
 
 
     private bool clickble = false;
@@ -35,7 +36,7 @@ public class UIController : MonoBehaviour
 
         StartCoroutine(ClickbleOn());
 
-
+        
 
 
         if (sceneName == "GameEasy")
@@ -60,6 +61,13 @@ public class UIController : MonoBehaviour
             if (SaveManager.instance != null)
             {
                 SaveState auxSave = SaveManager.instance.state;
+
+                if (auxSave.playedTuto)
+                {
+                    lockedMedium.SetActive(false);
+                    lockedHard.SetActive(false);
+                    isNotLocked = false;
+                }
                 if (auxSave.easyWin == true)
                 {
                     buttonEasy.GetComponent<Animator>().SetBool("win", true);
@@ -189,11 +197,11 @@ public class UIController : MonoBehaviour
                     {
                         EasyButton();
                     }
-                    if (hit.collider.tag == "BMedium")
+                    if (hit.collider.tag == "BMedium" && !isNotLocked)
                     {
                         MediumButton();
                     }
-                    if (hit.collider.tag == "BHard")
+                    if (hit.collider.tag == "BHard" && !isNotLocked)
                     {
                         HardButton();
                     }

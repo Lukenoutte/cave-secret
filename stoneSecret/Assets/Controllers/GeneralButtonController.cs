@@ -40,7 +40,7 @@ public class GeneralButtonController : MonoBehaviour
     private GameObject bg2;
 
     public GameObject looseMenu, winMenu, menuPause, timerAndPause, timerFinishLoose, timerFinishWin, record,
-        medal, record2, medal2;
+        medal, record2, medal2, timerObj;
     private string buttonName;
     //Contador de luzes on 
     private int contLightsOn = 0;
@@ -342,6 +342,7 @@ public class GeneralButtonController : MonoBehaviour
         {
             if (!SaveManager.instance.state.playedTuto)
             {
+                timerObj.SetActive(false);
                 if (contLightsOn > 0)
                 {
                     if (contLightsOn < mainList.Count)

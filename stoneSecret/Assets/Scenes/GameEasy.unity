@@ -8054,6 +8054,7 @@ MonoBehaviour:
   medal: {fileID: 868519169}
   record2: {fileID: 1669747762}
   medal2: {fileID: 619051751}
+  timerObj: {fileID: 477131481}
   contWrong: 0
   contEnterNoWin: 0
   contLightsOnAnimation: 0
