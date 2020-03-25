@@ -95,13 +95,13 @@ public class AnimationController : MonoBehaviour
                 {
                     bool AnimActive = false;
                     int oldIdMenu = idAnimMenu;
-                    idAnimMenu = Random.Range(1, 7);
+                    idAnimMenu = Random.Range(1, 6);
                     while (oldIdMenu == idAnimMenu)
                     {
-                        idAnimMenu = Random.Range(1, 7);
+                        idAnimMenu = Random.Range(1, 6);
                     }
 
-                    if (bixinho2Menu.activeSelf | bixinho4Menu.activeSelf | bixinho8Menu.activeSelf | bixinho1Menu.activeSelf | bixinhoBregaFunk.activeSelf | bixinhoAd.activeSelf)
+                    if (bixinho2Menu.activeSelf | bixinho4Menu.activeSelf | bixinho8Menu.activeSelf | bixinho1Menu.activeSelf | bixinhoBregaFunk.activeSelf)
                     {
                         AnimActive = true;
                     }
@@ -139,13 +139,7 @@ public class AnimationController : MonoBehaviour
                         bixinhoBregaFunk.SetActive(true);
 
                     }
-                    if (idAnimMenu == 6 && animOnMenu == false && !AnimActive)
-                    {
-                        animOnMenu = true;
-                        bixinhoAd.SetActive(true);
-                        StartCoroutine(AutoDestroyAnimAd(bixinhoAd));
 
-                    }
                 } // End
 
                 // Dif animations
@@ -161,7 +155,7 @@ public class AnimationController : MonoBehaviour
                 {
                     if (SaveManager.instance != null)
                     {
-                        if (!SaveManager.instance.state.played && !animOnDif && tutorialAnim)
+                        if (!SaveManager.instance.state.playedTuto && !animOnDif && tutorialAnim)
                         {
                             if (!bixinhoAd.activeSelf)
                             {
@@ -175,13 +169,13 @@ public class AnimationController : MonoBehaviour
 
                             int oldIdDif = idAnimDif;
                             bool AnimActive = false;
-                            idAnimDif = Random.Range(1, 6);
+                            idAnimDif = Random.Range(1, 5);
                             while (oldIdDif == idAnimDif)
                             {
-                                idAnimDif = Random.Range(1, 6);
+                                idAnimDif = Random.Range(1, 5);
                             }
 
-                            if (bixinho5Dif.activeSelf | bixinho3Dif.activeSelf | bixinho10Dif.activeSelf | bixinho11Dif.activeSelf | bixinhoAd.activeSelf)
+                            if (bixinho5Dif.activeSelf | bixinho3Dif.activeSelf | bixinho10Dif.activeSelf | bixinho11Dif.activeSelf)
                             {
                                 AnimActive = true;
                             }
@@ -212,13 +206,7 @@ public class AnimationController : MonoBehaviour
                                 bixinho11Dif.SetActive(true);
 
                             }
-                            if (idAnimDif == 5 && animOnDif == false && !AnimActive)
-                            {
-                                animOnDif = true;
-                                bixinhoAd.SetActive(true);
-                                StartCoroutine(AutoDestroyAnimAd(bixinhoAd));
-
-                            }
+   
                         }
                     }
 
@@ -233,6 +221,7 @@ public class AnimationController : MonoBehaviour
                     bixinho7Config.SetActive(false);
                     bixinho9Config.SetActive(false);
                     bixinho12Config.SetActive(false);
+                    bixinhoAd.SetActive(false);
 
                 }
                 else if (configuration.GetComponent<Transform>().position.x == 0 && !animOnConfig)
@@ -312,7 +301,7 @@ public class AnimationController : MonoBehaviour
             GeneralButtonController aux = GeneralButtonController.instance;
             if (SaveManager.instance != null)
             {
-                if (aux.contWrong == 2 && !animOnInGame && !execulted && !SaveManager.instance.state.played)
+                if (aux.contWrong == 0 && !animOnInGame && !execulted && !SaveManager.instance.state.playedTuto)
                 {
                     bixinho4InGame.SetActive(true);
                     animOnInGame = true;
@@ -332,10 +321,7 @@ public class AnimationController : MonoBehaviour
                         bixinho1Pause.SetActive(true);
                     }
                 }
-                else
-                {
-                    Debug.Log("No save menager");
-                }
+    
             }
             else
             {
@@ -553,7 +539,7 @@ public class AnimationController : MonoBehaviour
     {
 
         GameObject aux = anim;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         aux.GetComponent<Animator>().SetBool("clicked", true);
         yield return new WaitForSeconds(1);
         aux.SetActive(false);

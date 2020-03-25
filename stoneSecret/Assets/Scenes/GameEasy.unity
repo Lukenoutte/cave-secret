@@ -8054,9 +8054,9 @@ MonoBehaviour:
   medal: {fileID: 868519169}
   record2: {fileID: 1669747762}
   medal2: {fileID: 619051751}
-  countLightsOn: 0
   contWrong: 0
   contEnterNoWin: 0
+  contLightsOnAnimation: 0
 --- !u!1 &1488056801
 GameObject:
   m_ObjectHideFlags: 0
@@ -8602,6 +8602,7 @@ MonoBehaviour:
   bixinho13InGame: {fileID: 1177577979}
   bixinho14InGame: {fileID: 1397285452}
   bixinho1Pause: {fileID: 444497599}
+  bixinhoAd: {fileID: 0}
   animOnInGame: 0
 --- !u!1 &1608279256
 GameObject:

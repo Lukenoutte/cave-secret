@@ -2,7 +2,7 @@
 {
 
 
-    public bool played = false;
+    public bool playedTuto = false;
     public bool easyWin = false;
     public bool mediumWin = false;
     public bool hardWin = false;

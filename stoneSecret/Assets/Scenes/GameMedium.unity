@@ -3452,6 +3452,7 @@ MonoBehaviour:
   bixinho13InGame: {fileID: 492931009}
   bixinho14InGame: {fileID: 95327467}
   bixinho1Pause: {fileID: 276265372}
+  bixinhoAd: {fileID: 0}
   animOnInGame: 0
 --- !u!1 &914891474
 GameObject:
@@ -5279,9 +5280,9 @@ MonoBehaviour:
   medal: {fileID: 1762390713}
   record2: {fileID: 637944372}
   medal2: {fileID: 1377630784}
-  countLightsOn: 0
   contWrong: 0
   contEnterNoWin: 0
+  contLightsOnAnimation: 0
 --- !u!4 &1615525331
 Transform:
   m_ObjectHideFlags: 0

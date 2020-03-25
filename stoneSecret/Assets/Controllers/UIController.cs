@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour
         sceneName = m_Scene.name;
         if (sceneName == "Animation1")
         {
-            if (SaveManager.instance.state.played == true)
+            if (SaveManager.instance.state.playedTuto == true)
             {
                 SceneManager.LoadScene("MenuMain");
             }

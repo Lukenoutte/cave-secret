@@ -188,11 +188,14 @@ public class GeneralButtonController : MonoBehaviour
         // Timer
         if (!isHard)
         {
-            if (!winGame & !isPaused & !looseGame)
+            if (SaveManager.instance != null)
             {
-                timer += Time.deltaTime;
-                seconds = (int)timer;
-                timerText.text = seconds.ToString();
+                if (!winGame & !isPaused & !looseGame & SaveManager.instance.state.playedTuto)
+                {
+                    timer += Time.deltaTime;
+                    seconds = (int)timer;
+                    timerText.text = seconds.ToString();
+                }
             }
         }
         else if (!winGame && !isPaused && !looseGame)
@@ -284,7 +287,7 @@ public class GeneralButtonController : MonoBehaviour
 
 
 
-               
+
 
                 // Condição para ganhar
                 if (isEasy == true)
@@ -337,6 +340,30 @@ public class GeneralButtonController : MonoBehaviour
         } // End click
         if (SaveManager.instance != null)
         {
+            if (!SaveManager.instance.state.playedTuto)
+            {
+                if (contLightsOn > 0)
+                {
+                    if (contLightsOn < mainList.Count)
+                    {
+                        string nameNext = mainList[contLightsOn];
+                        GameObject aux = GameObject.Find(nameNext);
+                        aux.GetComponent<Animator>().SetBool("blink", true);
+                    }
+                }
+                else
+                {
+                    foreach(string a in mainList)
+                    {
+                        GameObject aux = GameObject.Find(a);
+                        aux.GetComponent<Animator>().SetBool("blink",false);
+                    }
+                }
+            }
+        }
+
+        if (SaveManager.instance != null)
+        {
             if (!SaveManager.instance.state.bixinhoActivation)
             {
                 contEnterNoWin = 0;
@@ -344,7 +371,7 @@ public class GeneralButtonController : MonoBehaviour
                 contLightsOnAnimation = 0;
             }
         }
-      
+
 
         if (isEasy | isMedium)
         {
@@ -367,39 +394,57 @@ public class GeneralButtonController : MonoBehaviour
         {
             if (winGame)
             {
-                Vector3 aux = allButtons.GetComponent<Transform>().position;
-                allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
-                winMenu.SetActive(true);
-                timerAndPause.SetActive(false);
-                Text textTimerWin;
-                textTimerWin = timerFinishWin.GetComponent<Text>();
-                textTimerWin.text = timerText.text;
-                ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
-                aux2.rateOverTime = 7;
                 SaveState auxSave = SaveManager.instance.state;
+                if (auxSave.playedTuto)
+                {
+                    Vector3 aux = allButtons.GetComponent<Transform>().position;
+                    allButtons.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+                    winMenu.SetActive(true);
+                    timerAndPause.SetActive(false);
+                    Text textTimerWin;
+                    textTimerWin = timerFinishWin.GetComponent<Text>();
+                    textTimerWin.text = timerText.text;
+                    ParticleSystem.EmissionModule aux2 = fireFlies.GetComponent<ParticleSystem>().emission;
+                    aux2.rateOverTime = 7;
+
+                }
                 //EasyRecord
                 if (isEasy)
                 {
+
+
                     if (auxSave.easyWin)
                     {
-                        if (seconds < auxSave.easyRecord)
+                        if (auxSave.playedTuto)
                         {
-                            auxSave.easyRecord = seconds;
-                            auxSave.breakRecordEasy = true;
-                            SaveManager.instance.Save();
+                            if (seconds < auxSave.easyRecord)
+                            {
+                                auxSave.easyRecord = seconds;
+                                auxSave.breakRecordEasy = true;
+                                SaveManager.instance.Save();
+                            }
+                            record2.GetComponent<Text>().text = auxSave.easyRecord.ToString();
+                            medal2.SetActive(true);
                         }
-                        record2.GetComponent<Text>().text = auxSave.easyRecord.ToString();
-                        medal2.SetActive(true);
 
                     }
                     else
                     {
-                        auxSave.easyRecord = seconds;
-                        auxSave.easyWin = true;
-                        auxSave.played = true;
-                        SaveManager.instance.Save();
+                        if (auxSave.playedTuto)
+                        {
+                            auxSave.easyRecord = seconds;
+                            auxSave.easyWin = true;
 
+                            SaveManager.instance.Save();
+                        }
                     }
+                    if (!auxSave.playedTuto)
+                    {
+                        auxSave.playedTuto = true;
+                        SaveManager.instance.Save();
+                        SceneManager.LoadScene("GameEasy");
+                    }
+
                 }
 
 
