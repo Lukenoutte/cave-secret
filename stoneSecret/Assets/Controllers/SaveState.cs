@@ -14,4 +14,5 @@
     public bool breakRecordHard = false;
     public bool thxMensage = false;
     public bool bixinhoActivation = true;
+    public float volume=  1f;
 }

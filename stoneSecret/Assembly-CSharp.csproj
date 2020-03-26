@@ -64,11 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Controllers\AnimationController.cs" />
+    <Compile Include="Assets\Controllers\AudioController.cs" />
     <Compile Include="Assets\Controllers\BgController.cs" />
     <Compile Include="Assets\Controllers\GeneralButtonController.cs" />
     <Compile Include="Assets\Controllers\Helper.cs" />
     <Compile Include="Assets\Controllers\SaveManager.cs" />
     <Compile Include="Assets\Controllers\SaveState.cs" />
+    <Compile Include="Assets\Controllers\Sound.cs" />
     <Compile Include="Assets\Controllers\UIController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Zete/stoneSecret/stoneSecret/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

@@ -293,6 +293,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1233039514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1233039516}
+  - component: {fileID: 1233039515}
+  m_Layer: 0
+  m_Name: AudioController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1233039515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233039514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5cdbaa89e4be348a01322e87104a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Theme1
+    clip: {fileID: 8300000, guid: 943457670916bdb42b4b228ad4801f7c, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Theme2
+    clip: {fileID: 8300000, guid: 846df1226bc1a594cad8384751bec5c3, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Theme3
+    clip: {fileID: 8300000, guid: 57dfa38d20da419468e8cfbd651e35e4, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Theme4
+    clip: {fileID: 8300000, guid: 05c9d3cfddd7c38498570b90c5df648b, type: 3}
+    volume: 1
+    source: {fileID: 0}
+--- !u!4 &1233039516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233039514}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.9229293, y: -0.9923977, z: 0.057962976}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1742371287
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +672,8 @@ MonoBehaviour:
   coracao: {fileID: 0}
   bixinhoActivation: {fileID: 0}
   menuPause: {fileID: 0}
+  lockedMedium: {fileID: 0}
+  lockedHard: {fileID: 0}
 --- !u!1 &2105881401
 GameObject:
   m_ObjectHideFlags: 0

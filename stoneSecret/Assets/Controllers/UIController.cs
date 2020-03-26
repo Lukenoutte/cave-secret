@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-
-    public GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
+    [SerializeField]
+    private GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
         medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard, thxBg1, thxBg2, thxBixinho, thxNext, coracao,
         bixinhoActivation, menuPause, lockedMedium, lockedHard;
+
     private Scene m_Scene;
     private string sceneName;
     private bool isEasy = false;

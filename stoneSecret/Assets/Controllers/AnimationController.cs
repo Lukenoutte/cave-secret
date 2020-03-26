@@ -7,12 +7,14 @@ public class AnimationController : MonoBehaviour
 {
     private GameObject bixinho, bixinho1Menu, bixinho2Menu, mainMenu;
 
-    public GameObject bixinho3Dif, bixinho4Menu, difficulty, bixinho5Dif, configuration, bixinho6Config, bixinho7Config,
+    [SerializeField]
+    private GameObject bixinho3Dif, bixinho4Menu, difficulty, bixinho5Dif, configuration, bixinho6Config, bixinho7Config,
         bixinho8Menu, bixinho9Config, bixinho10Dif, bixinho11Dif, bixinhoBregaFunk, bixinho12Config;
-
-    public GameObject bixinho4InGame, bixinho2InGame, bixinho5InGame, bixinho6InGame, bixinho8InGame,
+    [SerializeField]
+    private GameObject bixinho4InGame, bixinho2InGame, bixinho5InGame, bixinho6InGame, bixinho8InGame,
         bixinho1InGame, bixinho7InGame, bixinho3InGame, bixinho9InGame, bixinho10InGame, bixinho11InGame, bixinho12InGame,
         bixinho13InGame, bixinho14InGame, bixinho1Pause, bixinhoAd;
+
     private string animName;
     private bool animOnMenu;
     private bool animOnDif;
@@ -24,7 +26,7 @@ public class AnimationController : MonoBehaviour
     private bool tutorialAnim;
     private Scene m_Scene;
     private string sceneName;
-    public bool animOnInGame;
+    private bool animOnInGame;
     private bool execulted;
     private int wrongFixoTuto;
     private int rightFixo;
