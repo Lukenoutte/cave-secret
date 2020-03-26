@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
         medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard, thxBg1, thxBg2, thxBixinho, thxNext, coracao,
-        bixinhoActivation, volumeMenuMain, lockedMedium, lockedHard, volumePause, menuPause;
+        bixinhoActivation, volumeMenuMain, lockedMedium, lockedHard, volumePause, menuPause, musicInfo, creditsMusic;
 
     private Scene m_Scene;
     private string sceneName;
@@ -18,11 +18,34 @@ public class UIController : MonoBehaviour
     private bool isHard = false;
     private bool thxScreen = false;
     private bool isNotLocked = true;
+    private string theme0Credits;
+    private string theme1Credits;
+    private string theme2Credits;
+    private string theme3Credits;
 
+    private string theme0Link;
+    private string theme1Link;
+    private string theme2Link;
+    private string theme3Link;
+    private string mainLink;
 
+    private string authorLink;
+    private string ccLink;
     private bool clickble = false;
     void Start()
     {
+        theme0Credits = "Song: \n Great Expectations \n by Kai Engel \n is licensed under CC BY.";
+        theme1Credits = "Song: \n September \n by Kai Engel \n is licensed under CC BY.";
+        theme2Credits = "Song: \n Cobweb Morning \n by Kai Engel \n is licensed under CC BY.";
+        theme3Credits = "Song: \n Laburnum \n by Kai Engel \n is licensed under CC BY.";
+
+        theme0Link = "https://freemusicarchive.org/music/Kai_Engel/Satin_1564/Kai_Engel_-_Satin_-_05_Great_Expectations_1199";
+        theme1Link = "https://freemusicarchive.org/music/Kai_Engel/Chapter_Four__Fall/Kai_Engel_-_Chapter_Four_-_Fall_-_02_September";
+        theme2Link = "https://freemusicarchive.org/music/Kai_Engel/Chapter_Four__Fall/Kai_Engel_-_Chapter_Four_-_Fall_-_04_Cobweb_Morning";
+        theme3Link = "https://freemusicarchive.org/music/Kai_Engel/Chapter_Four__Fall/Kai_Engel_-_Chapter_Four_-_Fall_-_01_Laburnum";
+
+        authorLink = "https://freemusicarchive.org/music/Kai_Engel";
+        ccLink = "https://creativecommons.org/licenses/by/4.0/";
 
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
@@ -139,6 +162,7 @@ public class UIController : MonoBehaviour
                 }
 
 
+
                 if (auxSave.volume != volumeMenuMain.GetComponent<Slider>().value)
                 {
                     volumeMenuMain.GetComponent<Slider>().value = auxSave.volume;
@@ -165,6 +189,20 @@ public class UIController : MonoBehaviour
                     {
                         SceneManager.LoadScene("MenuMain");
                     }
+
+                    if (hit.collider.tag == "AuthorLink")
+                    {
+                        Application.OpenURL(authorLink);
+                    }
+                    if (hit.collider.tag == "CcLink")
+                    {
+                        Application.OpenURL(ccLink);
+                    }
+                    if (hit.collider.tag == "SongLink")
+                    {
+
+                        Application.OpenURL(mainLink);
+                    }
                     if (hit.collider.tag == "ThxNext")
                     {
                         thxScreen = false;
@@ -185,7 +223,27 @@ public class UIController : MonoBehaviour
                         menuMain.SetActive(true);
                         Vector3 aux = difficulty.GetComponent<Transform>().position;
                         difficulty.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
-                        configuration.GetComponent<Transform>().position = new Vector3(-999, aux.y, aux.z);
+                        Vector3 aux2 = configuration.GetComponent<Transform>().position;
+                        configuration.GetComponent<Transform>().position = new Vector3(-999, aux2.y, aux2.z);
+
+                    }
+                    if (hit.collider.tag == "BackInfoMusic")
+                    {
+
+                        Vector3 aux = musicInfo.GetComponent<Transform>().position;
+                        musicInfo.GetComponent<Transform>().position = new Vector3(-9999, aux.y, aux.z);
+                        Vector3 aux2 = musicInfo.GetComponent<Transform>().position;
+                        configuration.GetComponent<Transform>().position = new Vector3(0, aux2.y, aux2.z);
+
+                    }
+
+                    if (hit.collider.tag == "MusicInfo")
+                    {
+
+                        Vector3 aux = musicInfo.GetComponent<Transform>().position;
+                        musicInfo.GetComponent<Transform>().position = new Vector3(0, aux.y, aux.z);
+                        Vector3 aux2 = configuration.GetComponent<Transform>().position;
+                        configuration.GetComponent<Transform>().position = new Vector3(-999, aux2.y, aux2.z);
 
                     }
                     if (SaveManager.instance != null)
@@ -280,13 +338,41 @@ public class UIController : MonoBehaviour
                     }
 
                 }
-            }
+                if (SaveManager.instance.state.thxMensage && musicInfo.GetComponent<Transform>().position.x == 0)
+                {
+                    coracao.SetActive(false);
+                }
+                else if (SaveManager.instance.state.thxMensage && musicInfo.GetComponent<Transform>().position.x != 0)
+                {
+                    coracao.SetActive(true);
 
+                }
+            }
+            if (AudioController.instance.soundIndex == 0)
+            {
+                creditsMusic.GetComponent<Text>().text = theme0Credits;
+                mainLink = theme0Link;
+            }
+            if (AudioController.instance.soundIndex == 1)
+            {
+                creditsMusic.GetComponent<Text>().text = theme1Credits;
+                mainLink = theme1Link;
+            }
+            if (AudioController.instance.soundIndex == 2)
+            {
+                creditsMusic.GetComponent<Text>().text = theme2Credits;
+                mainLink = theme2Link;
+            }
+            if (AudioController.instance.soundIndex == 3)
+            {
+                creditsMusic.GetComponent<Text>().text = theme3Credits;
+                mainLink = theme3Link;
+            }
         }
 
-        if(isEasy | isMedium | isHard)
+        if (isEasy | isMedium | isHard)
         {
-            if(menuPause.GetComponent<Transform>().position.x == 0)
+            if (menuPause.GetComponent<Transform>().position.x == 0)
             {
                 if (SaveManager.instance.state.volume != volumePause.GetComponent<Slider>().value)
                 {

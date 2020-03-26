@@ -32,6 +32,11 @@ TagManager:
   - Back
   - ThxNext
   - BixinhoActivation
+  - MusicInfo
+  - BackInfoMusic
+  - AuthorLink
+  - SongLink
+  - CcLink
   layers:
   - Default
   - TransparentFX

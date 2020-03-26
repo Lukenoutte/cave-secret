@@ -55,14 +55,14 @@ public class AudioController : MonoBehaviour
                 else if(!sounds[soundIndex].source.isPlaying && playedFirstSong)
                 {
                     Play();
-                    Debug.Log("Play new Theme Song");
+                    
                 }
 
         }
         else if (!sounds[soundIndex].source.isPlaying)
         {
             Play();
-            Debug.Log("Play new Theme Song");
+           
         }
         }
 
