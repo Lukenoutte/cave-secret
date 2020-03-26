@@ -65,10 +65,13 @@ public class AudioController : MonoBehaviour
             Debug.Log("Play new Theme Song");
         }
         }
-        else
-        {
-            Play();
-        }
 
+
+        if (SaveManager.instance != null) {
+            if (SaveManager.instance.state.volume != sounds[soundIndex].source.volume)
+            {
+                sounds[soundIndex].source.volume = SaveManager.instance.state.volume;
+            }
+        }
     }
 }

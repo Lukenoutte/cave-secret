@@ -733,9 +733,11 @@ MonoBehaviour:
   thxNext: {fileID: 0}
   coracao: {fileID: 0}
   bixinhoActivation: {fileID: 1629230001}
-  menuPause: {fileID: 1026404866}
+  volumeMenuMain: {fileID: 0}
   lockedMedium: {fileID: 0}
   lockedHard: {fileID: 0}
+  volumePause: {fileID: 649087398}
+  menuPause: {fileID: 1026404866}
 --- !u!223 &266499289
 Canvas:
   m_ObjectHideFlags: 0
@@ -2447,7 +2449,7 @@ GameObject:
   - component: {fileID: 649087399}
   - component: {fileID: 649087400}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2515,10 +2517,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1192406947}
   m_HandleRect: {fileID: 956920026}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 100
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3455,7 +3457,6 @@ MonoBehaviour:
   bixinho14InGame: {fileID: 95327467}
   bixinho1Pause: {fileID: 276265372}
   bixinhoAd: {fileID: 0}
-  animOnInGame: 0
 --- !u!1 &914891474
 GameObject:
   m_ObjectHideFlags: 0

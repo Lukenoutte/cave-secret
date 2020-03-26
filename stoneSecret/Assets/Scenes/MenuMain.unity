@@ -2087,7 +2087,6 @@ MonoBehaviour:
   bixinho14InGame: {fileID: 0}
   bixinho1Pause: {fileID: 0}
   bixinhoAd: {fileID: 363026842}
-  animOnInGame: 0
 --- !u!114 &778624312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,7 +2117,7 @@ MonoBehaviour:
   thxNext: {fileID: 711321898}
   coracao: {fileID: 1678930084}
   bixinhoActivation: {fileID: 2136965435}
-  menuPause: {fileID: 0}
+  volumeMenuMain: {fileID: 1061391338}
   lockedMedium: {fileID: 972973198}
   lockedHard: {fileID: 1218555534}
 --- !u!1 &869601987
@@ -2722,10 +2721,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 53771326}
   m_HandleRect: {fileID: 2147276855}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 100
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

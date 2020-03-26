@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject menuMain, configuration, difficulty, buttonEasy, buttonMedium, buttonHard,
         medalEasy, medalMedium, medalHard, recordEasy, recordMedium, recordHard, thxBg1, thxBg2, thxBixinho, thxNext, coracao,
-        bixinhoActivation, menuPause, lockedMedium, lockedHard;
+        bixinhoActivation, volumeMenuMain, lockedMedium, lockedHard, volumePause, menuPause;
 
     private Scene m_Scene;
     private string sceneName;
@@ -37,7 +37,7 @@ public class UIController : MonoBehaviour
 
         StartCoroutine(ClickbleOn());
 
-        
+
 
 
         if (sceneName == "GameEasy")
@@ -57,6 +57,21 @@ public class UIController : MonoBehaviour
             isHard = true;
 
         }
+
+
+        if (isEasy | isMedium | isHard)
+        {
+            if (SaveManager.instance != null)
+            {
+                SaveState auxSave = SaveManager.instance.state;
+                if (auxSave.volume != volumePause.GetComponent<Slider>().value)
+                {
+                    volumePause.GetComponent<Slider>().value = auxSave.volume;
+                }
+            }
+
+        }
+
         if (sceneName == "MenuMain")
         {
             if (SaveManager.instance != null)
@@ -122,6 +137,14 @@ public class UIController : MonoBehaviour
                     coracao.SetActive(true);
 
                 }
+
+
+                if (auxSave.volume != volumeMenuMain.GetComponent<Slider>().value)
+                {
+                    volumeMenuMain.GetComponent<Slider>().value = auxSave.volume;
+                }
+
+
             }
         }
 
@@ -238,6 +261,7 @@ public class UIController : MonoBehaviour
         {
             if (SaveManager.instance != null)
             {
+
                 if (SaveManager.instance.state.bixinhoActivation)
                 {
                     bixinhoActivation.GetComponent<Animator>().SetBool("clicked", false);
@@ -246,8 +270,30 @@ public class UIController : MonoBehaviour
                 {
                     bixinhoActivation.GetComponent<Animator>().SetBool("clicked", true);
                 }
+
+                if (configuration.GetComponent<Transform>().position.x == 0)
+                {
+                    if (SaveManager.instance.state.volume != volumeMenuMain.GetComponent<Slider>().value)
+                    {
+                        SaveManager.instance.state.volume = volumeMenuMain.GetComponent<Slider>().value;
+                        SaveManager.instance.Save();
+                    }
+
+                }
             }
 
+        }
+
+        if(isEasy | isMedium | isHard)
+        {
+            if(menuPause.GetComponent<Transform>().position.x == 0)
+            {
+                if (SaveManager.instance.state.volume != volumePause.GetComponent<Slider>().value)
+                {
+                    SaveManager.instance.state.volume = volumePause.GetComponent<Slider>().value;
+                    SaveManager.instance.Save();
+                }
+            }
         }
 
         if (isEasy | isMedium)
