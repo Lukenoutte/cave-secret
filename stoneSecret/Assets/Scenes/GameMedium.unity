@@ -734,6 +734,8 @@ MonoBehaviour:
   coracao: {fileID: 0}
   bixinhoActivation: {fileID: 1629230001}
   menuPause: {fileID: 1026404866}
+  lockedMedium: {fileID: 0}
+  lockedHard: {fileID: 0}
 --- !u!223 &266499289
 Canvas:
   m_ObjectHideFlags: 0
@@ -5280,6 +5282,7 @@ MonoBehaviour:
   medal: {fileID: 1762390713}
   record2: {fileID: 637944372}
   medal2: {fileID: 1377630784}
+  timerObj: {fileID: 0}
   contWrong: 0
   contEnterNoWin: 0
   contLightsOnAnimation: 0
@@ -5970,6 +5973,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1817044127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1817044129}
+  - component: {fileID: 1817044128}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1817044128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817044127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f77883025c0ea2488c537365b8a0157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1817044129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817044127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1945566502
 GameObject:
   m_ObjectHideFlags: 0

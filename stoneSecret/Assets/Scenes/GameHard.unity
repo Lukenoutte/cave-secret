@@ -665,9 +665,10 @@ MonoBehaviour:
   medal: {fileID: 1940471649}
   record2: {fileID: 1020330815}
   medal2: {fileID: 851124823}
-  countLightsOn: 0
+  timerObj: {fileID: 0}
   contWrong: 0
   contEnterNoWin: 0
+  contLightsOnAnimation: 0
 --- !u!4 &327579994
 Transform:
   m_ObjectHideFlags: 0
@@ -3679,6 +3680,7 @@ MonoBehaviour:
   bixinho13InGame: {fileID: 0}
   bixinho14InGame: {fileID: 0}
   bixinho1Pause: {fileID: 55874114}
+  bixinhoAd: {fileID: 0}
   animOnInGame: 0
 --- !u!1 &1683638601
 GameObject:
@@ -3770,6 +3772,8 @@ MonoBehaviour:
   coracao: {fileID: 0}
   bixinhoActivation: {fileID: 0}
   menuPause: {fileID: 1152012983}
+  lockedMedium: {fileID: 0}
+  lockedHard: {fileID: 0}
 --- !u!223 &1683638605
 Canvas:
   m_ObjectHideFlags: 0
@@ -3955,6 +3959,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720984240}
   m_CullTransparentMesh: 0
+--- !u!1 &1723745630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723745632}
+  - component: {fileID: 1723745631}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1723745631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723745630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f77883025c0ea2488c537365b8a0157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1723745632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723745630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746014053
 GameObject:
   m_ObjectHideFlags: 0

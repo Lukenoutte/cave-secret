@@ -9,10 +9,11 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
+        if(instance == null) { 
         DontDestroyOnLoad(gameObject);
         instance = this;
         Load();
-        
+        }
     }
 
     public void Save()
