@@ -2227,6 +2227,7 @@ MonoBehaviour:
   bixinho14InGame: {fileID: 0}
   bixinho1Pause: {fileID: 0}
   bixinhoAd: {fileID: 363026842}
+  simbolsRecord: {fileID: 0}
   animOnInGame: 0
 --- !u!114 &778624312
 MonoBehaviour:
@@ -9271,8 +9272,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577821917}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 370, y: -304, z: -12800.001}
-  m_LocalScale: {x: 159.37422, y: 159.37422, z: 159.37422}
+  m_LocalPosition: {x: 282, y: -299, z: -12800.001}
+  m_LocalScale: {x: 51.498592, y: 51.498592, z: 51.498592}
   m_Children: []
   m_Father: {fileID: 794786481}
   m_RootOrder: 5
@@ -9290,9 +9291,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7406773, y: 0}
+  m_Offset: {x: -0.39544174, y: 0.12823033}
   serializedVersion: 2
-  m_Radius: 0.3984756
+  m_Radius: 1.3651353
 --- !u!212 &1577821920
 SpriteRenderer:
   m_ObjectHideFlags: 0

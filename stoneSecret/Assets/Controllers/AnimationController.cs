@@ -13,7 +13,7 @@ public class AnimationController : MonoBehaviour
     [SerializeField]
     private GameObject bixinho4InGame, bixinho2InGame, bixinho5InGame, bixinho6InGame, bixinho8InGame,
         bixinho1InGame, bixinho7InGame, bixinho3InGame, bixinho9InGame, bixinho10InGame, bixinho11InGame, bixinho12InGame,
-        bixinho13InGame, bixinho14InGame, bixinho1Pause, bixinhoAd;
+        bixinho13InGame, bixinho14InGame, bixinho1Pause, bixinhoAd, simbolsRecord;
 
     private string animName;
     private bool animOnMenu;
@@ -35,10 +35,13 @@ public class AnimationController : MonoBehaviour
     private int idAnimInGameTuto;
     private int idAnimInGameRight;
     private int idAnimInGameEnter;
+    private float timeAnim;
+    private GameObject animOnMain;
 
     // Start is called before the first frame update
     void Start()
     {
+        timeAnim = 5;
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
         execulted = false;
@@ -50,6 +53,37 @@ public class AnimationController : MonoBehaviour
         bixinho1Menu = GameObject.Find("/Canvas/MainMenu/Play/Bixinho1Menu");
         bixinho2Menu = GameObject.Find("/Canvas/MainMenu/Bixinho2Menu");
         mainMenu = GameObject.Find("/Canvas/MainMenu");
+
+        if(sceneName == "GameEasy")
+        {
+            if(SaveManager.instance != null)
+            {
+                if (SaveManager.instance.state.breakRecordEasy)
+                {
+                    simbolsRecord.SetActive(true);
+                }
+            }
+        }
+        if (sceneName == "GameMedium" )
+        {
+            if (SaveManager.instance != null)
+            {
+                if (SaveManager.instance.state.breakRecordMedium)
+                {
+                    simbolsRecord.SetActive(true);
+                }
+            }
+        }
+        if (sceneName == "GameHard")
+        {
+            if (SaveManager.instance != null)
+            {
+                if (SaveManager.instance.state.breakRecordHard)
+                {
+                    simbolsRecord.SetActive(true);
+                }
+            }
+        }
 
         if (SaveManager.instance != null)
         {
@@ -129,7 +163,7 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnMenu = true;
                         bixinho1Menu.SetActive(true);
-
+                        animOnMain = bixinho1Menu;
 
 
                     }
@@ -137,18 +171,21 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnMenu = true;
                         bixinho2Menu.SetActive(true);
+                        animOnMain = bixinho2Menu;
 
                     }
                     if (idAnimMenu == 3 && animOnMenu == false && !AnimActive)
                     {
                         animOnMenu = true;
                         bixinho4Menu.SetActive(true);
+                        animOnMain = bixinho4Menu;
 
                     }
                     if (idAnimMenu == 4 && animOnMenu == false && !AnimActive)
                     {
                         animOnMenu = true;
                         bixinho8Menu.SetActive(true);
+                        animOnMain = bixinho8Menu;
 
                     }
 
@@ -156,6 +193,7 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnMenu = true;
                         bixinhoBregaFunk.SetActive(true);
+                        animOnMain = bixinhoBregaFunk;
 
                     }
 
@@ -203,27 +241,28 @@ public class AnimationController : MonoBehaviour
                             {
                                 animOnDif = true;
                                 bixinho3Dif.SetActive(true);
+                                animOnMain = bixinho3Dif;
 
                             }
                             if (idAnimDif == 2 && animOnDif == false && !AnimActive)
                             {
                                 animOnDif = true;
                                 bixinho5Dif.SetActive(true);
-
+                                animOnMain = bixinho5Dif;
                             }
 
                             if (idAnimDif == 3 && animOnDif == false && !AnimActive)
                             {
                                 animOnDif = true;
                                 bixinho10Dif.SetActive(true);
-
+                                animOnMain = bixinho10Dif;
                             }
 
                             if (idAnimDif == 4 && animOnDif == false && !AnimActive)
                             {
                                 animOnDif = true;
                                 bixinho11Dif.SetActive(true);
-
+                                animOnMain = bixinho11Dif;
                             }
 
                         }
@@ -263,7 +302,7 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnConfig = true;
                         bixinho6Config.SetActive(true);
-
+                        animOnMain = bixinho6Config;
 
 
                     }
@@ -271,16 +310,19 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnConfig = true;
                         bixinho7Config.SetActive(true);
+                        animOnMain = bixinho7Config;
                     }
                     if (idAnimConfig == 3 && animOnConfig == false && !AnimActive)
                     {
                         animOnConfig = true;
                         bixinho9Config.SetActive(true);
+                        animOnMain = bixinho9Config;
                     }
                     if (idAnimConfig == 4 && animOnConfig == false && !AnimActive)
                     {
                         animOnConfig = true;
                         bixinho12Config.SetActive(true);
+                        animOnMain = bixinho12Config;
 
                     }
 
@@ -288,7 +330,8 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnConfig = true;
                         bixinhoAd.SetActive(true);
-                        StartCoroutine(AutoDestroyAnimAd(bixinhoAd));
+                        StartCoroutine(AutoDestroyAnim(bixinhoAd, timeAnim));
+                        animOnMain = bixinhoAd;
 
                     }
                 } // End 
@@ -316,7 +359,7 @@ public class AnimationController : MonoBehaviour
 
                 }
             }
-  
+
         }
         // In Game
         if (sceneName == "GameEasy" | sceneName == "GameMedium")
@@ -329,7 +372,8 @@ public class AnimationController : MonoBehaviour
                     bixinho4InGame.SetActive(true);
                     animOnInGame = true;
                     execulted = true;
-                    StartCoroutine(AutoDestroyAnim(bixinho4InGame));
+                    animOnMain = bixinho4InGame;
+                    StartCoroutine(AutoDestroyAnim(bixinho4InGame, timeAnim));
                 }
             }
             if (aux != null)
@@ -381,50 +425,58 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnInGame = true;
                         bixinho2InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho2InGame));
+                        animOnMain = bixinho2InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho2InGame, timeAnim));
                     }
 
                     if (idAnimInGameTuto == 2 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho5InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho5InGame));
+                        animOnMain = bixinho5InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho5InGame, timeAnim));
                     }
                     if (idAnimInGameTuto == 3 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho6InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho6InGame));
+                        animOnMain = bixinho6InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho6InGame, timeAnim));
                     }
                     if (idAnimInGameTuto == 4 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho8InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho8InGame));
+                        animOnMain = bixinho8InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho8InGame, timeAnim));
                     }
                     if (idAnimInGameTuto == 5 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho9InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho9InGame));
+                        animOnMain = bixinho9InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho9InGame, timeAnim));
                     }
                     if (idAnimInGameTuto == 6 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho10InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho10InGame));
+                        animOnMain = bixinho10InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho10InGame, timeAnim));
                     }
                     if (idAnimInGameTuto == 7 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho11InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho11InGame));
+                        animOnMain = bixinho11InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho11InGame, timeAnim));
                     }
                     if (idAnimInGameTuto == 8 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho13InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho13InGame));
+                        animOnMain = bixinho13InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho13InGame, timeAnim));
                     }
 
                     wrongFixoTuto += 6;
@@ -444,7 +496,8 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnInGame = true;
                         bixinho1InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho1InGame));
+                        animOnMain = bixinho1InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho1InGame, timeAnim));
                         rightFixo += 3;
                     }
 
@@ -452,37 +505,31 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnInGame = true;
                         bixinho7InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho7InGame));
+                        animOnMain = bixinho7InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho7InGame, timeAnim));
                         rightFixo += 3;
                     }
                     if (idAnimInGameRight == 3 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho12InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho12InGame));
+                        animOnMain = bixinho12InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho12InGame, timeAnim));
                         rightFixo += 3;
                     }
                     if (idAnimInGameRight == 4 && !animOnInGame)
                     {
                         animOnInGame = true;
                         bixinho14InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho14InGame));
+                        animOnMain = bixinho14InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho14InGame, timeAnim));
                         rightFixo += 3;
                     }
                 }
-                else if(aux.contLightsOnAnimation == rightFixo && animOnInGame)
+                else if (aux.contLightsOnAnimation == rightFixo && animOnInGame)
                 {
-                    bixinho2InGame.SetActive(false);
-                    bixinho5InGame.SetActive(false);
-                    bixinho6InGame.SetActive(false);
-                    bixinho8InGame.SetActive(false);
-                    bixinho9InGame.SetActive(false);
-                    bixinho10InGame.SetActive(false);
-                    bixinho11InGame.SetActive(false);
-                    bixinho13InGame.SetActive(false);
-                    bixinho3InGame.SetActive(false);
-                    bixinho4InGame.SetActive(false);
-                    animOnInGame = false;
+                    StartCoroutine(AutoDestroyAnim(animOnMain, 0.1f));
+                    
                 }
 
                 if (aux.contEnterNoWin == contEnterFixo && !animOnInGame)
@@ -498,7 +545,8 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnInGame = true;
                         bixinho3InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho3InGame));
+                        animOnMain = bixinho3InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho3InGame, timeAnim));
                         contEnterFixo += 3;
                     }
 
@@ -506,11 +554,16 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnInGame = true;
                         bixinho4InGame.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinho4InGame));
+                        animOnMain = bixinho4InGame;
+                        StartCoroutine(AutoDestroyAnim(bixinho4InGame, timeAnim));
                         contEnterFixo += 3;
                     }
 
 
+                }
+                else if (aux.contEnterNoWin == contEnterFixo && animOnInGame)
+                {
+                    StartCoroutine(AutoDestroyAnim(animOnMain, 0.1f));
                 }
             }
         }
@@ -547,11 +600,11 @@ public class AnimationController : MonoBehaviour
 
     }
 
-    private IEnumerator AutoDestroyAnim(GameObject anim)
+    private IEnumerator AutoDestroyAnim(GameObject anim, float time)
     {
 
         GameObject aux = anim;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(time);
         aux.GetComponent<Animator>().SetBool("clicked", true);
         yield return new WaitForSeconds(1);
         aux.SetActive(false);
@@ -577,35 +630,7 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-    private IEnumerator AutoDestroyAnimAd(GameObject anim)
-    {
 
-        GameObject aux = anim;
-        yield return new WaitForSeconds(5);
-        aux.GetComponent<Animator>().SetBool("clicked", true);
-        yield return new WaitForSeconds(1);
-        aux.SetActive(false);
-        if (sceneName == "GameEasy" | sceneName == "GameMedium")
-        {
-            animOnInGame = false;
-        }
-        if (sceneName == "MenuMain")
-        {
-            if (animOnMenu)
-            {
-                animOnMenu = false;
-            }
-            if (difficulty.GetComponent<Transform>().position.x == 0)
-            {
-                animOnDif = false;
-            }
-            if (configuration.GetComponent<Transform>().position.x == 0)
-            {
-                animOnConfig = false;
-            }
-
-        }
-    }
 
     private void desableAnimationInGame()
     {

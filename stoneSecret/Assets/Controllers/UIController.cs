@@ -376,10 +376,13 @@ public class UIController : MonoBehaviour
         {
             if (menuPause.GetComponent<Transform>().position.x == 0)
             {
-                if (SaveManager.instance.state.volume != volumePause.GetComponent<Slider>().value)
+                if (SaveManager.instance != null)
                 {
-                    SaveManager.instance.state.volume = volumePause.GetComponent<Slider>().value;
-                    SaveManager.instance.Save();
+                    if (SaveManager.instance.state.volume != volumePause.GetComponent<Slider>().value)
+                    {
+                        SaveManager.instance.state.volume = volumePause.GetComponent<Slider>().value;
+                        SaveManager.instance.Save();
+                    }
                 }
             }
         }
