@@ -7369,9 +7369,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1129712565}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 0.5
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8647,6 +8647,7 @@ MonoBehaviour:
   bixinho14InGame: {fileID: 1397285452}
   bixinho1Pause: {fileID: 444497599}
   bixinhoAd: {fileID: 0}
+  animOnInGame: 0
 --- !u!1 &1608279256
 GameObject:
   m_ObjectHideFlags: 0
@@ -9764,6 +9765,8 @@ MonoBehaviour:
   lockedHard: {fileID: 0}
   volumePause: {fileID: 1225009626}
   menuPause: {fileID: 599487046}
+  musicInfo: {fileID: 0}
+  creditsMusic: {fileID: 0}
 --- !u!1 &1820410555
 GameObject:
   m_ObjectHideFlags: 0

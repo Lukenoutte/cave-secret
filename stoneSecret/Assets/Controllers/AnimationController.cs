@@ -26,6 +26,7 @@ public class AnimationController : MonoBehaviour
     private bool tutorialAnim;
     private Scene m_Scene;
     private string sceneName;
+    [SerializeField]
     private bool animOnInGame;
     private bool execulted;
     private int wrongFixoTuto;
@@ -469,6 +470,21 @@ public class AnimationController : MonoBehaviour
                         rightFixo += 3;
                     }
                 }
+                else if(aux.contLightsOnAnimation == rightFixo && animOnInGame)
+                {
+                    bixinho2InGame.SetActive(false);
+                    bixinho5InGame.SetActive(false);
+                    bixinho6InGame.SetActive(false);
+                    bixinho8InGame.SetActive(false);
+                    bixinho9InGame.SetActive(false);
+                    bixinho10InGame.SetActive(false);
+                    bixinho11InGame.SetActive(false);
+                    bixinho13InGame.SetActive(false);
+                    bixinho3InGame.SetActive(false);
+                    bixinho4InGame.SetActive(false);
+                    animOnInGame = false;
+                }
+
                 if (aux.contEnterNoWin == contEnterFixo && !animOnInGame)
                 {
 

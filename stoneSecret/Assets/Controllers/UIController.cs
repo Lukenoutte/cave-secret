@@ -348,6 +348,7 @@ public class UIController : MonoBehaviour
 
                 }
             }
+            if(AudioController.instance != null) { 
             if (AudioController.instance.soundIndex == 0)
             {
                 creditsMusic.GetComponent<Text>().text = theme0Credits;
@@ -367,6 +368,7 @@ public class UIController : MonoBehaviour
             {
                 creditsMusic.GetComponent<Text>().text = theme3Credits;
                 mainLink = theme3Link;
+            }
             }
         }
 

@@ -2227,6 +2227,7 @@ MonoBehaviour:
   bixinho14InGame: {fileID: 0}
   bixinho1Pause: {fileID: 0}
   bixinhoAd: {fileID: 363026842}
+  animOnInGame: 0
 --- !u!114 &778624312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2907,9 +2908,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2147276855}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 0.5
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3538,7 +3539,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 73636d0d803269f4bb3294aca620bf43, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 895c7c6b363095d40ae7099eb864a4ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
