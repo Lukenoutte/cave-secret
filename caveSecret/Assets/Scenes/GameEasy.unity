@@ -8729,6 +8729,8 @@ MonoBehaviour:
   bixinhoAd: {fileID: 0}
   simbolsRecord: {fileID: 285663783}
   line: {fileID: 0}
+  bixinhoAd2: {fileID: 0}
+  lineHard: {fileID: 0}
   animOnInGame: 0
 --- !u!1 &1608279256
 GameObject:

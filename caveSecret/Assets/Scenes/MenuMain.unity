@@ -1930,6 +1930,7 @@ GameObject:
   - component: {fileID: 711321899}
   - component: {fileID: 711321900}
   - component: {fileID: 711321901}
+  - component: {fileID: 711321902}
   m_Layer: 0
   m_Name: ThxNext
   m_TagString: ThxNext
@@ -2030,6 +2031,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.14, y: 0.89}
   m_EdgeRadius: 0
+--- !u!95 &711321902
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711321898}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ade1bf16e8799a4e924158363fd28fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &756607284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,7 +2197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765040357}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.11, y: -0.76, z: -22.015879}
+  m_LocalPosition: {x: 2.14, y: -0.76, z: -22.015879}
   m_LocalScale: {x: 2.494492, y: 2.494492, z: 2.494492}
   m_Children: []
   m_Father: {fileID: 1491796309}
@@ -2375,6 +2395,7 @@ MonoBehaviour:
   simbolsRecord: {fileID: 0}
   line: {fileID: 765040357}
   bixinhoAd2: {fileID: 1044003907}
+  lineHard: {fileID: 0}
   animOnInGame: 0
 --- !u!114 &778624312
 MonoBehaviour:

@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/Zete/Videos/Novo6/caveSecret.apk
+C:/Users/Zete/Videos/Novo7/caveSecret.apk
 SceneListBegin?
 Assets/Scenes/Logo.unity
 Assets/Scenes/Animation1.unity
@@ -105,7 +105,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-6e9ac9158feafbefd3200f011ff3d69b Assembly-CSharp.dll:.AnimationController
+b1c586ad44611ff83a925a0922383006 Assembly-CSharp.dll:.AnimationController
 4e9333594897a1fb8b136ad2eae996c7 Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
