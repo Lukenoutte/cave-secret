@@ -15,6 +15,7 @@ public class AnimationController : MonoBehaviour
         bixinho1InGame, bixinho7InGame, bixinho3InGame, bixinho9InGame, bixinho10InGame, bixinho11InGame, bixinho12InGame,
         bixinho13InGame, bixinho14InGame, bixinho1Pause, bixinhoAd, simbolsRecord, line, bixinhoAd2;
 
+    private int Adtime;
     private string animName;
     private bool animOnMenu;
     private bool animOnDif;
@@ -41,6 +42,7 @@ public class AnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Adtime = 4;
         timeAnim = 5;
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
@@ -289,7 +291,7 @@ public class AnimationController : MonoBehaviour
                             {
                                 animOnDif = true;
                                 bixinhoAd2.SetActive(true);
-                                StartCoroutine(AutoDestroyAnim(bixinhoAd2, 3));
+                                StartCoroutine(AutoDestroyAnim(bixinhoAd2, Adtime));
                                 animOnMain = bixinhoAd2;
                             }
 
@@ -358,7 +360,7 @@ public class AnimationController : MonoBehaviour
                     {
                         animOnConfig = true;
                         bixinhoAd.SetActive(true);
-                        StartCoroutine(AutoDestroyAnim(bixinhoAd, 3));
+                        StartCoroutine(AutoDestroyAnim(bixinhoAd, Adtime));
                         animOnMain = bixinhoAd;
 
                     }

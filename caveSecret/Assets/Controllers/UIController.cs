@@ -276,7 +276,7 @@ public class UIController : MonoBehaviour
                         {
                             AdController.instance.adCont++;
 
-                            if (AdController.instance.adCont == 3)
+                            if (AdController.instance.adCont == 2)
                             {
                                 AdController.instance.playAdBool = true;
                             }
