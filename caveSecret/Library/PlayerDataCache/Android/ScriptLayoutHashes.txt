@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/Zete/Videos/Novo5/caveSecret.apk
+C:/Users/Zete/Videos/Novo6/caveSecret.apk
 SceneListBegin?
 Assets/Scenes/Logo.unity
 Assets/Scenes/Animation1.unity

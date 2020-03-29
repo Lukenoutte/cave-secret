@@ -13,7 +13,7 @@ public class AnimationController : MonoBehaviour
     [SerializeField]
     private GameObject bixinho4InGame, bixinho2InGame, bixinho5InGame, bixinho6InGame, bixinho8InGame,
         bixinho1InGame, bixinho7InGame, bixinho3InGame, bixinho9InGame, bixinho10InGame, bixinho11InGame, bixinho12InGame,
-        bixinho13InGame, bixinho14InGame, bixinho1Pause, bixinhoAd, simbolsRecord, line, bixinhoAd2;
+        bixinho13InGame, bixinho14InGame, bixinho1Pause, bixinhoAd, simbolsRecord, line, bixinhoAd2, lineHard;
 
     private int Adtime;
     private string animName;
@@ -83,6 +83,10 @@ public class AnimationController : MonoBehaviour
                 if (SaveManager.instance.state.breakRecordHard)
                 {
                     simbolsRecord.SetActive(true);
+                }
+                if (!SaveManager.instance.state.hardWin) { 
+                    lineHard.SetActive(true);
+                    StartCoroutine(AutoDestroyAnim(lineHard, 3));
                 }
             }
         }
@@ -228,6 +232,12 @@ public class AnimationController : MonoBehaviour
                         if (!auxS.breakRecordEasy && auxS.easyWin && auxS.mediumWin && auxS.hardWin)
                         {
                             line.SetActive(true);
+                            if (!bixinhoAd.activeSelf && !animOnDif)
+                            {
+                                animOnDif = true;
+                                tutorialAnim = false;
+                                bixinho3Dif.SetActive(true);
+                            }
                         }
                         else
                         {
@@ -403,7 +413,7 @@ public class AnimationController : MonoBehaviour
                     animOnInGame = true;
                     execulted = true;
                     animOnMain = bixinho4InGame;
-                    StartCoroutine(AutoDestroyAnim(bixinho4InGame, timeAnim));
+                    StartCoroutine(AutoDestroyAnim(bixinho4InGame, 6));
                 }
             }
             if (aux != null)

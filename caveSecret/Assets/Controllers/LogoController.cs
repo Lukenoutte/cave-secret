@@ -24,13 +24,13 @@ public class LogoController : MonoBehaviour
     private IEnumerator GoToMenuDelay()
     {
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("MenuMain");
     }
     private IEnumerator GoToAnimationDelay()
     {
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("Animation1");
     }
 }
