@@ -1,5 +1,5 @@
 # caveSecret
-Jogo mobile 2d feito no UNITY
+Cada pedra tem uma sequência diferente, memorize, desvende e quebre seus próprios recordes!
 
 Play Store: https://play.google.com/store/apps/details?id=com.lukenoutte.cavesecret
 
